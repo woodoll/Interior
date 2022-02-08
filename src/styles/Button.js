@@ -52,6 +52,15 @@ const buttonStyle = css`
         background: ${palette.blue[4]};
       }
     `}
+
+    ${(props) =>
+    props.yellow &&
+    css`
+      background: ${palette.yellow[4]};
+      &:hover {
+        background: ${palette.yellow[3]};
+      }
+    `}
     //  간격 조절
     ${(props) =>
     props.page &&

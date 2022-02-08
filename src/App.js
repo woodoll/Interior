@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import LoginForm from './admin/master/login/LoginForm';
+import MasterMainPage from './admin/master/common/MasterMainPage';
+import LoginFunctions from './admin/master/login/LoginFunctions';
 
 const App = () => {
   return (
     <>
-      <Route component={LoginForm} path="/" />
+      <Route component={MasterMainPage} path="/master" />
+      <Route component={LoginFunctions} path="/login" />
     </>
   );
 };
