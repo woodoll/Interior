@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import MasterMainPage from './admin/master/common/MasterMainPage';
-import LoginFunctions from './admin/master/login/LoginFunctions';
+import LoginKakaoFunctions from './admin/master/login/LoginKakaoFuncions';
 
 const App = () => {
   return (
     <>
       <Route component={MasterMainPage} path="/master" />
-      <Route component={LoginFunctions} path="/login" />
+      <Route component={LoginKakaoFunctions} path="/home/user_kakao/siginIn" />
     </>
   );
 };

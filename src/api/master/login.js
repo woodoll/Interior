@@ -8,3 +8,8 @@ export const login = ({ userId, password }) => {
     return res;
   });
 };
+
+//  kakaoLogin
+export const kakaoLogin = ({ code }) => {
+  return master.post('/home/user_kakao/siginIn', { code });
+};

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeField, initialize, login } from './LoginActions';
 import LoginForm from './LoginForm';
+import { KAKAO_AUTH_URL } from '../../../api/kakao/OAuth';
+import { kakaoLogin } from '../../../api/master/login';
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
@@ -42,12 +44,18 @@ const LoginContainer = () => {
   //   }
   // }, [auth, authError, dispatch]);
 
+  // SNS 로그인
+  const BtnKakaoOnClick = (e) => {
+    window.location.href = `${KAKAO_AUTH_URL}`;
+  };
+
   return (
     <LoginForm
       onChange={onChange}
       userId={userId}
       password={password}
       onSubmit={onSubmit}
+      BtnKakaoOnClick={BtnKakaoOnClick}
     />
   );
 };

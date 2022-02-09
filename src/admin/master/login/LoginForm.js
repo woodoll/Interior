@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../../styles/palette';
 import Button from '../../../styles/Button';
-import { KAKAO_AUTH_URL } from '../../../api/kakao/OAuth';
+import KaKao from '../../../styles/kakao_logo.png';
 
 const LoginFormBlock = styled.div`
   h3 {
@@ -45,7 +45,16 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
 
-const KaKaoBtn = styled(Button)``;
+const KaKaoBtn = styled(Button)`
+  padding: 0;
+  margin-top: 1rem;
+  background: none;
+
+  &:hover {
+    background: none;
+    padding: 0;
+  }
+`;
 
 // const ErrorMessage = styled.div`
 //   color: red;
@@ -54,7 +63,13 @@ const KaKaoBtn = styled(Button)``;
 //   margin-top: 1rem;
 // `;
 
-const LoginForm = ({ userId, password, onChange, onSubmit }) => {
+const LoginForm = ({
+  userId,
+  password,
+  onChange,
+  onSubmit,
+  BtnKakaoOnClick,
+}) => {
   return (
     <LoginFormBlock>
       <h3>로그인</h3>
@@ -78,8 +93,8 @@ const LoginForm = ({ userId, password, onChange, onSubmit }) => {
           로그인
         </ButtonWithMarginTop>
       </form>
-      <KaKaoBtn yellow href={KAKAO_AUTH_URL}>
-        카카오 로그인
+      <KaKaoBtn onClick={BtnKakaoOnClick}>
+        <img src={KaKao} />
       </KaKaoBtn>
       <Footer>
         <Link to="/register">회원가입</Link>

@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Responsive from '../../../styles/Responsive';
 import LoginFunctions from '../login/LoginFunctions';
 import approve from '../venders/approve';
+import LoginKakaoFunctions from '../login/LoginKakaoFuncions';
 
 const SectionPageBlock = styled(Responsive)`
   //  스크롤바 제거
