@@ -1,14 +1,14 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import MasterMainPage from './admin/master/common/MasterMainPage';
-import LoginKakaoFunctions from './admin/master/login/LoginKakaoFuncions';
+import { Route, Routes } from 'react-router-dom';
+import MasterMainSection from './ad-master/components/MasterMainSection';
+import VenderMainSection from './ad-vneder/components/VenderMainSection';
 
 const App = () => {
   return (
-    <>
-      <Route component={MasterMainPage} path="/master" />
-      <Route component={LoginKakaoFunctions} path="/home/user_kakao/siginIn" />
-    </>
+    <Routes>
+      <Route path="/master/*" element={<MasterMainSection />} />
+      <Route path="/vender/*" element={<VenderMainSection />} />
+    </Routes>
   );
 };
 

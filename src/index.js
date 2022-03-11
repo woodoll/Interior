@@ -7,17 +7,17 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer, { rootSaga } from './modules';
+import RootReducer, { RootSaga } from './Reducer/RootReducer';
 import { createLogger } from 'redux-logger';
 
 const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-  rootReducer,
+  RootReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware, logger)),
 );
 
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(RootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

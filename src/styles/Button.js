@@ -18,6 +18,10 @@ const buttonStyle = css`
     background: ${palette.gray[6]};
   }
 
+  & + & {
+    margin: 0 5px 0 5px;
+  }
+
   //  크기 조절
   ${(props) =>
     props.small &&
