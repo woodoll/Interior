@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
-import RootReducer, { RootSaga } from './Reducer/RootReducer';
+import RootReducer, { RootSaga } from 'lib/reducer/RootReducer';
 import { createLogger } from 'redux-logger';
 
 const logger = createLogger();
