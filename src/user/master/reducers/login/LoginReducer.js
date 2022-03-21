@@ -1,5 +1,5 @@
 /* #region  import  */
-import { masterLogin } from 'lib/lib_dir';
+import * as loginAPI from 'api/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
 import { actStartLoading } from 'lib/reducer/LoadingReducer';
@@ -10,7 +10,7 @@ const initialState = {
   userId: '',
   password: '',
   auth: '',
-  authError: '',
+  authError: null,
   error: null,
 };
 
@@ -38,7 +38,7 @@ export const actMasterLogin = ({ userId, password }) => ({
 function* loginSaga(action) {
   yield put(actStartLoading(LOGIN));
   try {
-    const auth = yield call(masterLogin, action);
+    const auth = yield call(loginAPI.masterLogin, action);
     yield put({
       type: LOGIN_SUCCESS,
       auth: auth.data,
@@ -68,6 +68,11 @@ function MasterLoginReducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return produce(state, (draft) => {
         draft.auth = action.auth;
+      });
+    case LOGIN_FAILURE:
+      return produce(state, (draft) => {
+        draft.auth = null;
+        draft.authError = action.error;
       });
     default:
       return state;

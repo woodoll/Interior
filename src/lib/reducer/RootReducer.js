@@ -19,6 +19,10 @@ import VenderLoginReducer, {
 import ClientLoginReducer, {
   ClientLoginReducerSaga,
 } from 'user/client/reducers/login/LoginReducer';
+import userReducer, { userSaga } from './user';
+import OrderReducer, {
+  OrderReducerSaga,
+} from 'user/vender/reducers/orders/OrderReducer';
 
 const RootReducer = combineReducers({
   LoadingReducer,
@@ -28,6 +32,8 @@ const RootReducer = combineReducers({
   VendersReducer,
   AddReducer,
   ProductReducer,
+  userReducer,
+  OrderReducer,
 });
 
 export function* RootSaga() {
@@ -38,6 +44,8 @@ export function* RootSaga() {
     VendersReducerSaga(),
     AddReducerSaga(),
     ProductReducerSaga(),
+    userSaga(),
+    OrderReducerSaga(),
   ]);
 }
 

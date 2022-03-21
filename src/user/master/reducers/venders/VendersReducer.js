@@ -1,7 +1,8 @@
-import * as vendersAPI from 'api/master/venders';
+import * as vendersAPI from 'api/venders';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
-import { actStartLoading, actFinishLoading } from 'lib/reducer/LoadingReducer';
+import { actStartLoading } from 'lib/reducer/LoadingReducer';
+import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 
 const initialState = {
   venders: '',

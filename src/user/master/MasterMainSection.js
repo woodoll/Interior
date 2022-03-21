@@ -5,17 +5,17 @@ import { Route, Routes } from 'react-router-dom';
 
 import palette from 'lib/styles/palette';
 import Responsive from 'lib/styles/Responsive';
-import { HeaderSection } from 'lib/lib_dir';
-import { SidebarSection } from 'lib/lib_dir';
-import { MainSection } from 'lib/lib_dir';
-import { ClientMenuList } from 'lib/lib_dir';
+import HeaderSection from 'lib/common/section/HeaderSection';
+import SidebarSection from 'lib/common/section/SidebarSection';
+import MainSection from 'lib/common/section/MainSection';
+import { MasterMenuList } from 'lib/master/masterMenuList';
 
-import { ClientLoginContainer } from 'lib/lib_dir';
-import { ClientBuyProductContainer } from 'lib/lib_dir';
+import MasterLoginContainer from 'user/master/containers/login/LoginContainer';
+import AllListContainer from 'user/master/containers/venders/AllListContainer';
 /* #endregion */
 
 /* #region  styles */
-const ClientMainSectionBlock = styled.div`
+const MasterMainSectionBlock = styled.div`
   max-width: 100vw;
   max-height: 100vh;
   overflow-y: scroll;
@@ -60,26 +60,23 @@ const SectionForm = styled(Responsive)`
 `;
 /* #endregion */
 
-const ClientMainSection = () => {
+const MasterMainSection = () => {
   return (
-    <ClientMainSectionBlock>
-      <HeaderSection pagename="INTERIOR PLAY" pageuser="client" />
+    <MasterMainSectionBlock>
+      <HeaderSection pagename="INTERIOR PLAY MSTER" pageuser="master" />
       <Sections>
-        <SidebarSection MenuList={ClientMenuList} pageuser="client" />
+        <SidebarSection MenuList={MasterMenuList} pageuser="master" />
         <SectionForm>
           <Routes>
             <Route path="/" element={<MainSection />}>
-              <Route path="signIn" element={<ClientLoginContainer />} />
-              <Route
-                path="/goods/all_list"
-                element={<ClientBuyProductContainer />}
-              />
+              <Route path="/signIn" element={<MasterLoginContainer />} />
+              <Route path="/venders/all_list" element={<AllListContainer />} />
             </Route>
           </Routes>
         </SectionForm>
       </Sections>
-    </ClientMainSectionBlock>
+    </MasterMainSectionBlock>
   );
 };
 
-export default ClientMainSection;
+export default MasterMainSection;

@@ -1,8 +1,8 @@
-import * as goodsAPI from '../../../../api/vender/goods';
+import * as goodsAPI from 'api/goods';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
-import { actStartLoading } from 'lib/lib_dir';
-import { actFinishLoading } from 'lib/lib_dir';
+import { actStartLoading } from 'lib/reducer/LoadingReducer';
+import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 
 const initialState = {
   productType: '',

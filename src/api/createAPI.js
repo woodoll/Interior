@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const vender = axios.create({
+export const user = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },

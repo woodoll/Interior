@@ -1,9 +1,9 @@
 /* #region  import */
-import { clientGetProductList } from 'lib/lib_dir';
+import * as productAPI from 'api/product';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
-import { actStartLoading } from 'lib/lib_dir';
-import { actFinishLoading } from 'lib/lib_dir';
+import { actStartLoading } from 'lib/reducer/LoadingReducer';
+import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 /* #endregion */
 
 const initialState = {
@@ -20,7 +20,7 @@ export const actGetProduct = (page) => ({ type: GET_PRODUCT, page });
 function* getProductSaga(action) {
   yield put(actStartLoading(GET_PRODUCT));
   try {
-    const products = yield call(clientGetProductList, action.page);
+    const products = yield call(productAPI.clientGetProductList, action.page);
     yield put({
       type: GET_PRODUCT_SUCCESS,
       products: products.data,

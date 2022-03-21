@@ -1,13 +1,14 @@
-import { clientLogin } from 'lib/lib_dir';
+import * as loginAPI from 'api/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
-import { actStartLoading, actFinishLoading } from 'lib/reducer/LoadingReducer';
+import { actStartLoading } from 'lib/reducer/LoadingReducer';
+import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 
 const initialState = {
   userId: '',
   password: '',
   auth: '',
-  authError: '',
+  authError: null,
   error: null,
 };
 
@@ -35,7 +36,7 @@ export const actClientLogin = ({ userId, password }) => ({
 function* loginSaga(action) {
   yield put(actStartLoading(LOGIN));
   try {
-    const auth = yield call(clientLogin, action);
+    const auth = yield call(loginAPI.clientLogin, action);
     yield put({
       type: LOGIN_SUCCESS,
       auth: auth.data,
@@ -65,6 +66,11 @@ function ClientLoginReducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return produce(state, (draft) => {
         draft.auth = action.auth;
+      });
+    case LOGIN_FAILURE:
+      return produce(state, (draft) => {
+        draft.auth = null;
+        draft.authError = action.error;
       });
     default:
       return state;

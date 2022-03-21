@@ -1,21 +1,19 @@
-/* #region  import */
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 
 import palette from 'lib/styles/palette';
 import Responsive from 'lib/styles/Responsive';
-import { HeaderSection } from 'lib/lib_dir';
-import { SidebarSection } from 'lib/lib_dir';
-import { MainSection } from 'lib/lib_dir';
-import { MasterMenuList } from 'lib/lib_dir';
+import HeaderContainer from 'lib/common/section/HeaderContainer';
+import SidebarSection from 'lib/common/section/SidebarSection';
+import MainSection from 'lib/common/section/MainSection';
+import { VenderMenuList } from 'lib/vender/venderMenuList';
 
-import { MasterLoginContainer } from 'lib/lib_dir';
-import AllListContainer from '../containers/venders/AllListContainer';
-/* #endregion */
+import AddContainer from 'user/vender/containers/goods/AddContainer';
+import VenderLoginContainer from 'user/vender/containers/login/LoginContainer';
+import AllListContainer from './containers/orders/AllListContainer';
 
-/* #region  styles */
-const MasterMainSectionBlock = styled.div`
+const VenderMainSectionBlock = styled.div`
   max-width: 100vw;
   max-height: 100vh;
   overflow-y: scroll;
@@ -58,25 +56,25 @@ const SectionForm = styled(Responsive)`
   padding: 1rem;
   background: ${palette.gray[2]};
 `;
-/* #endregion */
 
-const MasterMainSection = () => {
+const VenderMainSection = () => {
   return (
-    <MasterMainSectionBlock>
-      <HeaderSection pagename="INTERIOR PLAY MSTER" pageuser="master" />
+    <VenderMainSectionBlock>
+      <HeaderContainer pagename="INTERIOR PLAY VENDER" pageuser="vender" />
       <Sections>
-        <SidebarSection MenuList={MasterMenuList} pageuser="master" />
+        <SidebarSection MenuList={VenderMenuList} pageuser="vender" />
         <SectionForm>
           <Routes>
             <Route path="/" element={<MainSection />}>
-              <Route path="/signIn" element={<MasterLoginContainer />} />
-              <Route path="/venders/all_list" element={<AllListContainer />} />
+              <Route path="/signIn" element={<VenderLoginContainer />} />
+              <Route path="/goods/add" element={<AddContainer />} />
+              <Route path="/order/all_list" element={<AllListContainer />} />
             </Route>
           </Routes>
         </SectionForm>
       </Sections>
-    </MasterMainSectionBlock>
+    </VenderMainSectionBlock>
   );
 };
 
-export default MasterMainSection;
+export default VenderMainSection;

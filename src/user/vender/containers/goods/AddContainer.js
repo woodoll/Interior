@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {
-  changeField,
-  uploadFiled,
-  initialize,
-  actSubmit,
-} from '../../reducers/goods/AddReducer';
-import AddComponent from '../../components/goods/AddComponent';
+import { changeField } from 'user/vender/reducers/goods/AddReducer';
+import { uploadFiled } from 'user/vender/reducers/goods/AddReducer';
+import { initialize } from 'user/vender/reducers/goods/AddReducer';
+import { actSubmit } from 'user/vender/reducers/goods/AddReducer';
+import AddComponent from 'user/vender/components/goods/AddComponent';
 
 const mapStateToProps = (store) => ({
   productType: store.AddReducer.productType,

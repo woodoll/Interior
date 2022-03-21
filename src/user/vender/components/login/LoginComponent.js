@@ -51,13 +51,7 @@ const ButtonWithMarginTop = styled(Button)`
 // `;
 /* #endregion */
 
-const VenderLoginComponent = ({
-  userId,
-  password,
-  payload,
-  disLogin,
-  disChange,
-}) => {
+const VenderLoginComponent = ({ userId, password, disLogin, disChange }) => {
   const navigate = useNavigate();
   const onChange = (e) => disChange(e.target.value, e.target.name);
   const onSubmit = (e) => {
@@ -65,11 +59,6 @@ const VenderLoginComponent = ({
     disLogin({ userId, password });
     disChange((e.target.value = ''));
   };
-  useEffect(() => {
-    if (payload) {
-      navigate('/');
-    }
-  });
   return (
     <LoginComponentBlock>
       <h3>로그인</h3>

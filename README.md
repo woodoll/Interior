@@ -1,17 +1,13 @@
 # 프로젝트 빌드시 라이브러리 설치 바랍니다. (yarn install)
 
-# 트리구조입니다.
+# 규칙입니다.
 
-master, vender, client
-
-component
-container
-reducer
-styles
-lib
+자주 쓰이는 항복은 lib 폴더에 넣었습니다.
+컴포넌트나 컨테이너와 같이 페이지 이동에 영향을 주는 항목은 lib_dir로 경로 설정을 하였습니다.
 
 # 네이밍입니다.
 
 act = 액션생성 함수
 dis = 액션 함수
 btn = 버튼
+opt = 옵션

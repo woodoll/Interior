@@ -1,4 +1,3 @@
-import { vender } from './vender';
 import axios from 'axios';
 
 export const addGoods = ({ formData }) => {

@@ -1,13 +1,16 @@
-import { venderLogin } from 'lib/lib_dir';
+/* #region  import */
+import * as loginAPI from 'api/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
-import { actStartLoading, actFinishLoading } from 'lib/reducer/LoadingReducer';
+import { actStartLoading } from 'lib/reducer/LoadingReducer';
+import { actFinishLoading } from 'lib/reducer/LoadingReducer';
+/* #endregion */
 
 const initialState = {
   userId: '',
   password: '',
   auth: '',
-  authError: '',
+  authError: null,
   error: null,
 };
 
@@ -17,16 +20,16 @@ const LOGIN = 'LoginReducer/LOGIN';
 const LOGIN_SUCCESS = 'LoginReducer/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'LoginReducer/LOGIN_FAILURE';
 
-export const changeField = ({ key, value }) => ({
+export const actChangeField = ({ key, value }) => ({
   type: CHANGE_FIELD,
   key,
   value,
 });
-export const initialize = () => ({
+export const actInitialize = () => ({
   type: INITIALIZE,
   initialState,
 });
-export const login = ({ userId, password }) => ({
+export const actVenderLogin = ({ userId, password }) => ({
   type: LOGIN,
   userId,
   password,
@@ -35,7 +38,7 @@ export const login = ({ userId, password }) => ({
 function* loginSaga(action) {
   yield put(actStartLoading(LOGIN));
   try {
-    const auth = yield call(venderLogin, action);
+    const auth = yield call(loginAPI.venderLogin, action);
     yield put({
       type: LOGIN_SUCCESS,
       auth: auth.data,
@@ -65,6 +68,11 @@ function VenderLoginReducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return produce(state, (draft) => {
         draft.auth = action.auth;
+      });
+    case LOGIN_FAILURE:
+      return produce(state, (draft) => {
+        draft.auth = null;
+        draft.authError = action.error;
       });
     default:
       return state;

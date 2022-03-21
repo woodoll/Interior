@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {
-  actGetVenders,
-  actPutApprove,
-} from '../../reducers/venders/VendersReducer';
-import { MasterVenderAllListComponent } from 'lib/lib_dir';
+import { actGetVenders } from 'user/master/reducers/venders/VendersReducer';
+import { actPutApprove } from 'user/master/reducers/venders/VendersReducer';
+import MasterVenderAllListComponent from 'user/master/components/venders/All_list';
 
 const mapStateToProps = (store) => ({
   venders: store.VendersReducer.venders,

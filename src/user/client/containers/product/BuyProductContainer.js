@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actGetProduct } from 'user/client/reducers/product/ProductReducer';
-import { ClientBuyProductComponent } from 'lib/lib_dir';
+import ClientBuyProductComponent from 'user/client/components/product/BuyProductComponent';
 /* #endregion */
 
 const mapStateToProps = (store) => ({

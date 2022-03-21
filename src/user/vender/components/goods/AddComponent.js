@@ -3,12 +3,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { productOptProductType } from 'lib/lib_dir';
-import { productOptOriginType } from 'lib/lib_dir';
-import { productOptMnfctType } from 'lib/lib_dir';
-import { productOptColorType } from 'lib/lib_dir';
+import { productOptProductType } from 'lib/vender/options';
+import { productOptOriginType } from 'lib/vender/options';
+import { productOptMnfctType } from 'lib/vender/options';
+import { productOptColorType } from 'lib/vender/options';
 
-import { SelectForm } from 'lib/lib_dir';
+import SelectForm from 'lib/common/SelectForm';
 /* #endregion */
 
 /* #region  styles */
@@ -50,7 +50,7 @@ const VenderAddComponent = ({
     console.log('file1 = ', file1);
   };
   const onSubmit = (e) => {
-    e.preventdefault();
+    // e.preventdefault();
     const formData = new FormData();
     formData.append('productType', productType);
     formData.append('originType', originType);
@@ -81,27 +81,40 @@ const VenderAddComponent = ({
   });
   return (
     <AddComponentBlock>
-      <Form name="AddProduct" encType="multipart/form-data" onSubmit={onSubmit}>
-        <SelectForm
-          name="productType"
-          option={productOptProductType}
-          onChange={onChange}
-        />
-        <SelectForm
-          name="originType"
-          option={productOptOriginType}
-          onChange={onChange}
-        />
-        <SelectForm
-          name="mnfctType"
-          option={productOptMnfctType}
-          onChange={onChange}
-        />
-        <SelectForm
-          name="colorType"
-          option={productOptColorType}
-          onChange={onChange}
-        />
+      <Form
+        name="AddProduct"
+        target="_blank"
+        encType="multipart/form-data"
+        onSubmit={onSubmit}
+      >
+        <select name="productType" onChange={onChange}>
+          {productOptProductType.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <select name="originType" onChange={onChange}>
+          {productOptOriginType.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <select name="mnfctType" onChange={onChange}>
+          {productOptMnfctType.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <select name="colorType" onChange={onChange}>
+          {productOptColorType.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
         <input
           name="productName"
           placeholder="상품이름"

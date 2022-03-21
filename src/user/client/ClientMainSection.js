@@ -1,18 +1,21 @@
+/* #region  import */
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 
 import palette from 'lib/styles/palette';
 import Responsive from 'lib/styles/Responsive';
-import { HeaderSection } from 'lib/lib_dir';
-import { SidebarSection } from 'lib/lib_dir';
-import { MainSection } from 'lib/lib_dir';
-import { VenderMenuList } from 'lib/lib_dir';
+import HeaderContainer from 'lib/common/section/HeaderContainer';
+import SidebarSection from 'lib/common/section/SidebarSection';
+import MainSection from 'lib/common/section/MainSection';
+import { ClientMenuList } from 'lib/client/clientMenuList';
 
-import AddContainer from '../containers/goods/AddContainer';
-import LoginContainer from '../containers/login/LoginContainer';
+import ClientLoginContainer from 'user/client/containers/login/LoginContainer';
+import ClientBuyProductContainer from 'user/client/containers/product/BuyProductContainer';
+/* #endregion */
 
-const VenderMainSectionBlock = styled.div`
+/* #region  styles */
+const ClientMainSectionBlock = styled.div`
   max-width: 100vw;
   max-height: 100vh;
   overflow-y: scroll;
@@ -55,24 +58,28 @@ const SectionForm = styled(Responsive)`
   padding: 1rem;
   background: ${palette.gray[2]};
 `;
+/* #endregion */
 
-const VenderMainSection = () => {
+const ClientMainSection = () => {
   return (
-    <VenderMainSectionBlock>
-      <HeaderSection pagename="INTERIOR PLAY VENDER" pageuser="vender" />
+    <ClientMainSectionBlock>
+      <HeaderContainer pagename="INTERIOR PLAY" pageuser="client" />
       <Sections>
-        <SidebarSection MenuList={VenderMenuList} pageuser="vender" />
+        <SidebarSection MenuList={ClientMenuList} pageuser="client" />
         <SectionForm>
           <Routes>
             <Route path="/" element={<MainSection />}>
-              <Route path="/signIn" element={<LoginContainer />} />
-              <Route path="/goods/add" element={<AddContainer />} />
+              <Route path="signIn" element={<ClientLoginContainer />} />
+              <Route
+                path="/goods/all_list"
+                element={<ClientBuyProductContainer />}
+              />
             </Route>
           </Routes>
         </SectionForm>
       </Sections>
-    </VenderMainSectionBlock>
+    </ClientMainSectionBlock>
   );
 };
 
-export default VenderMainSection;
+export default ClientMainSection;

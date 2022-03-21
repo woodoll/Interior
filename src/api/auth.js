@@ -1,23 +1,59 @@
-import { client } from './client';
+import { user } from './createAPI';
+
+//  common API  **********************************
+
+//  상태 체크
+export const check = () => user.post('/home/getInfo');
+
+//  로그아웃
+export const logout = () => {
+  return user.post('/home/logOut').then((res) => {
+    user.defaults.headers.common['Authorization'] = null;
+    return res;
+  });
+};
+
+//  master API  **********************************
+
+//  로그인
+export const masterLogin = ({ userId, password }) => {
+  return user.post('/home/masterSignIn', { userId, password }).then((res) => {
+    const accessToken = res.headers.authorization;
+    user.defaults.headers.common['Authorization'] = `${accessToken}`;
+    return res;
+  });
+};
+
+//  vender API  **********************************
+
+//  로그인
+export const venderLogin = ({ userId, password }) => {
+  return user.post('/home/venderSignIn', { userId, password }).then((res) => {
+    const accessToken = res.headers.authorization;
+    user.defaults.headers.common['Authorization'] = `${accessToken}`;
+    return res;
+  });
+};
+
+//  client API  **********************************
 
 //  로그인
 export const clientLogin = ({ userId, password }) => {
-  return client.post('/home/userSignIn', { userId, password }).then((res) => {
-    localStorage.setItem('token', res.headers.authorization);
+  return user.post('/home/userSignIn', { userId, password }).then((res) => {
     const accessToken = res.headers.authorization;
-    client.defaults.headers.common['Authorization'] = `${accessToken}`;
+    user.defaults.headers.common['Authorization'] = `${accessToken}`;
     return res;
   });
 };
 
 //  카카오 로그인
 export const kakaoLogin = ({ code }) => {
-  return client
+  return user
     .get('/home/user_kakao/signIn', { params: { code: code } })
     .then((res) => {
       console.log(res);
       const accessToken = res.headers.authorization;
-      client.defaults.headers.common['Authorization'] = `Barer ${accessToken}`;
+      user.defaults.headers.common['Authorization'] = `Barer ${accessToken}`;
     });
 };
 
@@ -28,12 +64,12 @@ export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id
 
 //  네이버 로그인
 export const naverLogin = ({ code }) => {
-  return client
+  return user
     .get('/home/user_naver/signIn', { params: { code: code } })
     .then((res) => {
       console.log(res);
       const accessToken = res.headers.authorization;
-      client.defaults.headers.common['Authorization'] = `Barer ${accessToken}`;
+      user.defaults.headers.common['Authorization'] = `Barer ${accessToken}`;
     });
 };
 
@@ -44,7 +80,7 @@ export const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response
 
 //  구글 로그인
 export const googleLogin = (res) => {
-  return client.post('/home/user_google/signIn', res);
+  return user.post('/home/user_google/signIn', res);
 };
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_API_KEY;

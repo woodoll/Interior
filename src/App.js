@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import MasterMainSection from 'user/master/components/MasterMainSection';
-import VenderMainSection from 'user/vender/components/VenderMainSection';
-import ClientMainSection from 'user/client/components/ClientMainSection';
+import MasterMainSection from 'user/master/MasterMainSection';
+import VenderMainSection from 'user/vender/VenderMainSection';
+import ClientMainSection from 'user/client/ClientMainSection';
 
 const App = () => {
   return (
