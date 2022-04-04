@@ -9,9 +9,10 @@ import SidebarSection from 'lib/common/section/SidebarSection';
 import MainSection from 'lib/common/section/MainSection';
 import { VenderMenuList } from 'lib/vender/venderMenuList';
 
-import AddContainer from 'user/vender/containers/goods/AddContainer';
 import VenderLoginContainer from 'user/vender/containers/login/LoginContainer';
+import AddContainer from 'user/vender/containers/goods/AddContainer';
 import AllListContainer from './containers/orders/AllListContainer';
+import ContentsSection from './ContentsSection';
 
 const VenderMainSectionBlock = styled.div`
   max-width: 100vw;
@@ -61,18 +62,10 @@ const VenderMainSection = () => {
   return (
     <VenderMainSectionBlock>
       <HeaderContainer pagename="INTERIOR PLAY VENDER" pageuser="vender" />
-      <Sections>
-        <SidebarSection MenuList={VenderMenuList} pageuser="vender" />
-        <SectionForm>
-          <Routes>
-            <Route path="/" element={<MainSection />}>
-              <Route path="/signIn" element={<VenderLoginContainer />} />
-              <Route path="/goods/add" element={<AddContainer />} />
-              <Route path="/order/all_list" element={<AllListContainer />} />
-            </Route>
-          </Routes>
-        </SectionForm>
-      </Sections>
+      <Routes>
+        <Route path="/signIn" element={<VenderLoginContainer />} />
+        <Route path="/*" element={<ContentsSection />} />
+      </Routes>
     </VenderMainSectionBlock>
   );
 };

@@ -1,7 +1,7 @@
 /* #region  import */
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import palette from 'lib/styles/palette';
 import Button from 'lib/styles/Button';
@@ -10,12 +10,15 @@ import Button from 'lib/styles/Button';
 /* #region  styles */
 const LoginComponentBlock = styled.div`
   height: 100%;
+  width: 100vw;
   background: #fff;
-  padding: 15vw;
+  padding: 15vh 35vw;
   h3 {
-    margin: 0;
+    margin-top: 1rem;
     color: ${palette.gray[8]};
-    margin-bottom: 1rem;
+  }
+  input {
+    margin-top: 1rem;
   }
 `;
 
@@ -27,7 +30,7 @@ const StyledInput = styled.input`
   outline: none;
   width: 100%;
   &:focus {
-    color: $oc-teal-7;
+    color: ${palette.teal[7]};
     border-bottom: 1px solid ${palette.gray[7]};
   }
   & + & {
@@ -35,8 +38,15 @@ const StyledInput = styled.input`
   }
 `;
 
+const Split = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+`;
+
 const ButtonWithMarginTop = styled(Button)`
-  margin-top: 1rem;
+  margin: 0;
   background: ${palette.gray[7]};
   &:hover {
     background: ${palette.gray[9]};
@@ -61,7 +71,8 @@ const VenderLoginComponent = ({ userId, password, disLogin, disChange }) => {
   };
   return (
     <LoginComponentBlock>
-      <h3>로그인</h3>
+      <h3>인테리어 플레이</h3>
+      <h1>판매사 관리자</h1>
       <form onSubmit={onSubmit}>
         <StyledInput
           autoComplete="userId"
@@ -78,8 +89,34 @@ const VenderLoginComponent = ({ userId, password, disLogin, disChange }) => {
           onChange={onChange}
           value={password}
         />
-        <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
+        <Split>
+          <div>
+            <label id="a">
+              <input type="checkbox" style={{ margin: '0 0.5rem' }} />
+            </label>
+            <label for="a">아이디 저장</label>
+          </div>
+          <Link to="/">아이디/비밀번호 찾기</Link>
+        </Split>
+        <ButtonWithMarginTop
+          cyan
+          fullWidth
+          style={{ background: `${palette.blue[7]}` }}
+        >
           로그인
+        </ButtonWithMarginTop>
+        <h3>판매자가 아니신가요?</h3>
+        <ButtonWithMarginTop
+          cyan
+          fullWidth
+          style={{
+            border: `3px solid ${palette.blue[7]}`,
+            boxSizing: 'border-box',
+            background: 'none',
+            color: `${palette.blue[7]}`,
+          }}
+        >
+          <Link to="/">회원가입</Link>
         </ButtonWithMarginTop>
       </form>
     </LoginComponentBlock>

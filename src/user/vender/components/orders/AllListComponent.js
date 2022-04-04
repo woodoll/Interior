@@ -9,7 +9,6 @@ const AllListComponentBlock = styled(Responsive)``;
 const AllListComponent = ({ orders }) => {
   const navigate = useNavigate();
   console.log('orderList = ', orders);
-  const onClick = ({ uuid, orderState }) => venderChangeState(uuid, orderState);
   const state = '03';
   if (orders.result === 'login') {
     navigate('/vender/signIn');

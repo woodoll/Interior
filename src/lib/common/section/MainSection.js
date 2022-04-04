@@ -6,6 +6,7 @@ import palette from 'lib/styles/palette';
 import Responsive from 'lib/styles/Responsive';
 
 const MainSectionBlock = styled.div`
+  min-height: calc(90vh - 2rem);
   display: flex;
   flex-direction: row;
   max-width: 100vw;
