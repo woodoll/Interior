@@ -41,6 +41,14 @@ export const VenderMenuList = [
         title: '상품 등록',
         url: 'add',
       },
+      {
+        title: '상품 진열',
+        url: 'display',
+      },
+      {
+        title: '진열 상품목록',
+        url: 'display_list',
+      },
     ],
   },
 ];

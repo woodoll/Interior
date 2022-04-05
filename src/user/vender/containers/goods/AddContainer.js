@@ -4,7 +4,7 @@ import { changeField } from 'user/vender/reducers/goods/AddReducer';
 import { uploadFiled } from 'user/vender/reducers/goods/AddReducer';
 import { initialize } from 'user/vender/reducers/goods/AddReducer';
 import { actSubmit } from 'user/vender/reducers/goods/AddReducer';
-import AddComponent from 'user/vender/components/goods/AddComponent';
+import AddComponent from 'user/vender/components/goods/Goods_add';
 
 const mapStateToProps = (store) => ({
   productType: store.AddReducer.productType,

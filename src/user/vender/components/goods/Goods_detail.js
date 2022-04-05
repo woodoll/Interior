@@ -6,21 +6,16 @@ import { Select, Input, Radio, InputNumber } from 'antd';
 import Responsive from 'lib/styles/Responsive';
 
 import { productOptProductType } from 'lib/vender/options';
-import { productOptOriginType } from 'lib/vender/options';
 import { productOptMnfctType } from 'lib/vender/options';
-import { productOptColorType } from 'lib/vender/options';
 
-import SelectForm from 'lib/common/SelectForm';
-import palette from 'lib/styles/palette';
 import UploadFile from 'lib/common/Upload';
+import Wysiwyg from 'lib/common/Wysiwyg';
 /* #endregion */
 
 /* #region  styles */
 const AddComponentBlock = styled(Responsive)`
   width: 100%;
 `;
-
-const { TextArea } = Input;
 
 const Form = styled.form`
   display: flex;
@@ -122,21 +117,11 @@ const VenderAddComponent = ({
             options={productOptProductType}
             defaultValue={productOptProductType[0]}
           />
-          {/* <Select
-          name="originType"
-          options={productOptOriginType}
-          defaultValue={productOptOriginType[0]}
-        /> */}
           <Select
             name="mnfctType"
             options={productOptMnfctType}
             defaultValue={productOptMnfctType[0]}
           />
-          {/* <Select
-            name="colorType"
-            options={productOptColorType}
-            defaultValue={productOptColorType[0]}
-          /> */}
         </AddSection>
         <h3>기본정보</h3>
         <AddSection>
@@ -228,47 +213,13 @@ const VenderAddComponent = ({
           <InputNumber min={0} type="number" style={{ width: '200px' }} />
         </AddSection>
         <h3>상품 이미지 등록</h3>
-        <h3>상세설명</h3>
-        <Radio.Group defaultValue="Y" onChange={onChange}>
-          <Radio.Button value="Y" name="displayStatus">
-            YES
-          </Radio.Button>
-          <Radio.Button value="N" name="displayStatus">
-            NO
-          </Radio.Button>
-        </Radio.Group>
-        <Radio.Group defaultValue="00" onChange={onChange}>
-          <Radio.Button value="00" name="stockType">
-            YES
-          </Radio.Button>
-          <Radio.Button value="01" name="stockType">
-            NO
-          </Radio.Button>
-        </Radio.Group>
-        <Radio.Group defaultValue="Y" onChange={onChange}>
-          <Radio.Button value="Y" name="optionYn">
-            YES
-          </Radio.Button>
-          <Radio.Button value="N" name="optionYn">
-            NO
-          </Radio.Button>
-        </Radio.Group>
-        <Radio.Group defaultValue="00" onChange={onChange}>
-          <Radio.Button value="00" name="uploadType">
-            YES
-          </Radio.Button>
-          <Radio.Button value="01" name="uploadType">
-            NO
-          </Radio.Button>
-        </Radio.Group>
         <UploadFile name="file1" accept="image/*" onChange={onUpload} />
         <UploadFile />
-        <TextArea
+        <h3>상세설명</h3>
+        <Wysiwyg
           name="detailContents"
-          placeholder="상품 설명"
           onChange={onChange}
           value={detailContents}
-          row={6}
         />
         <button>등록</button>
       </Form>

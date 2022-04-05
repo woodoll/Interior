@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Upload } from 'antd';
 
 const UploadFile = () => {
-  const [fileList, setFileList] = useState([{}]);
+  const [fileList, setFileList] = useState([]);
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);

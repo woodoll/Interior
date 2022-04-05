@@ -7,7 +7,10 @@ import SidebarSection from 'lib/common/section/SidebarSection';
 import MainSection from 'lib/common/section/MainSection';
 import { VenderMenuList } from 'lib/vender/venderMenuList';
 
+import Goods_list from './components/goods/Goods_list';
 import AddContainer from 'user/vender/containers/goods/AddContainer';
+import Goods_display from 'user/vender/components/goods/Goods_display';
+import Goods_detail from 'user/vender/components/goods/Goods_detail';
 import AllListContainer from 'user/vender/containers/orders/AllListContainer';
 
 const ContentsSectionBlock = styled.div`
@@ -40,7 +43,10 @@ const ContentsSection = () => {
       <SectionForm>
         <Routes>
           <Route path="/" element={<MainSection />}>
+            <Route path="/goods/all_list" element={<Goods_list />} />
             <Route path="/goods/add" element={<AddContainer />} />
+            <Route path="/goods/display" element={<Goods_display />} />
+            <Route path="/goods/detail" element={<Goods_detail />} />
             <Route path="/order/all_list" element={<AllListContainer />} />
           </Route>
         </Routes>
