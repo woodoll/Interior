@@ -46,7 +46,7 @@ const options = [
   },
 ];
 
-const Goods_list = () => {
+const Goods_display_list = () => {
   const { RangePicker } = DatePicker;
   return (
     <Goods_listBlock>
@@ -129,4 +129,4 @@ const Goods_list = () => {
   );
 };
 
-export default Goods_list;
+export default Goods_display_list;

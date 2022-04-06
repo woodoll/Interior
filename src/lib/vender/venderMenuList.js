@@ -1,52 +1,63 @@
-export const VenderMenuList = [
+export const MenuList = [
   {
-    name: 'order',
-    title: '주문 관리',
-    lists: [
+    key: 'sub1',
+    title: '매출분석',
+    sub: [
       {
-        title: '전체 주문내역',
-        url: 'all_list',
+        key: '1',
+        title: '기간별 통계',
+        url: 'statistics_period',
       },
       {
-        title: '무통장 입금',
-        url: 'bank',
-      },
-      {
-        title: '배송처리',
-        url: 'delivery',
-      },
-      {
-        title: '교환요청',
-        url: 'exchange',
-      },
-      {
-        title: '주문취소',
-        url: 'cancel',
-      },
-      {
-        title: '환불요청',
-        url: 'refund',
+        key: '2',
+        title: '상품별 통계',
+        url: 'statistics_product',
       },
     ],
   },
   {
-    name: 'goods',
-    title: '상품 관리',
-    lists: [
+    key: 'sub2',
+    title: '주문관리',
+    sub: [
       {
-        title: '전체 상품목록',
+        key: '3',
+        title: '전체 주문리스트',
         url: 'all_list',
       },
       {
+        key: '4',
+        title: '배송관리',
+        url: 'delivery',
+      },
+      {
+        key: '5',
+        title: '취소/교환/반품',
+        url: 'exchange',
+      },
+    ],
+  },
+  {
+    key: 'sub3',
+    title: '상품관리',
+    sub: [
+      {
+        key: '6',
+        title: '상품 리스트',
+        url: 'all_list',
+      },
+      {
+        key: '7',
         title: '상품 등록',
         url: 'add',
       },
       {
+        key: '8',
         title: '상품 진열',
         url: 'display',
       },
       {
-        title: '진열 상품목록',
+        key: '9',
+        title: '진열상품 리스트',
         url: 'display_list',
       },
     ],

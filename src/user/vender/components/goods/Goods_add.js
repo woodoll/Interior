@@ -2,16 +2,12 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Select, Input, Radio, InputNumber, Cascader } from 'antd';
+import { Select, Input, Radio, InputNumber, Divider } from 'antd';
 import Responsive from 'lib/styles/Responsive';
 
 import { productOptProductType } from 'lib/vender/options';
-import { productOptOriginType } from 'lib/vender/options';
 import { productOptMnfctType } from 'lib/vender/options';
-import { productOptColorType } from 'lib/vender/options';
 
-import SelectForm from 'lib/common/SelectForm';
-import palette from 'lib/styles/palette';
 import UploadFile from 'lib/common/Upload';
 import Wysiwyg from 'lib/common/Wysiwyg';
 /* #endregion */
@@ -178,7 +174,9 @@ const VenderAddComponent = ({
             <Radio.Button value="beige" style={{ background: 'beige' }} />
           </Radio.Group>
         </AddSection>
+        <Divider />
         <h3>상품세부정보</h3>
+        <Divider />
         <h3>상품가격 / 재고/ 주문수량 설정</h3>
         <AddSection>
           <p>정가/ 할인률</p>
@@ -218,47 +216,18 @@ const VenderAddComponent = ({
           <p style={{ marginLeft: '1rem' }}>재고량</p>
           <InputNumber min={0} type="number" style={{ width: '200px' }} />
         </AddSection>
+        <Divider />
         <h3>상품 이미지 등록</h3>
-        {/* <Radio.Group defaultValue="Y" onChange={onChange}>
-          <Radio.Button value="Y" name="displayStatus">
-            YES
-          </Radio.Button>
-          <Radio.Button value="N" name="displayStatus">
-            NO
-          </Radio.Button>
-        </Radio.Group>
-        <Radio.Group defaultValue="00" onChange={onChange}>
-          <Radio.Button value="00" name="stockType">
-            YES
-          </Radio.Button>
-          <Radio.Button value="01" name="stockType">
-            NO
-          </Radio.Button>
-        </Radio.Group>
-        <Radio.Group defaultValue="Y" onChange={onChange}>
-          <Radio.Button value="Y" name="optionYn">
-            YES
-          </Radio.Button>
-          <Radio.Button value="N" name="optionYn">
-            NO
-          </Radio.Button>
-        </Radio.Group>
-        <Radio.Group defaultValue="00" onChange={onChange}>
-          <Radio.Button value="00" name="uploadType">
-            YES
-          </Radio.Button>
-          <Radio.Button value="01" name="uploadType">
-            NO
-          </Radio.Button>
-        </Radio.Group> */}
         <UploadFile name="file1" accept="image/*" onChange={onUpload} />
         <UploadFile />
+        <Divider />
         <h3>상세설명</h3>
         <Wysiwyg
           name="detailContents"
           onChange={onChange}
           value={detailContents}
         />
+        <Divider />
         <button>등록</button>
       </Form>
     </AddComponentBlock>

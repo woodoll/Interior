@@ -59,7 +59,23 @@ class CheckTable extends React.Component {
             disabled={!hasSelected}
             loading={loading}
           >
-            Reload
+            선택상품 진열
+          </Button>
+          <Button
+            type="primary"
+            onClick={this.start}
+            disabled={!hasSelected}
+            loading={loading}
+          >
+            품절처리
+          </Button>
+          <Button
+            type="primary"
+            onClick={this.start}
+            disabled={!hasSelected}
+            loading={loading}
+          >
+            선택삭제
           </Button>
           <span style={{ marginLeft: 8 }}>
             {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}

@@ -8,7 +8,6 @@ const MyBlock = styled.div`
   .wrapper-class {
     width: 100%;
     margin: 0 auto;
-    margin-bottom: 4rem;
   }
   .editor {
     height: 500px !important;

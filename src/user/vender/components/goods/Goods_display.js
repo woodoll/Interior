@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Input, Radio, Cascader } from 'antd';
+import { Input, Radio, Cascader, Divider } from 'antd';
 import Responsive from 'lib/styles/Responsive';
 
 import { productOptProductType } from 'lib/vender/options';
@@ -151,10 +151,13 @@ const VenderAddComponent = ({
             </Radio.Button>
           </Radio.Group>
         </AddSection>
+        <Divider />
         <h3>상품선택</h3>
         <SortableTable />
+        <Divider />
         <h3>추가옵션</h3>
         <SortableTable />
+        <Divider />
         <button>저장</button>
       </Form>
     </AddComponentBlock>

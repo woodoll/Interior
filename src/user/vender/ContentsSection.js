@@ -11,6 +11,7 @@ import Goods_list from './components/goods/Goods_list';
 import AddContainer from 'user/vender/containers/goods/AddContainer';
 import Goods_display from 'user/vender/components/goods/Goods_display';
 import Goods_detail from 'user/vender/components/goods/Goods_detail';
+import Goods_dispaly_list from 'user/vender/components/goods/Goods_display_list';
 import AllListContainer from 'user/vender/containers/orders/AllListContainer';
 
 const ContentsSectionBlock = styled.div`
@@ -47,6 +48,10 @@ const ContentsSection = () => {
             <Route path="/goods/add" element={<AddContainer />} />
             <Route path="/goods/display" element={<Goods_display />} />
             <Route path="/goods/detail" element={<Goods_detail />} />
+            <Route
+              path="/goods/display_list"
+              element={<Goods_dispaly_list />}
+            />
             <Route path="/order/all_list" element={<AllListContainer />} />
           </Route>
         </Routes>

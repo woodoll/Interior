@@ -1,10 +1,72 @@
+/* #region  import */
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Responsive from 'lib/styles/Responsive';
 import { venderChangeState } from 'api/orders';
+import Checkbox_all from 'lib/common/Checkbox_all';
+import { Divider, Select, Input, DatePicker, Space, Button } from 'antd';
+import Table_check from 'lib/common/Table_check';
+/* #endregion */
 
+/* #region  styles */
 const AllListComponentBlock = styled(Responsive)``;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+
+const AddSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  p {
+    width: 100px;
+  }
+
+  Select,
+  Input {
+    width: 100px;
+    height: fit-content;
+  }
+`;
+/* #endregion */
+
+const { RangePicker } = DatePicker;
+
+const plainOptions = ['결제완료', '배송지시', '배송중', '배송완료', '구매확정'];
+const defaultCheckedList = [
+  '결제완료',
+  '배송지시',
+  '배송중',
+  '배송완료',
+  '구매확정',
+];
+
+const CSplainOptions = [
+  '자동취소',
+  '고객취소',
+  '판매자취소',
+  '반품접수',
+  '반품중',
+  '반품회수완료',
+  '교환접수',
+  '교환중',
+  '교환완료',
+];
+const CSdefaultCheckedList = [
+  '자동취소',
+  '고객취소',
+  '판매자취소',
+  '반품접수',
+  '반품중',
+  '반품회수완료',
+  '교환접수',
+  '교환중',
+  '교환완료',
+];
 
 const AllListComponent = ({ orders }) => {
   const navigate = useNavigate();
@@ -15,7 +77,34 @@ const AllListComponent = ({ orders }) => {
   }
   return (
     <AllListComponentBlock>
-      {orders && (
+      <h1>전체주문리스트</h1>
+      <Form>
+        <Space direction="vertical" size={12}>
+          <Checkbox_all
+            plainOptions={plainOptions}
+            defaultCheckedList={defaultCheckedList}
+          />
+          <Checkbox_all
+            plainOptions={CSplainOptions}
+            defaultCheckedList={CSdefaultCheckedList}
+          />
+          <AddSection>
+            <p>상세조건</p>
+            <Select />
+            <Input />
+          </AddSection>
+          <AddSection>
+            <p>주문일</p>
+            <RangePicker />
+          </AddSection>
+          <div>
+            <Button>검색</Button>
+            <Button>초기화</Button>
+          </div>
+        </Space>
+      </Form>
+      <Divider />
+      {orders ? (
         <div>
           {orders.map((order, index) => (
             <div key={index}>
@@ -34,6 +123,8 @@ const AllListComponent = ({ orders }) => {
             </div>
           ))}
         </div>
+      ) : (
+        <Table_check />
       )}
     </AllListComponentBlock>
   );
