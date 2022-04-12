@@ -62,5 +62,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://172.30.1.6:8081"
+  "proxy": "http://172.30.1.59:8081"
 }

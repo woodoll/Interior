@@ -9,14 +9,22 @@ import { Route, Routes, Link } from 'react-router-dom';
 // import MainSection from 'lib/common/section/MainSection';
 import { MenuList } from 'lib/vender/venderMenuList';
 
+import SiderMenu from 'lib/common/section/SidebarSection';
+
 import Goods_list from 'user/vender/components/goods/Goods_list';
 import AddContainer from 'user/vender/containers/goods/AddContainer';
 import Goods_display from 'user/vender/components/goods/Goods_display';
 import Goods_detail from 'user/vender/components/goods/Goods_detail';
 import Goods_dispaly_list from 'user/vender/components/goods/Goods_display_list';
 import AllListContainer from 'user/vender/containers/orders/AllListContainer';
+import Orders_detail from 'user/vender/components/orders/Orders_detail';
+import Orders_delivery from 'user/vender/components/orders/Orders_delivery';
+import Orders_return from 'user/vender/components/orders/Orders_return';
+import Orders_return_detail from './components/orders/Orders_return_detail';
+import Board_goodsqna from 'user/vender/components/board/Board_goodsqna';
+import Board_goodsreview from './components/board/Board_goodsreview';
 
-// import VenderLoginContainer from 'user/vender/containers/login/LoginContainer';
+import VenderLoginContainer from 'user/vender/containers/login/LoginContainer';
 // import AddContainer from 'user/vender/containers/goods/AddContainer';
 // import AllListContainer from './containers/orders/AllListContainer';
 // import ContentsSection from './ContentsSection';
@@ -79,12 +87,8 @@ import AllListContainer from 'user/vender/containers/orders/AllListContainer';
 
 // export default VenderMainSection;
 
-import { Layout, Menu, Breadcrumb, BackTop } from 'antd';
-import {
-  PieChartOutlined,
-  CreditCardOutlined,
-  FormatPainterOutlined,
-} from '@ant-design/icons';
+import { Layout, Breadcrumb, BackTop } from 'antd';
+import HeaderContainer from 'lib/common/section/HeaderContainer';
 
 const LayoutForm = styled(Layout)`
   .logo {
@@ -103,7 +107,6 @@ const LayoutForm = styled(Layout)`
 `;
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 const VenderMainSection = () => {
   const [open, setOpen] = useState(false);
@@ -111,6 +114,8 @@ const VenderMainSection = () => {
   const onCollapse = () => {
     setOpen(!open);
   };
+
+  const urlName = null;
 
   return (
     <LayoutForm hasSider>
@@ -120,72 +125,23 @@ const VenderMainSection = () => {
           position: 'sticky',
           top: '0',
           maxHeight: '100vh',
+          overflow: 'scroll-Y',
         }}
         collapsible
         collapsed={open}
         onCollapse={onCollapse}
       >
-        <div className="logo">InteriorPlay</div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <SubMenu
-            key={MenuList[0].key}
-            icon={<PieChartOutlined />}
-            title={MenuList[0].title}
-          >
-            <Menu.Item key={MenuList[0].sub[0].key}>
-              <Link to="/">{MenuList[0].sub[0].title}</Link>
-            </Menu.Item>
-            <Menu.Item key={MenuList[0].sub[1].key}>
-              <Link to="/">{MenuList[0].sub[1].title}</Link>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key={MenuList[1].key}
-            icon={<CreditCardOutlined />}
-            title={MenuList[1].title}
-          >
-            <Menu.Item key={MenuList[1].sub[0].key}>
-              <Link to="/vender/orders/all_list">
-                {MenuList[1].sub[0].title}
-              </Link>
-            </Menu.Item>
-            <Menu.Item key={MenuList[1].sub[1].key}>
-              <Link to="/vender/orders/delivery">
-                {MenuList[1].sub[1].title}
-              </Link>
-            </Menu.Item>
-            <Menu.Item key={MenuList[1].sub[2].key}>
-              <Link to="/vender/orders/excahnge">
-                {MenuList[1].sub[2].title}
-              </Link>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key={MenuList[2].key}
-            icon={<FormatPainterOutlined />}
-            title={MenuList[2].title}
-          >
-            <Menu.Item key={MenuList[2].sub[0].key}>
-              <Link to="/vender/goods/all_list">
-                {MenuList[2].sub[0].title}
-              </Link>
-            </Menu.Item>
-            <Menu.Item key={MenuList[2].sub[1].key}>
-              <Link to="/vender/goods/add">{MenuList[2].sub[1].title}</Link>
-            </Menu.Item>
-            <Menu.Item key={MenuList[2].sub[2].key}>
-              <Link to="/vender/goods/display">{MenuList[2].sub[2].title}</Link>
-            </Menu.Item>
-            <Menu.Item key={MenuList[2].sub[3].key}>
-              <Link to="/vender/goods/display_list">
-                {MenuList[2].sub[3].title}
-              </Link>
-            </Menu.Item>
-          </SubMenu>
-        </Menu>
+        <div className="logo">
+          <Link to="/vender" style={{ color: '#fff' }}>
+            InteriorPlay
+          </Link>
+        </div>
+        <SiderMenu urlName={urlName} />
       </Sider>
       <Layout className="site-layout" style={{ overflow: 'scroll-y' }}>
-        <Header className="site-layout-background" style={{ padding: 0 }} />
+        <Header className="site-layout-background" style={{ padding: 0 }}>
+          <HeaderContainer pagename="INTERIOR PLAY VENDER" pageuser="vender" />
+        </Header>
         <Content
           style={{
             margin: '0 16px',
@@ -195,13 +151,14 @@ const VenderMainSection = () => {
         >
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
+            <Breadcrumb.Item>{urlName}</Breadcrumb.Item>
           </Breadcrumb>
           <div
             className="site-layout-background"
             style={{ padding: 24, textAlign: 'center', minHeight: '100%' }}
           >
             <Routes>
+              <Route path="/signIn" element={<VenderLoginContainer />} />
               <Route path="/goods/all_list" element={<Goods_list />} />
               <Route path="/goods/add" element={<AddContainer />} />
               <Route path="/goods/display" element={<Goods_display />} />
@@ -211,6 +168,18 @@ const VenderMainSection = () => {
                 element={<Goods_dispaly_list />}
               />
               <Route path="/orders/all_list" element={<AllListContainer />} />
+              <Route path="/orders/order_detail" element={<Orders_detail />} />
+              <Route path="/orders/delivery" element={<Orders_delivery />} />
+              <Route path="/orders/return" element={<Orders_return />} />
+              <Route
+                path="/orders/return_detail"
+                element={<Orders_return_detail />}
+              />
+              <Route path="/board/goodsqna" element={<Board_goodsqna />} />
+              <Route
+                path="/board/goodsreview"
+                element={<Board_goodsreview />}
+              />
             </Routes>
           </div>
         </Content>

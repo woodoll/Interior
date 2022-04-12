@@ -1,16 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, Button } from 'antd';
-
-const columns = [
-  {
-    title: '상품명',
-    dataIndex: 'name',
-  },
-  {
-    title: '상품상세',
-    dataIndex: 'address',
-  },
-];
 
 const data = [];
 for (let i = 0; i < 46; i++) {
@@ -21,74 +10,31 @@ for (let i = 0; i < 46; i++) {
   });
 }
 
-class CheckTable extends React.Component {
-  state = {
-    selectedRowKeys: [], // Check here to configure the default column
-    loading: false,
+const CheckTable = ({ columns }) => {
+  const [selecetdRowkeys, setSelectedRowkeys] = useState([]);
+
+  const onSelectChange = () => {
+    console.log('selectedRowKeys changed: ', selecetdRowkeys);
+    setSelectedRowkeys(!selecetdRowkeys);
   };
 
-  start = () => {
-    this.setState({ loading: true });
-    // ajax request after empty completing
-    setTimeout(() => {
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
-      });
-    }, 1000);
+  const rowSelection = {
+    selecetdRowkeys,
+    onChange: onSelectChange,
   };
 
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
-  };
+  const hasSelected = selecetdRowkeys.length > 0;
 
-  render() {
-    const { loading, selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
-    return (
-      <div>
-        <div style={{ marginBottom: 16 }}>
-          <Button
-            type="primary"
-            onClick={this.start}
-            disabled={!hasSelected}
-            loading={loading}
-          >
-            선택상품 진열
-          </Button>
-          <Button
-            type="primary"
-            onClick={this.start}
-            disabled={!hasSelected}
-            loading={loading}
-          >
-            품절처리
-          </Button>
-          <Button
-            type="primary"
-            onClick={this.start}
-            disabled={!hasSelected}
-            loading={loading}
-          >
-            선택삭제
-          </Button>
-          <span style={{ marginLeft: 8 }}>
-            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-          </span>
-        </div>
-        <Table
-          rowSelection={rowSelection}
-          columns={columns}
-          dataSource={data}
-        />
+  return (
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <span style={{ marginLeft: 8 }}>
+          {hasSelected ? `Selected ${selecetdRowkeys.length} items` : ''}
+        </span>
       </div>
-    );
-  }
-}
+      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+    </div>
+  );
+};
 
 export default CheckTable;

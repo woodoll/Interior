@@ -68,6 +68,45 @@ const CSdefaultCheckedList = [
   '교환완료',
 ];
 
+const columns = [
+  {
+    title: '주문번호',
+    dataIndex: 'orderNum',
+  },
+  {
+    title: '상품명',
+    dataIndex: 'name',
+  },
+  {
+    title: '수량',
+    dataIndex: '',
+  },
+  {
+    title: '주문금액',
+    dataIndex: '',
+  },
+  {
+    title: '주문자명/연락처',
+    dataIndex: '',
+  },
+  {
+    title: '수령인/연락처',
+    dataIndex: '',
+  },
+  {
+    title: '배송지',
+    dataIndex: '',
+  },
+  {
+    title: '주문상태 최종변경일시',
+    dataIndex: '',
+  },
+  {
+    title: '주문일시',
+    dataIndex: '',
+  },
+];
+
 const AllListComponent = ({ orders }) => {
   const navigate = useNavigate();
   console.log('orderList = ', orders);
@@ -77,7 +116,7 @@ const AllListComponent = ({ orders }) => {
   }
   return (
     <AllListComponentBlock>
-      <h1>전체주문리스트</h1>
+      <h2>전체주문리스트</h2>
       <Form>
         <Space direction="vertical" size={12}>
           <Checkbox_all
@@ -104,30 +143,30 @@ const AllListComponent = ({ orders }) => {
         </Space>
       </Form>
       <Divider />
-      {orders ? (
-        <div>
-          {orders.map((order, index) => (
-            <div key={index}>
-              <div>구매 코드 : {order.orderCode}</div>
-              <div>구매자 이름 : {order.buyerName}</div>
-              <div>구매 날짜 : {order.orderDate}</div>
-              <div>상품 코드 : {order.productCode}</div>
-              <div>상품 이름 : {order.productName}</div>
-              <div>결제 수단 : {order.paymentType}</div>
-              <div>구매 상태 : {order.orderState}</div>
-              배송 처리하기
-              <button onClick={() => venderChangeState(order.uuid, state)}>
-                배송
-              </button>
-              <hr />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <Table_check />
-      )}
+      <Table_check columns={columns} />
     </AllListComponentBlock>
   );
 };
 
 export default AllListComponent;
+
+{
+  /* <div>
+{orders.map((order, index) => (
+  <div key={index}>
+    <div>구매 코드 : {order.orderCode}</div>
+    <div>구매자 이름 : {order.buyerName}</div>
+    <div>구매 날짜 : {order.orderDate}</div>
+    <div>상품 코드 : {order.productCode}</div>
+    <div>상품 이름 : {order.productName}</div>
+    <div>결제 수단 : {order.paymentType}</div>
+    <div>구매 상태 : {order.orderState}</div>
+    배송 처리하기
+    <button onClick={() => venderChangeState(order.uuid, state)}>
+      배송
+    </button>
+    <hr />
+  </div>
+))}
+</div> */
+}

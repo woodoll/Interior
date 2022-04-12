@@ -46,6 +46,13 @@ const options = [
   },
 ];
 
+const columns = [
+  {
+    title: '',
+    dataIndex: '',
+  },
+];
+
 const Goods_display_list = () => {
   const { RangePicker } = DatePicker;
   return (
@@ -124,7 +131,7 @@ const Goods_display_list = () => {
         </div>
       </Form>
       <Divider />
-      <CheckTable />
+      <CheckTable columns={columns} />
     </Goods_listBlock>
   );
 };

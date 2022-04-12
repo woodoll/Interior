@@ -1,6 +1,7 @@
 /* #region  import */
 import React from 'react';
 import styled from 'styled-components';
+import Responsive from 'lib/styles/Responsive';
 import { useNavigate, Link } from 'react-router-dom';
 
 import palette from 'lib/styles/palette';
@@ -8,11 +9,10 @@ import Button from 'lib/styles/Button';
 /* #endregion */
 
 /* #region  styles */
-const LoginComponentBlock = styled.div`
+const LoginComponentBlock = styled(Responsive)`
   height: 100%;
-  width: 100vw;
   background: #fff;
-  padding: 15vh 35vw;
+  padding: 10% 20%;
   h3 {
     margin-top: 1rem;
     color: ${palette.gray[8]};
@@ -102,6 +102,7 @@ const VenderLoginComponent = ({ userId, password, disLogin, disChange }) => {
           cyan
           fullWidth
           style={{ background: `${palette.blue[7]}` }}
+          onClick={onSubmit}
         >
           로그인
         </ButtonWithMarginTop>

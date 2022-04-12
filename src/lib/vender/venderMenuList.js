@@ -62,4 +62,20 @@ export const MenuList = [
       },
     ],
   },
+  {
+    key: 'sub4',
+    title: '게시판 관리',
+    sub: [
+      {
+        key: '10',
+        title: '상품 문의',
+        url: 'goodsqna',
+      },
+      {
+        key: '11',
+        title: '상품 리뷰',
+        url: 'goodsreview',
+      },
+    ],
+  },
 ];
