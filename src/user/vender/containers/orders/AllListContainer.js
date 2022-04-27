@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actGetOrderList } from 'user/vender/reducers/orders/OrderReducer';
-import AllListComponent from 'user/vender/components/orders/Orders_all_list';
+import AllListComponent from 'user/vender/components/orders/AllListComponent';
 /* #endregion */
 
 const mapStateToProps = (store) => ({

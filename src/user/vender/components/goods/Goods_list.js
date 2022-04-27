@@ -54,6 +54,7 @@ const options = [
   },
 ];
 
+<<<<<<< HEAD
 const columns = [
   {
     title: '이미지',
@@ -89,6 +90,12 @@ const columns = [
 ];
 
 const Goods_list = ({ goods }) => {
+<<<<<<< HEAD
+=======
+=======
+const Goods_list = () => {
+>>>>>>> parent of 872dc29 (04/12)
+>>>>>>> 304ed38 (04/27-1)
   const { RangePicker } = DatePicker;
   return (
     <Goods_listBlock>
@@ -172,7 +179,15 @@ const Goods_list = ({ goods }) => {
         </Space>
       </Form>
       <Divider />
+<<<<<<< HEAD
       <CheckTable columns={columns} data={goods} />
+=======
+<<<<<<< HEAD
+      <CheckTable columns={columns} data={goods} />
+=======
+      <CheckTable />
+>>>>>>> parent of 872dc29 (04/12)
+>>>>>>> 304ed38 (04/27-1)
     </Goods_listBlock>
   );
 };

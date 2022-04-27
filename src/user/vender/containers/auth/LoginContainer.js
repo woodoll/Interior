@@ -10,10 +10,18 @@ import VenderLoginComponent from 'user/vender/components/auth/LoginComponent';
 /* #endregion */
 
 const mapStateToProps = (store) => ({
+<<<<<<< HEAD:src/user/vender/containers/auth/LoginContainer.js
   userId: store.VenderLoginReducer.userId,
   password: store.VenderLoginReducer.password,
   auth: store.VenderLoginReducer.auth,
   error: store.VenderLoginReducer.error,
+=======
+  userId: store.MasterLoginReducer.userId,
+  password: store.MasterLoginReducer.password,
+  auth: store.MasterLoginReducer.auth,
+  authError: store.MasterLoginReducer.authError,
+  error: store.MasterLoginReducer.error,
+>>>>>>> parent of 872dc29 (04/12):src/user/vender/containers/login/LoginContainer.js
 
   user: store.userReducer.user,
 });
@@ -25,7 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
   disCheck: () => dispatch(check()),
 });
 
-const VenderLoginContainer = ({
+const MasterLoginContainer = ({
   userId,
   password,
   auth,
@@ -80,4 +88,4 @@ const VenderLoginContainer = ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(VenderLoginContainer);
+)(MasterLoginContainer);

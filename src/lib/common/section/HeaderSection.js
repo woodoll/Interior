@@ -3,13 +3,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { Button } from 'antd';
-
 import palette from 'lib/styles/palette';
+import Button from 'lib/styles/Button';
 /* #endregion */
 
 /* #region  styles */
-const HeaderSectionBlock = styled.div``;
+const HeaderSectionBlock = styled.div`
+  padding: 0 3rem;
+  width: 100%;
+  height: 10vh;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid ${palette.gray[2]};
+`;
 
 const Wrapper = styled.div`
   height: 100%;
@@ -55,9 +61,16 @@ const HeaderSection = ({ pagename, pageuser, user, disLogout }) => {
           </div>
         ) : (
           <div className="right">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 304ed38 (04/27-1)
             <Button styles={{ margin: '0 auto' }} type="primary">
               <Link to={`/${pageuser}/auth/login`}>로그인</Link>
             </Button>
+=======
+            <Button to={`/${pageuser}/signIn`}>로그인</Button>
+>>>>>>> parent of 872dc29 (04/12)
           </div>
         )}
       </Wrapper>
