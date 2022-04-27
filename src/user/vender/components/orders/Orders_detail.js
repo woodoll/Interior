@@ -2,9 +2,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
-import { Divider, Button } from 'antd';
+import { Divider, Button, PageHeader } from 'antd';
 
-import CheckTable from 'lib/common/Table_check';
+import { Link } from 'react-router-dom';
+
+import CheckTable from 'lib/common/table/Table_check';
 /* #endregion */
 
 /* #region  styles */
@@ -20,10 +22,45 @@ const AddSection = styled.div`
 `;
 /* #endregion */
 
-const Orders_detail = () => {
+const columns = [
+  {
+    title: '상품번호',
+    dataIndex: 'orderNum',
+  },
+  {
+    title: '상품명',
+    dataIndex: 'name',
+    render: (data) => (
+      <div>
+        <div>이미지 영역</div>
+        <div>텍스트 영역</div>
+      </div>
+    ),
+  },
+  {
+    title: '운송장번호',
+    dataIndex: '',
+  },
+  {
+    title: '주문상태',
+    dataIndex: '',
+  },
+  {
+    title: '수량',
+    dataIndex: '',
+  },
+  {
+    title: '주문금액',
+    dataIndex: '',
+  },
+];
+
+const Orders_detail = ({ setPathUrl }) => {
+  setPathUrl('주문 상세');
   return (
     <Orders_detailBlock>
-      <h2>주문 상세내역</h2>
+      <PageHeader className="PageHeader" title="주문상세내역" />
+      <Divider />
       <h3>주문정보</h3>
       <Divider />
       <AddSection>
@@ -58,14 +95,16 @@ const Orders_detail = () => {
       </AddSection>
       <Divider />
       <h3>주문상품</h3>
-      <CheckTable />
+      <CheckTable columns={columns} />
       <div style={{ display: 'flex' }}>
         <p>합계</p>
         <p>수량 합계</p>
         <p>주문금액 합계</p>
       </div>
       <div>
-        <Button>목록</Button>
+        <Button>
+          <Link to="/vender/orders/all_list">목록</Link>
+        </Button>
         <Button>취소접수</Button>
       </div>
     </Orders_detailBlock>

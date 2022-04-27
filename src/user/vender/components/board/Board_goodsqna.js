@@ -3,9 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
 
-import { Input, Select, Button, Divider, DatePicker, Space } from 'antd';
+import {
+  Input,
+  Select,
+  Button,
+  Divider,
+  DatePicker,
+  Space,
+  PageHeader,
+} from 'antd';
 import Checkbox_all from 'lib/common/Checkbox_all';
-import Table_tag from 'lib/common/Table_tag';
+import Table_tag from 'lib/common/table/Table_tag';
 /* #endregion */
 
 /* #region  styles */
@@ -33,15 +41,27 @@ const AddSection = styled.div`
 `;
 /* #endregion */
 
+const routes = [
+  {
+    path: '',
+    breadcrumbName: '게시판 관리',
+  },
+  {
+    path: '',
+    breadcrumbName: '상품 문의',
+  },
+];
+
 const { RangePicker } = DatePicker;
 
 const plainOptions = ['답변대기', '답변완료'];
 const defaultCheckedList = ['답변대기', '답변완료'];
 
-const Board_goodsqna = () => {
+const Board_goodsqna = ({ setPathUrl }) => {
+  setPathUrl('상품 문의');
   return (
     <Board_goodsqnaBlock>
-      <h2>상품 문의</h2>
+      <PageHeader className="PageHeader" title="상품 문의" />
       <Divider />
       <Form>
         <Space direction="vertical" size={12}>

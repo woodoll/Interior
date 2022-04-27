@@ -6,27 +6,14 @@ import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 
 const initialState = {
   productType: '',
-  originType: '',
-  mnfctType: '',
-  colorType: '',
-  productName: '',
-  displayStatus: '',
-  normalPrice: '',
-  discountRate: '',
-  sellingPrice: '',
-  stockType: '',
-  minQuantity: '',
-  maxQuantity: '',
-  pointType: '',
-  optionYn: '',
-  uploadType: '',
-  detailContents: '',
-  file1: '',
-  msgCode: '',
+  manufacturerType: '',
+  productGroupNm: '',
+  searchKeyword: '',
+  displayYn: '',
+  products: [{}],
 };
 
 const CHANGE_FILED = 'AddReducer/CHANGE_FILED';
-const UPLOAD_FILED = 'AddReducer/CAHNGE_FILED';
 const INITIALIZE = 'AddReducer/INITIALIZE';
 const ADD_PRODUCT = 'AddReducer/ADD_PRODUCT';
 const ADD_PRODUCT_SUCCESS = 'AddReducer/ADD_PRODUCT_SUCCESS';
@@ -36,10 +23,6 @@ export const changeField = ({ key, value }) => ({
   type: CHANGE_FILED,
   key,
   value,
-});
-export const uploadFiled = ({ files }) => ({
-  type: UPLOAD_FILED,
-  files,
 });
 export const initialize = () => ({
   type: INITIALIZE,
@@ -79,10 +62,6 @@ function AddReducer(state = initialState, action) {
     case CHANGE_FILED:
       return produce(state, (draft) => {
         draft[action.key] = action.value;
-      });
-    case UPLOAD_FILED:
-      return produce(state, (draft) => {
-        draft.file1 = action.files;
       });
     case ADD_PRODUCT_SUCCESS:
       return produce(state, (draft) => {

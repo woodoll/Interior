@@ -9,8 +9,7 @@ import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 const initialState = {
   userId: '',
   password: '',
-  auth: '',
-  authError: null,
+  auth: {},
   error: null,
 };
 
@@ -47,7 +46,6 @@ function* loginSaga(action) {
     yield put({
       type: LOGIN_FAILURE,
       error: true,
-      authError: e,
     });
   }
   yield put(actFinishLoading(LOGIN));
@@ -71,8 +69,7 @@ function VenderLoginReducer(state = initialState, action) {
       });
     case LOGIN_FAILURE:
       return produce(state, (draft) => {
-        draft.auth = null;
-        draft.authError = action.error;
+        draft.auth = action.e;
       });
     default:
       return state;

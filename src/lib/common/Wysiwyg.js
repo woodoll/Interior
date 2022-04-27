@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
-import { EditorState } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 const MyBlock = styled.div`
   .wrapper-class {
@@ -17,7 +18,18 @@ const MyBlock = styled.div`
   }
 `;
 
-const Wysiwyg = () => {
+const IntroduceContent = styled.div`
+  position: relative;
+  border: 0.0625rem solid #d7e2eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  padding: 1.5rem;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+`;
+
+const Wysiwyg = (props) => {
   // useState로 상태관리하기 초기값은 EditorState.createEmpty()
   // EditorState의 비어있는 ContentState 기본 구성으로 새 개체를 반환 => 이렇게 안하면 상태 값을 나중에 변경할 수 없음.
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -26,6 +38,18 @@ const Wysiwyg = () => {
     // editorState에 값 설정
     setEditorState(editorState);
   };
+
+  const editorToHtml = draftToHtml(
+    convertToRaw(editorState.getCurrentContent()),
+  );
+
+  const sendText = (editorToHtml) => {
+    props.setPropsContents(editorToHtml);
+  };
+
+  useEffect(() => {
+    sendText(editorToHtml);
+  }, [editorToHtml]);
 
   return (
     <MyBlock>
@@ -44,7 +68,7 @@ const Wysiwyg = () => {
           link: { inDropdown: true },
           history: { inDropdown: false },
         }}
-        placeholder="내용을 작성해주세요."
+        placeholder="상세설명을 작성해주세요."
         // 한국어 설정
         localization={{
           locale: 'ko',

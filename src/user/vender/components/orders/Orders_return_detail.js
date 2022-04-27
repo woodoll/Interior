@@ -3,18 +3,19 @@ import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
 
-import { Descriptions, Divider, Button } from 'antd';
-import CheckTable from 'lib/common/Table_check';
+import { Descriptions, Divider, Button, PageHeader } from 'antd';
+import CheckTable from 'lib/common/table/Table_check';
 /* #endregion */
 
 /* #region  styles */
 const Orders_return_detailBlock = styled(Responsive)``;
 /* #endregion */
 
-const Orders_return_detail = () => {
+const Orders_return_detail = ({ setPathUrl }) => {
+  setPathUrl('취소/반품/교환 내역');
   return (
     <Orders_return_detailBlock>
-      <h2>취소/반품/교환 내역</h2>
+      <PageHeader className="PageHeader" title="취소/반품/교환 내역" />
       <Divider />
       <Descriptions title="접수정보">
         <Descriptions.Item label="접수번호">접수번호</Descriptions.Item>

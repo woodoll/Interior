@@ -6,7 +6,8 @@ const ResponsiveBlock = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   width: 100%;
-  min-height: calc(90vh - 5rem);
+  min-height: calc(90vh - 16px);
+  height: 100%;
   margin: 0 auto;
   background: #fff;
   text-align: left;

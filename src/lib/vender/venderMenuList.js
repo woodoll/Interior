@@ -14,6 +14,7 @@ export const MenuList = [
         url: 'statistics_product',
       },
     ],
+    url: 'non',
   },
   {
     key: 'sub2',
@@ -35,6 +36,7 @@ export const MenuList = [
         url: 'exchange',
       },
     ],
+    url: 'orders',
   },
   {
     key: 'sub3',
@@ -61,6 +63,7 @@ export const MenuList = [
         url: 'display_list',
       },
     ],
+    url: 'goods',
   },
   {
     key: 'sub4',
@@ -77,5 +80,6 @@ export const MenuList = [
         url: 'goodsreview',
       },
     ],
+    url: 'board',
   },
 ];

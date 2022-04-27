@@ -1,4 +1,5 @@
 import { user } from './createAPI';
+import axios from '../../node_modules/axios/index';
 
 //  common API  **********************************
 
@@ -17,9 +18,9 @@ export const logout = () => {
 
 //  로그인
 export const masterLogin = ({ userId, password }) => {
-  return user.post('/home/masterSignIn', { userId, password }).then((res) => {
+  return user.post('/master/login', { userId, password }).then((res) => {
     const accessToken = res.headers.authorization;
-    user.defaults.headers.common['Authorization'] = `${accessToken}`;
+    user.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return res;
   });
 };
@@ -28,10 +29,21 @@ export const masterLogin = ({ userId, password }) => {
 
 //  로그인
 export const venderLogin = ({ userId, password }) => {
-  return user.post('/home/venderSignIn', { userId, password }).then((res) => {
+  return user.post('/venders/login', { userId, password }).then((res) => {
     const accessToken = res.headers.authorization;
-    user.defaults.headers.common['Authorization'] = `${accessToken}`;
+    user.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return res;
+  });
+};
+
+//  회원가입
+export const venderRegister = ({ formData }) => {
+  for (const keyValue of formData) console.log(keyValue);
+  return axios.post(`/venders`, formData, {
+    data: FormData,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
   });
 };
 
@@ -39,9 +51,9 @@ export const venderLogin = ({ userId, password }) => {
 
 //  로그인
 export const clientLogin = ({ userId, password }) => {
-  return user.post('/home/userSignIn', { userId, password }).then((res) => {
+  return user.post('/client/login', { userId, password }).then((res) => {
     const accessToken = res.headers.authorization;
-    user.defaults.headers.common['Authorization'] = `${accessToken}`;
+    user.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return res;
   });
 };

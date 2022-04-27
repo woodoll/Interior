@@ -77,13 +77,10 @@ const data = [
 const SortableItem = SortableElement((props) => <tr {...props} />);
 const SortableBody = SortableContainer((props) => <tbody {...props} />);
 
-class SortableTable extends React.Component {
-  state = {
-    dataSource: data,
-  };
+const SortableTable = () => {
+  const dataSource = data;
 
-  onSortEnd = ({ oldIndex, newIndex }) => {
-    const { dataSource } = this.state;
+  const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = arrayMoveImmutable(
         [].concat(dataSource),
@@ -95,18 +92,17 @@ class SortableTable extends React.Component {
     }
   };
 
-  DraggableContainer = (props) => (
+  const DraggableContainer = (props) => (
     <SortableBody
       useDragHandle
       disableAutoscroll
       helperClass="row-dragging"
-      onSortEnd={this.onSortEnd}
+      onSortEnd={onSortEnd}
       {...props}
     />
   );
 
-  DraggableBodyRow = ({ className, style, ...restProps }) => {
-    const { dataSource } = this.state;
+  const DraggableBodyRow = ({ className, style, ...restProps }) => {
     // function findIndex base on Table rowKey props and should always be a right array index
     const index = dataSource.findIndex(
       (x) => x.index === restProps['data-row-key'],
@@ -114,24 +110,20 @@ class SortableTable extends React.Component {
     return <SortableItem index={index} {...restProps} />;
   };
 
-  render() {
-    const { dataSource } = this.state;
-
-    return (
-      <Table
-        pagination={false}
-        dataSource={dataSource}
-        columns={columns}
-        rowKey="index"
-        components={{
-          body: {
-            wrapper: this.DraggableContainer,
-            row: this.DraggableBodyRow,
-          },
-        }}
-      />
-    );
-  }
-}
+  return (
+    <Table
+      pagination={false}
+      dataSource={dataSource}
+      columns={columns}
+      rowKey="index"
+      components={{
+        body: {
+          wrapper: DraggableContainer,
+          row: DraggableBodyRow,
+        },
+      }}
+    />
+  );
+};
 
 export default SortableTable;

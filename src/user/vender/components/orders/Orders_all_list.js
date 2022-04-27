@@ -3,10 +3,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Responsive from 'lib/styles/Responsive';
-import { venderChangeState } from 'api/orders';
 import Checkbox_all from 'lib/common/Checkbox_all';
-import { Divider, Select, Input, DatePicker, Space, Button } from 'antd';
-import Table_check from 'lib/common/Table_check';
+import {
+  Divider,
+  Select,
+  Input,
+  DatePicker,
+  Space,
+  Button,
+  PageHeader,
+} from 'antd';
+import CheckTable from 'lib/common/table/Table_check';
+import SubTabs from 'lib/common/Tabs';
 /* #endregion */
 
 /* #region  styles */
@@ -107,16 +115,36 @@ const columns = [
   },
 ];
 
+const dataNum = [];
+for (let i = 0; i < 5; i++) {
+  dataNum.push({
+    key: i,
+    name: `주문번호별${i}`,
+    address: `상품상세 ${i}`,
+    url: `${i}`,
+  });
+}
+
+const dataProduct = [];
+for (let i = 0; i < 5; i++) {
+  dataProduct.push({
+    key: i,
+    name: `품목주문별${i}`,
+    address: `상품상세 ${i}`,
+    url: `${i}`,
+  });
+}
+
 const AllListComponent = ({ orders }) => {
   const navigate = useNavigate();
-  console.log('orderList = ', orders);
-  const state = '03';
+
   if (orders.result === 'login') {
     navigate('/vender/signIn');
   }
   return (
     <AllListComponentBlock>
-      <h2>전체주문리스트</h2>
+      <PageHeader className="PageHeader" title="전체주문리스트" />
+      <Divider />
       <Form>
         <Space direction="vertical" size={12}>
           <Checkbox_all
@@ -143,7 +171,71 @@ const AllListComponent = ({ orders }) => {
         </Space>
       </Form>
       <Divider />
-      <Table_check columns={columns} />
+      <SubTabs
+        page1={
+          <CheckTable
+            columns={columns}
+            data={dataNum}
+            onRow={(dataNum) => {
+              return {
+                onClick: (event) => {
+                  console.log(dataNum);
+                  navigate(`/vender/orders/detail`);
+                },
+              };
+            }}
+          />
+        }
+        page2={
+          <CheckTable
+            columns={columns}
+            data={dataProduct}
+            onRow={(dataProduct) => {
+              return {
+                onClick: (event) => {
+                  console.log(dataProduct);
+                  navigate(`/vender/orders/detail`);
+                },
+              };
+            }}
+          />
+        }
+        pageName1="주문번호별"
+        pageName2="품목주문별"
+      />
+      <Divider />
+      <SubTabs
+        page1={
+          <CheckTable
+            columns={columns}
+            data={dataNum}
+            onRow={(dataNum) => {
+              return {
+                onClick: (event) => {
+                  console.log(dataNum);
+                  navigate(`/vender/orders/detail`);
+                },
+              };
+            }}
+          />
+        }
+        page2={
+          <CheckTable
+            columns={columns}
+            data={dataProduct}
+            onRow={(dataProduct) => {
+              return {
+                onClick: (event) => {
+                  console.log(dataProduct);
+                  navigate(`/vender/orders/detail`);
+                },
+              };
+            }}
+          />
+        }
+        pageName1="주문번호별"
+        pageName2="품목주문별"
+      />
     </AllListComponentBlock>
   );
 };

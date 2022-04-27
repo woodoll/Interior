@@ -13,10 +13,12 @@ const mapDispatchToProps = (dispatch) => ({
   disGetOriderList: () => dispatch(actGetOrderList()),
 });
 
-const AllListContainer = ({ orders, disGetOriderList }) => {
+const AllListContainer = ({ orders, disGetOriderList, setPathUrl }) => {
   useEffect(() => {
     disGetOriderList();
   }, []);
+
+  setPathUrl('전체 주문리스트');
 
   return <AllListComponent orders={orders} />;
 };

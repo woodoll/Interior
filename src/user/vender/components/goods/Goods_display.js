@@ -2,11 +2,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Input, Radio, Cascader, Divider } from 'antd';
+import { Input, Radio, Cascader, Divider, Space, PageHeader } from 'antd';
 import Responsive from 'lib/styles/Responsive';
 
 import { productOptProductType } from 'lib/vender/options';
-import SortableTable from 'lib/common/Table_drag';
+import SortableTable from 'lib/common/table/Table_drag';
 
 /* #endregion */
 
@@ -24,7 +24,6 @@ const Form = styled.form`
 const AddSection = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 0.5rem;
   p {
     width: 100px;
   }
@@ -53,6 +52,7 @@ const VenderAddComponent = ({
   disChange,
   disUpload,
   msgCode,
+  setPathUrl,
 }) => {
   const navigate = useNavigate();
   const onChange = (e) => disChange(e.target.value, e.target.name);
@@ -90,75 +90,81 @@ const VenderAddComponent = ({
       navigate('/');
     }
   });
+
+  setPathUrl('상품 진열');
+
   return (
     <AddComponentBlock>
+      <PageHeader className="PageHeader" title="상품진열" />
+      <Divider />
       <Form
         name="AddProduct"
         target="_blank"
         encType="multipart/form-data"
         onSubmit={onSubmit}
       >
-        <h2>상품등록</h2>
-        <h3>카테고리 선택</h3>
-        <AddSection>
-          <Cascader
-            style={{ width: '200px' }}
-            name="productType"
-            options={productOptProductType}
-            placeholder="분류"
-          />
-        </AddSection>
-        <h3>기본정보</h3>
-        <AddSection>
-          <p>진열코드</p>
-          <Input
-            style={{ width: '200px' }}
-            name="productName"
-            placeholder="진열코드"
-            onChange={onChange}
-            value={productName}
-            disabled
-          />
-        </AddSection>
-        <AddSection>
-          <p>노출상품명</p>
-          <Input
-            style={{ width: '200px' }}
-            name="productName"
-            placeholder="노출상품명"
-            onChange={onChange}
-            value={productName}
-          />
-        </AddSection>
-        <AddSection>
-          <p>검색 키워드</p>
-          <Input
-            style={{ width: '200px' }}
-            name="productName"
-            placeholder="검색 키워드"
-            onChange={onChange}
-            value={productName}
-          />
-        </AddSection>
-        <AddSection>
-          <p>진열여부</p>
-          <Radio.Group defaultValue="Y" onChange={onChange}>
-            <Radio.Button value="Y" name="displayStatus">
-              진열함
-            </Radio.Button>
-            <Radio.Button value="N" name="displayStatus">
-              진열 안함
-            </Radio.Button>
-          </Radio.Group>
-        </AddSection>
-        <Divider />
-        <h3>상품선택</h3>
-        <SortableTable />
-        <Divider />
-        <h3>추가옵션</h3>
-        <SortableTable />
-        <Divider />
-        <button>저장</button>
+        <Space direction="vertical" size={12}>
+          <h3>카테고리 선택</h3>
+          <AddSection>
+            <Cascader
+              style={{ width: '200px' }}
+              name="productType"
+              options={productOptProductType}
+              placeholder="분류"
+            />
+          </AddSection>
+          <h3>기본정보</h3>
+          <AddSection>
+            <p>진열코드</p>
+            <Input
+              style={{ width: '200px' }}
+              name="productName"
+              placeholder="진열코드"
+              onChange={onChange}
+              value={productName}
+              disabled
+            />
+          </AddSection>
+          <AddSection>
+            <p>노출상품명</p>
+            <Input
+              style={{ width: '200px' }}
+              name="productName"
+              placeholder="노출상품명"
+              onChange={onChange}
+              value={productName}
+            />
+          </AddSection>
+          <AddSection>
+            <p>검색 키워드</p>
+            <Input
+              style={{ width: '200px' }}
+              name="productName"
+              placeholder="검색 키워드"
+              onChange={onChange}
+              value={productName}
+            />
+          </AddSection>
+          <AddSection>
+            <p>진열여부</p>
+            <Radio.Group defaultValue="Y" onChange={onChange}>
+              <Radio.Button value="Y" name="displayStatus">
+                진열함
+              </Radio.Button>
+              <Radio.Button value="N" name="displayStatus">
+                진열 안함
+              </Radio.Button>
+            </Radio.Group>
+          </AddSection>
+          <Divider />
+          <h3>상품선택</h3>
+          <SortableTable />
+          <Divider />
+          <h3>추가옵션</h3>
+          <SortableTable />
+          <Divider />
+          <button>저장</button>
+        </Space>
       </Form>
     </AddComponentBlock>
   );

@@ -2,18 +2,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { actChangeField } from 'user/vender/reducers/login/LoginReducer';
-import { actInitialize } from 'user/vender/reducers/login/LoginReducer';
-import { actVenderLogin } from 'user/vender/reducers/login/LoginReducer';
+import { actChangeField } from 'user/vender/reducers/auth/LoginReducer';
+import { actInitialize } from 'user/vender/reducers/auth/LoginReducer';
+import { actVenderLogin } from 'user/vender/reducers/auth/LoginReducer';
 import { check } from 'lib/reducer/user';
-import VenderLoginComponent from 'user/vender/components/login/LoginComponent';
+import VenderLoginComponent from 'user/vender/components/auth/LoginComponent';
 /* #endregion */
 
 const mapStateToProps = (store) => ({
   userId: store.VenderLoginReducer.userId,
   password: store.VenderLoginReducer.password,
   auth: store.VenderLoginReducer.auth,
-  authError: store.VenderLoginReducer.authError,
   error: store.VenderLoginReducer.error,
 
   user: store.userReducer.user,
@@ -51,6 +50,7 @@ const VenderLoginContainer = ({
     if (auth.msgCode === 'SUCCESS') {
       console.log('로그인 성공');
       disCheck();
+      navigate('/vender');
     }
   }, [auth]);
 
@@ -59,6 +59,7 @@ const VenderLoginContainer = ({
       navigate('/vender');
       try {
         localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
         console.log('localStorage is not working');
       }

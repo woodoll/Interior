@@ -4,8 +4,16 @@ import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
 import Checkbox_all from 'lib/common/Checkbox_all';
 
-import { Space, Select, Input, DatePicker, Button, Divider } from 'antd';
-import CheckTable from 'lib/common/Table_check';
+import {
+  Space,
+  Select,
+  Input,
+  DatePicker,
+  Button,
+  Divider,
+  PageHeader,
+} from 'antd';
+import CheckTable from 'lib/common/table/Table_check';
 /* #endregion */
 
 /* #region  styles */
@@ -88,10 +96,12 @@ const columns = [
 
 const { RangePicker } = DatePicker;
 
-const Orders_return = () => {
+const Orders_return = ({ setPathUrl }) => {
+  setPathUrl('취소/교환/반품');
   return (
     <Orders_returnBlock>
-      <h2>취소/교환/반품</h2>
+      <PageHeader className="PageHeader" title="취소/교환/반품" />
+      <Divider />
       <Space direction="vertical" size={12}>
         <Checkbox_all
           plainOptions={plainOptions}

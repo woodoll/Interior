@@ -3,8 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
 
-import { Input, Select, DatePicker, Button, Divider, Space } from 'antd';
-import CheckTable from 'lib/common/Table_check';
+import {
+  Input,
+  Select,
+  DatePicker,
+  Button,
+  Divider,
+  Space,
+  PageHeader,
+} from 'antd';
+import CheckTable from 'lib/common/table/Table_check';
+import SubTabs from 'lib/common/Tabs';
 /* #endregion */
 
 /* #region  styles */
@@ -53,7 +62,8 @@ const columns = [
   },
   {
     title: '택배사선택',
-    dataIndex: '',
+    dataIndex: 'input',
+    editable: true,
   },
   {
     title: '운송장번호',
@@ -73,10 +83,19 @@ const columns = [
   },
 ];
 
-const Orders_delivery = () => {
+const data = [
+  {
+    name: '상품테스트',
+    input: '입력창',
+  },
+];
+
+const Orders_delivery = ({ setPathUrl }) => {
+  setPathUrl('배송관리');
   return (
     <Orders_deliveryBlock>
-      <h2>배송관리</h2>
+      <PageHeader className="PageHeader" title="배송관리" />
+      <Divider />
       <Form>
         <Space direction="vertical" size={12}>
           <AddSection>
@@ -95,7 +114,12 @@ const Orders_delivery = () => {
         </Space>
       </Form>
       <Divider />
-      <CheckTable columns={columns} />
+      <SubTabs
+        page1={<CheckTable columns={columns} data={data} />}
+        page2={<CheckTable columns={columns} data={data} />}
+        pageName1="주문번호별"
+        pageName2="품목주문별"
+      />
       <Divider />
       <CheckTable columns={columns} />
     </Orders_deliveryBlock>

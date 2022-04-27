@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .logo {
+  div .logo {
     font-size: 1.125rem;
     font-weight: 800;
     letter-spacing: 2px;
@@ -25,6 +25,7 @@ const Wrapper = styled.div`
   .right {
     display: flex;
     margin-right: 1rem;
+    align-items: center;
   }
 `;
 
@@ -34,32 +35,28 @@ const UserInfo = styled.div`
   margin-right: 1rem;
   vertical-align: middle;
 `;
-
-const StyledButton = styled(Button)`
-  & + & {
-    margin-left: 0.5rem;
-  }
-`;
 /* #endregion */
 
 const HeaderSection = ({ pagename, pageuser, user, disLogout }) => {
   return (
     <HeaderSectionBlock>
       <Wrapper>
-        <Link to={`/${pageuser}`} className="logo">
-          {pagename}
-        </Link>
+        <div>
+          <Link to={`/${pageuser}`} className="logo">
+            {pagename}
+          </Link>
+        </div>
         {user ? (
           <div className="right">
             <UserInfo>{user.name} 님 환영합니다.</UserInfo>
             {/* <StyledButton to="/">쇼핑몰 바로가기</StyledButton>
             <StyledButton to="/">관리자 정보</StyledButton> */}
-            <StyledButton onClick={disLogout}>로그아웃</StyledButton>
+            <Button onClick={disLogout}>로그아웃</Button>
           </div>
         ) : (
           <div className="right">
-            <Button>
-              <Link to={`/${pageuser}/signIn`}>로그인</Link>
+            <Button styles={{ margin: '0 auto' }} type="primary">
+              <Link to={`/${pageuser}/auth/login`}>로그인</Link>
             </Button>
           </div>
         )}

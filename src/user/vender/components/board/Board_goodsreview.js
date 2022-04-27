@@ -3,9 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
 
-import { Input, Select, Button, Divider, DatePicker, Space } from 'antd';
+import {
+  Input,
+  Select,
+  Button,
+  Divider,
+  DatePicker,
+  Space,
+  PageHeader,
+} from 'antd';
 import Checkbox_all from 'lib/common/Checkbox_all';
-import CheckTable from 'lib/common/Table_check';
+import CheckTable from 'lib/common/table/Table_check';
 /* #endregion */
 
 /* #region  styles */
@@ -72,10 +80,11 @@ const columns = [
   },
 ];
 
-const Board_goodsreview = () => {
+const Board_goodsreview = ({ setPathUrl }) => {
+  setPathUrl('상품 리뷰');
   return (
     <Board_goodsreviewBlock>
-      <h2>상품 리뷰</h2>
+      <PageHeader className="PageHeader" title="상품 리뷰" />
       <Divider />
       <Form>
         <Space direction="vertical" size={12}>

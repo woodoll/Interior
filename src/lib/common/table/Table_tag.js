@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Tag, Space, Collapse } from 'antd';
-import CommentModule from './Comment';
+import CommentModule from '../Comment';
 
 const { Panel } = Collapse;
 
