@@ -20,9 +20,9 @@
     "immer": "^9.0.12",
     "ps": "^1.0.0",
     "query-string": "^7.1.1",
-    "react": "^18.0.0",
+    "react": "^17.0.2",
     "react-daum-postcode": "^3.0.1",
-    "react-dom": "^18.0.0",
+    "react-dom": "^17.0.2",
     "react-draft-wysiwyg": "^1.14.7",
     "react-google-login": "^5.2.2",
     "react-kakao-login": "^2.1.0",
@@ -65,6 +65,7 @@
     ]
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
   "proxy": "http://172.30.1.40:8080/"
 =======
 <<<<<<< HEAD
@@ -73,4 +74,7 @@
   "proxy": "http://172.30.1.6:8081"
 >>>>>>> parent of 872dc29 (04/12)
 >>>>>>> 304ed38 (04/27-1)
+=======
+  "proxy": "http://172.30.1.4:8080/"
+>>>>>>> 7911096 (05/09)
 }

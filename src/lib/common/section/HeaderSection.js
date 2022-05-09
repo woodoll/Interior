@@ -2,20 +2,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Button, Space } from 'antd';
 
 import palette from 'lib/styles/palette';
-import Button from 'lib/styles/Button';
 /* #endregion */
 
 /* #region  styles */
-const HeaderSectionBlock = styled.div`
-  padding: 0 3rem;
-  width: 100%;
-  height: 10vh;
-  box-sizing: border-box;
-  background: #fff;
-  border-bottom: 1px solid ${palette.gray[2]};
-`;
+const HeaderSectionBlock = styled.div``;
 
 const Wrapper = styled.div`
   height: 100%;
@@ -29,36 +22,42 @@ const Wrapper = styled.div`
     color: ${palette.gray[9]};
   }
   .right {
-    display: flex;
     margin-right: 1rem;
-    align-items: center;
   }
 `;
 
 const UserInfo = styled.div`
   font-size: 1.125rem;
   font-weight: 800;
-  margin-right: 1rem;
-  vertical-align: middle;
 `;
 /* #endregion */
 
-const HeaderSection = ({ pagename, pageuser, user, disLogout }) => {
+const HeaderSection = ({ pagename, pageuser, user, disLogout, FontColor }) => {
+  const userInfo = JSON.parse(user);
   return (
     <HeaderSectionBlock>
       <Wrapper>
         <div>
-          <Link to={`/${pageuser}`} className="logo">
+          <Link to={`/`} className="logo" style={FontColor}>
             {pagename}
           </Link>
         </div>
         {user ? (
           <div className="right">
-            <UserInfo>{user.name} 님 환영합니다.</UserInfo>
-            {/* <StyledButton to="/">쇼핑몰 바로가기</StyledButton>
-            <StyledButton to="/">관리자 정보</StyledButton> */}
-            <Button onClick={disLogout}>로그아웃</Button>
+            <Space align="center">
+              <UserInfo>{userInfo.companyNm} 님 환영합니다.</UserInfo>
+              <Button to="/">쇼핑몰 바로가기</Button>
+              <Button to="/">관리자 정보</Button>
+              <Button
+                onClick={() => {
+                  disLogout();
+                }}
+              >
+                로그아웃
+              </Button>
+            </Space>
           </div>
+<<<<<<< HEAD
         ) : (
           <div className="right">
 <<<<<<< HEAD
@@ -73,6 +72,9 @@ const HeaderSection = ({ pagename, pageuser, user, disLogout }) => {
 >>>>>>> parent of 872dc29 (04/12)
           </div>
         )}
+=======
+        ) : null}
+>>>>>>> 7911096 (05/09)
       </Wrapper>
     </HeaderSectionBlock>
   );

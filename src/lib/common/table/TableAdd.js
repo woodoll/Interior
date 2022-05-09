@@ -35,7 +35,7 @@ const EditableCell = ({
   );
 };
 
-const Table_add = ({ setTableData }) => {
+const TableAdd = ({ setTableData }) => {
   const [fileList, setFileList] = useState([
     {
       uid: '-1',
@@ -115,7 +115,6 @@ const Table_add = ({ setTableData }) => {
         return (
           <ImgCrop rotate>
             <Upload
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture-card"
               fileList={fileList}
               onChange={onChange}
@@ -188,16 +187,16 @@ const Table_add = ({ setTableData }) => {
 
   const productsData = [
     {
-      productNm: '임시이름',
-      displayOrder: '00',
-      colorCode: '00',
-      listPrice: '1000',
-      discountContents: '10',
-      sellingPrice: '900',
-      stockYn: 'Y',
-      stock: '10',
+      productNm: '',
+      displayOrder: '',
+      colorCode: '',
+      listPrice: '',
+      discountRate: '',
+      sellingPrice: '',
+      stockYn: '',
+      stock: '',
+      detailContents: '',
       thumbnail: '',
-      detailContents: '대충설명',
     },
   ];
 
@@ -316,4 +315,4 @@ const Table_add = ({ setTableData }) => {
   );
 };
 
-export default Table_add;
+export default TableAdd;

@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 import MasterMainSection from 'user/master/MasterMainSection';
-import VenderMainSection from 'user/vender/VenderMainSection';
 import ClientMainSection from 'user/client/ClientMainSection';
+import VenderLoginContainer from 'user/vender/containers/auth/LoginContainer';
 
-const App = () => {
-  return (
-    <Routes>
-      <Route path="/master/*" element={<MasterMainSection />} />
-      <Route path="/vender/*" element={<VenderMainSection />} />
-      <Route path="/client/*" element={<ClientMainSection />} />
-    </Routes>
-  );
+const user = localStorage.getItem('user');
+
+const App = ({ user }) => {
+  return <VenderLoginContainer user={user} />;
 };
 
 export default App;

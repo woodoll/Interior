@@ -39,14 +39,6 @@ const AddSection = styled.div`
   }
 `;
 
-const InputText = styled.input`
-  border: 1.5px solid #cccccc;
-  border-radius: 3px;
-  padding: 10px;
-  font-size: 1rem;
-  color: #000;
-`;
-
 /* #endregion */
 const VenderAddComponent = ({
   productType,

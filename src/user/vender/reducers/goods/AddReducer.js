@@ -5,12 +5,12 @@ import { actStartLoading } from 'lib/reducer/LoadingReducer';
 import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 
 const initialState = {
-  productType: '',
+  productType: '00',
   manufacturerType: '',
   productGroupNm: '',
   searchKeyword: '',
   displayYn: '',
-  products: [{}],
+  products: '',
 };
 
 const CHANGE_FILED = 'AddReducer/CHANGE_FILED';

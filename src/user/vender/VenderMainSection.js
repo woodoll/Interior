@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 
-<<<<<<< HEAD
 import SiderMenu from 'lib/common/section/SidebarSection';
 import HeaderContainer from 'lib/common/section/HeaderContainer';
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -85,6 +85,8 @@ import {
   FormatPainterOutlined,
 } from '@ant-design/icons';
 >>>>>>> parent of 872dc29 (04/12)
+=======
+>>>>>>> 7911096 (05/09)
 
 import Auth_Index from './components/auth/Auth_index';
 import Orders_Index from './components/orders/Orders_Index';
@@ -128,9 +130,8 @@ const LayoutForm = styled(Layout)`
 `;
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
-const VenderMainSection = () => {
+const VenderMainSection = ({ FontColor, user }) => {
   const [open, setOpen] = useState(false);
 
   // const params = useParams();
@@ -144,14 +145,23 @@ const VenderMainSection = () => {
     <LayoutForm>
       <BackTop />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 304ed38 (04/27-1)
+=======
+>>>>>>> 7911096 (05/09)
       <Header className="site-layout-background" style={{ padding: 0 }}>
-        <HeaderContainer pagename="INTERIOR PLAY VENDER" pageuser="vender" />
+        <HeaderContainer
+          pagename="INTERIOR PLAY VENDER"
+          pageuser="vender"
+          FontColor={FontColor}
+          user={user}
+        />
       </Header>
       <Layout hasSider className="site-layout" style={{ overflow: 'scroll-y' }}>
         <Sider
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -229,6 +239,8 @@ const VenderMainSection = () => {
         <Content
 >>>>>>> parent of 872dc29 (04/12)
 >>>>>>> 304ed38 (04/27-1)
+=======
+>>>>>>> 7911096 (05/09)
           style={{
             position: 'sticky',
             top: '0',
@@ -240,9 +252,12 @@ const VenderMainSection = () => {
           onCollapse={onCollapse}
         >
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 304ed38 (04/27-1)
+=======
+>>>>>>> 7911096 (05/09)
           <SiderMenu />
         </Sider>
         <Layout style={{ overflow: 'scroll-y' }}>
@@ -266,6 +281,7 @@ const VenderMainSection = () => {
               <Route path="/orders/*" element={<Orders_Index />} />
               <Route path="/goods/*" element={<Goods_Index />} />
               <Route path="/board/*" element={<Board_Index />} />
+<<<<<<< HEAD
 =======
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
@@ -287,6 +303,8 @@ const VenderMainSection = () => {
               <Route path="/orders/all_list" element={<AllListContainer />} />
 >>>>>>> parent of 872dc29 (04/12)
 >>>>>>> 304ed38 (04/27-1)
+=======
+>>>>>>> 7911096 (05/09)
             </Routes>
           </Content>
           <Footer style={{ textAlign: 'center' }}>

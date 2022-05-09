@@ -1,4 +1,3 @@
-import * as checkAPI from 'api/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
 import { actFinishLoading, actStartLoading } from './LoadingReducer';
@@ -29,19 +28,19 @@ export const logout = () => ({
 
 function checkFailureSaga() {
   try {
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
   } catch (e) {
-    console.log('localStorage is not working');
+    console.log('sessionStorage is not working');
   }
 }
 
-function* checkSaga(action) {
+function* checkSaga() {
   yield put(actStartLoading(CHECK));
+  const check = sessionStorage.getItem('user');
   try {
-    const check = yield call(checkAPI.check, action);
     yield put({
       type: CHECK_SUCCESS,
-      user: check.data,
+      user: check,
     });
   } catch (e) {
     yield put({
@@ -53,10 +52,9 @@ function* checkSaga(action) {
   yield put(actFinishLoading(CHECK));
 }
 
-function* logoutSaga(action) {
+function* logoutSaga() {
   try {
-    yield call(checkAPI.logout, action);
-    localStorage.removeItem('user');
+    yield call(sessionStorage.removeItem('user'));
   } catch (e) {
     console.log(e);
   }

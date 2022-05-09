@@ -54,23 +54,22 @@ const options = [
   },
 ];
 
-<<<<<<< HEAD
 const columns = [
-  {
-    title: '이미지',
-    dataIndex: 'smallImage',
-    render: (goods) => (
-      <div
-        style={{
-          border: '1px solid red',
-          width: '100px',
-          height: '100px',
-        }}
-      >
-        <img src={`http://localhost:8081/${goods.smallImage}`} />
-      </div>
-    ),
-  },
+  // {
+  //   title: '이미지',
+  //   dataIndex: 'smallImage',
+  //   render: (goods) => (
+  //     <div
+  //       style={{
+  //         border: '1px solid red',
+  //         width: '100px',
+  //         height: '100px',
+  //       }}
+  //     >
+  //       <img src={`http://localhost:8081/${goods.smallImage}`} />
+  //     </div>
+  //   ),
+  // },
   {
     title: '상품이름',
     dataIndex: 'productName',
@@ -88,14 +87,16 @@ const columns = [
     dataIndex: 'sellingPrice',
   },
 ];
-
 const Goods_list = ({ goods }) => {
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
 const Goods_list = () => {
 >>>>>>> parent of 872dc29 (04/12)
 >>>>>>> 304ed38 (04/27-1)
+=======
+>>>>>>> 7911096 (05/09)
   const { RangePicker } = DatePicker;
   return (
     <Goods_listBlock>
@@ -179,8 +180,8 @@ const Goods_list = () => {
         </Space>
       </Form>
       <Divider />
-<<<<<<< HEAD
       <CheckTable columns={columns} data={goods} />
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
       <CheckTable columns={columns} data={goods} />
@@ -188,6 +189,8 @@ const Goods_list = () => {
       <CheckTable />
 >>>>>>> parent of 872dc29 (04/12)
 >>>>>>> 304ed38 (04/27-1)
+=======
+>>>>>>> 7911096 (05/09)
     </Goods_listBlock>
   );
 };
