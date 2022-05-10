@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { actChangeFiled } from 'user/vender/reducers/auth/RegisterReducer';
-import { actUploadFiled } from 'user/vender/reducers/auth/RegisterReducer';
 import { actInitialize } from 'user/vender/reducers/auth/RegisterReducer';
 import { actSubmit } from 'user/vender/reducers/auth/RegisterReducer';
 import VenderRegisterComponent_2 from 'user/vender/components/auth/RegisterComponent_2';
@@ -35,7 +34,6 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   disSubmit: (formData) => dispatch(actSubmit(formData)),
   disChange: (value, name) => dispatch(actChangeFiled({ key: name, value })),
-  disUpload: (files, name) => dispatch(actUploadFiled({ key: name, files })),
   disInitialize: () => dispatch(actInitialize()),
 });
 
@@ -66,7 +64,6 @@ const VenderRegisterContainer = ({
   disSubmit,
   disChange,
   disInitialize,
-  disUpload,
   next,
 }) => {
   return (
@@ -96,7 +93,6 @@ const VenderRegisterContainer = ({
       passbook={passbook}
       disSubmit={disSubmit}
       disChange={disChange}
-      disUpload={disUpload}
       next={next}
     />
   );

@@ -6,6 +6,8 @@ import { Input, Divider, Space, Button, Upload, Form } from 'antd';
 
 import ModalPostCode from 'lib/common/postCode/PostCode';
 import { UploadOutlined } from '@ant-design/icons';
+import UploadText from 'lib/common/upload/Upload_one';
+import Upload_one from 'lib/common/upload/Upload_one';
 /* #endregion */
 
 /* #region  styles */
@@ -56,69 +58,71 @@ const RegisterComponent_2 = ({
   passbook,
   disSubmit,
   disChange,
-  disUpload,
   next,
 }) => {
   const [zipcodeNum, setZipcodeNum] = useState('');
   const [address, setAddress] = useState('');
+  const [img1, setImg1] = useState('');
+  const [img2, setImg2] = useState('');
   zipCode = zipcodeNum;
   addr1 = address;
+  registration = img1;
+  passbook = img2;
+
+  const uploadProps = {
+    name: 'registration',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      setImg1(info.file);
+    },
+  };
 
   const onChange = (e) => disChange(e.target.value, e.target.name);
-  const onUpload = (e, name) => {
-    disUpload(e.file.originFileObj, name);
-    console.log(e);
-  };
 
   const onSubmit = (e) => {
     const formData = new FormData();
-    formData.append('userId', userId);
-    formData.append('password', password);
-    formData.append('companyNm', companyNm);
-    formData.append('productType', productType);
-    formData.append('ceoNm', ceoNm);
-    formData.append('businessNb', businessNb);
-    formData.append('businessType', businessType);
-    formData.append('businessItems', businessItems);
-    formData.append('mailOrderNb', mailOrderNb);
-    formData.append('customerServiceNb', customerServiceNb);
-    formData.append('avlbStartTime', avlbStartTime);
-    formData.append('avlbEndTime', avlbEndTime);
-    formData.append('zipCode', zipCode);
-    formData.append('addr1', addr1);
-    formData.append('addr2', addr2);
-    formData.append('managerNm', managerNm);
-    formData.append('managerMobile', managerMobile);
-    formData.append('managerEmail', managerEmail);
-    formData.append('bankNm', bankNm);
-    formData.append('accountHolder', accountHolder);
-    formData.append('accountNb', accountNb);
-    formData.append('registration', registration);
-    formData.append('passbook', passbook);
+    formData.append('userId,', userId);
+    formData.append('password,', password);
+    formData.append('companyNm,', companyNm);
+    formData.append('productType,', productType);
+    formData.append('ceoNm,', ceoNm);
+    formData.append('businessNb,', businessNb);
+    formData.append('businessType,', businessType);
+    formData.append('businessItems,', businessItems);
+    formData.append('mailOrderNb,', mailOrderNb);
+    formData.append('customerServiceNb,', customerServiceNb);
+    formData.append('avlbStartTime,', avlbStartTime);
+    formData.append('avlbEndTime,', avlbEndTime);
+    formData.append('zipCode,', zipCode);
+    formData.append('addr1,', addr1);
+    formData.append('addr2,', addr2);
+    formData.append('managerNm,', managerNm);
+    formData.append('managerMobile,', managerMobile);
+    formData.append('managerEmail,', managerEmail);
+    formData.append('bankNm,', bankNm);
+    formData.append('accountHolder,', accountHolder);
+    formData.append('accountNb,', accountNb);
+    formData.append('registration,', registration);
+    formData.append('passbook,', passbook);
 
     disSubmit({
       formData,
     });
-
-    next();
   };
 
   return (
     <RegisterComponentBlock>
-      <form>
+      <form encType="multipart/form-data">
         <Space direction="vertical" size={12}>
-          <AddSection>
+          {/* <AddSection>
             <p>아이디</p>
             <Input name="userId" value={userId} onChange={onChange} />
           </AddSection>
           <AddSection>
             <p>패스워드</p>
-            <Input
-              type="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-            />
+            <Input name="password" value={password} onChange={onChange} />
           </AddSection>
           <AddSection>
             <p>회사명</p>
@@ -180,15 +184,15 @@ const RegisterComponent_2 = ({
             <p>우편번호</p>
             <Input
               style={{ width: '100px', marginRight: '10px' }}
-              name="zipCode"
               value={zipCode}
+              name="zipCode"
               onChange={onChange}
             />
             <ModalPostCode setAddress={setAddress} setZipcode={setZipcodeNum} />
           </AddSection>
           <AddSection>
             <p>상세주소</p>
-            <Input name="add1" value={addr1} onChange={onChange} />
+            <Input value={addr1} name="add1" onChange={onChange} />
           </AddSection>
           <AddSection>
             <p>상세주소</p>
@@ -234,25 +238,20 @@ const RegisterComponent_2 = ({
             <p>사업자등록증</p>
             <Upload
               name="registration"
-              onChange={(e) => onUpload(e, 'registration')}
+              onChange={(info) => (registration = info.file)}
             >
-              {/* registration = info.file */}
               <Button icon={<UploadOutlined />}>Upload</Button>
             </Upload>
-            {/* <Input type="file" name="registration" onChange={onUpload} /> */}
           </AddSection>
           <AddSection>
             <p>뭔가의이미지</p>
-            <Upload name="passbook" onChange={(e) => onUpload(e, 'passbook')}>
-              <Button icon={<UploadOutlined />}>Upload</Button>
-            </Upload>
-            {/* <Input type="file" name="passbook" onChange={onUpload} /> */}
-          </AddSection>
+            <Upload_one />
+          </AddSection> */}
           <Button
-            onClick={() => onSubmit()}
             style={{ width: '100%' }}
-            type={'primary'}
             size="large"
+            type="primary"
+            onClick={() => onSubmit()}
           >
             저장
           </Button>

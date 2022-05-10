@@ -1,5 +1,5 @@
 import { user } from './createAPI';
-import axios from 'axios';
+import axios from '../../node_modules/axios/index';
 
 //  common API  **********************************
 
@@ -31,7 +31,6 @@ export const masterLogin = ({ userId, password }) => {
 export const venderLogin = ({ userId, password }) => {
   return user.post('/venders/login', { userId, password }).then((res) => {
     const accessToken = res.headers.authorization;
-    sessionStorage.setItem('accessToken', accessToken);
     user.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return res;
   });
@@ -39,13 +38,12 @@ export const venderLogin = ({ userId, password }) => {
 
 //  회원가입
 export const venderRegister = ({ formData }) => {
-  for (const keyValue of formData) console.log(formData);
+  for (const keyValue of formData) console.log(keyValue);
   return axios.post(`/venders`, formData, {
-    data: formData,
+    data: FormData,
     headers: {
       'Content-Type': 'multipart/form-data',
     },
-    body: formData,
   });
 };
 

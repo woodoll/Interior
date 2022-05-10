@@ -12,6 +12,7 @@ const mapStateToProps = (store) => ({
   searchKeyword: store.AddReducer.searchKeyword,
   displayYn: store.AddReducer.displayYn,
   products: store.AddReducer.products,
+  msgCode: store.AddReducer.msgCode,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -30,11 +31,13 @@ const AddContainer = ({
   disSubmit,
   disChange,
   disInitialize,
+  msgCode,
   setPathUrl,
 }) => {
   useEffect(() => {
     disInitialize();
   }, []);
+  setPathUrl('상품 등록');
   return (
     <VenderAddComponent
       productType={productType}
@@ -45,7 +48,7 @@ const AddContainer = ({
       products={products}
       disSubmit={disSubmit}
       disChange={disChange}
-      setPathUrl={setPathUrl}
+      msgCode={msgCode}
     />
   );
 };

@@ -26,26 +26,38 @@ const initialState = {
   bankNm: '은행명',
   accountHolder: '예금주',
   accountNb: '1234',
-  registration: '',
-  passbook: '',
+  registration: {
+    lastModified: 1632022382000,
+    name: '지브리_배경화면_고화질__(64).png',
+    percent: 0,
+    response: undefined,
+    size: 510077,
+    status: 'error',
+    type: 'image/png',
+    uid: 'rc-upload-1651049564491-6',
+  },
+  passbook: {
+    lastModified: 1632022382000,
+    name: '지브리_배경화면_고화질__(64).png',
+    percent: 0,
+    response: undefined,
+    size: 510077,
+    status: 'error',
+    type: 'image/png',
+    uid: 'rc-upload-1651049564491-6',
+  },
 };
 
-const CHANGE_FILED = 'VenderRegisterReducer/CAHNGE_FILED';
-const UPLOAD_FILED = 'VenderRegisterReducer/UPLOAD_FILED';
-const INITIALIZE = 'VenderRegisterReducer/INITIALIZE';
-const REGISTER = 'VenderRegisterReducer/REGISTER';
-const REGISTER_SUCCESS = 'VenderRegisterReducer/REGISTER_SUCCESS';
-const REGISTER_FIALURE = 'VenderRegisterReducer/REGISTER_FIALURE';
+const CHANGE_FILED = 'RegisterReducer/CAHNGE_FILED';
+const INITIALIZE = 'RegisterReducer/INITIALIZE';
+const REGISTER = 'RegisterReducer/REGISTER';
+const REGISTER_SUCCESS = 'RegisterReducer/REGISTER_SUCCESS';
+const REGISTER_FIALURE = 'RegisterReducer/REGISTER_FIALURE';
 
 export const actChangeFiled = ({ key, value }) => ({
   type: CHANGE_FILED,
   key,
   value,
-});
-export const actUploadFiled = ({ key, files }) => ({
-  type: UPLOAD_FILED,
-  key,
-  files,
 });
 export const actInitialize = () => ({
   type: INITIALIZE,
@@ -85,11 +97,6 @@ function VenderRegisterReducer(state = initialState, action) {
     case CHANGE_FILED:
       return produce(state, (draft) => {
         draft[action.key] = action.value;
-      });
-    case UPLOAD_FILED:
-      return produce(state, (draft) => {
-        draft[action.key] = action.files;
-        console.log(action.files);
       });
     case REGISTER_SUCCESS:
       return produce(state, (draft) => {

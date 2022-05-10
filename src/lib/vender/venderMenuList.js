@@ -65,6 +65,7 @@ export const MenuList = [
     ],
     url: 'goods',
   },
+<<<<<<< HEAD
   {
     key: 'sub4',
     title: '게시판 관리',
@@ -82,4 +83,6 @@ export const MenuList = [
     ],
     url: 'board',
   },
+=======
+>>>>>>> parent of 872dc29 (04/12)
 ];

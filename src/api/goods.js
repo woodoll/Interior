@@ -1,17 +1,15 @@
 import { user } from './createAPI';
-import axios from 'axios';
 
 export const addGoods = ({ formData }) => {
-  for (const keyValue of formData) console.log(formData);
-  return axios.post(`/goods`, formData, {
-    data: formData,
+  for (const keyValue of formData) console.log(keyValue);
+  return user.post(`/vender/goods/goodsAdd`, formData, {
+    data: FormData,
     headers: {
       'Content-Type': 'multipart/form-data',
-      Authorization: `${sessionStorage.getItem('accessToken')}`,
     },
   });
 };
 
 export const getGoods = () => {
-  return user.get(`/goods`);
+  return user.get(`/vender/goods/getAllList?page=1`);
 };
