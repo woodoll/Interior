@@ -17,17 +17,6 @@ import {
 
 const { SubMenu } = Menu;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  &::-webkit-scrollbar {
-    display: none; /* Chrome , Safari , Opera */
-  }
-
-<<<<<<< HEAD
->>>>>>> 304ed38 (04/27-1)
-=======
->>>>>>> 7911096 (05/09)
 // submenu keys of first level
 const rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4'];
 
@@ -56,13 +45,6 @@ const SiderMenu = () => {
         icon={<PieChartOutlined />}
         title={MenuList[0].title}
       >
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 304ed38 (04/27-1)
-=======
->>>>>>> 7911096 (05/09)
         <Menu.Item key={MenuList[0].sub[0].key}>
           <Link to={`/`}>{MenuList[0].sub[0].title}</Link>
         </Menu.Item>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { changeField } from 'user/vender/reducers/goods/AddReducer';
 import { initialize } from 'user/vender/reducers/goods/AddReducer';
 import { actSubmit } from 'user/vender/reducers/goods/AddReducer';
@@ -12,6 +13,7 @@ const mapStateToProps = (store) => ({
   searchKeyword: store.AddReducer.searchKeyword,
   displayYn: store.AddReducer.displayYn,
   products: store.AddReducer.products,
+  addResult: store.AddReducer.addResult,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -27,14 +29,23 @@ const AddContainer = ({
   searchKeyword,
   displayYn,
   products,
+  addResult,
   disSubmit,
   disChange,
   disInitialize,
   setPathUrl,
 }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     disInitialize();
   }, []);
+
+  useEffect(() => {
+    if (addResult.message === '상품등록 성공') {
+      navigate('/goods/success');
+      disInitialize();
+    }
+  });
   return (
     <VenderAddComponent
       productType={productType}

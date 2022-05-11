@@ -62,15 +62,6 @@ const columns = [
 ];
 
 const Goods_display_list = ({ setPathUrl }) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-const Goods_display_list = () => {
->>>>>>> parent of 872dc29 (04/12)
->>>>>>> 304ed38 (04/27-1)
-=======
->>>>>>> 7911096 (05/09)
   const { RangePicker } = DatePicker;
   setPathUrl('진열상품 목록');
   return (

@@ -88,15 +88,6 @@ const columns = [
   },
 ];
 const Goods_list = ({ goods }) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-const Goods_list = () => {
->>>>>>> parent of 872dc29 (04/12)
->>>>>>> 304ed38 (04/27-1)
-=======
->>>>>>> 7911096 (05/09)
   const { RangePicker } = DatePicker;
   return (
     <Goods_listBlock>
@@ -181,16 +172,6 @@ const Goods_list = () => {
       </Form>
       <Divider />
       <CheckTable columns={columns} data={goods} />
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-      <CheckTable columns={columns} data={goods} />
-=======
-      <CheckTable />
->>>>>>> parent of 872dc29 (04/12)
->>>>>>> 304ed38 (04/27-1)
-=======
->>>>>>> 7911096 (05/09)
     </Goods_listBlock>
   );
 };

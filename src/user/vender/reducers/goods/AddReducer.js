@@ -5,12 +5,13 @@ import { actStartLoading } from 'lib/reducer/LoadingReducer';
 import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 
 const initialState = {
-  productType: '00',
+  productType: '',
   manufacturerType: '',
   productGroupNm: '',
   searchKeyword: '',
   displayYn: '',
-  products: '',
+  products: {},
+  addResult: '',
 };
 
 const CHANGE_FILED = 'AddReducer/CHANGE_FILED';
@@ -39,13 +40,12 @@ function* addProductSaga(action) {
     const addProduct = yield call(goodsAPI.addGoods, action);
     yield put({
       type: ADD_PRODUCT_SUCCESS,
-      addProduct: addProduct.data,
+      addResult: addProduct.data,
     });
   } catch (e) {
     yield put({
       type: ADD_PRODUCT_FAILURE,
-      error: true,
-      addProduct: e,
+      addResult: e.response.data,
     });
   }
   yield put(actFinishLoading(ADD_PRODUCT));
@@ -65,8 +65,11 @@ function AddReducer(state = initialState, action) {
       });
     case ADD_PRODUCT_SUCCESS:
       return produce(state, (draft) => {
-        draft.addProduct = action.addProduct;
-        draft.msgCode = action.msgCode;
+        draft.addResult = action.addResult;
+      });
+    case ADD_PRODUCT_FAILURE:
+      return produce(state, (draft) => {
+        draft.addResult = action.addResult;
       });
     default:
       return state;

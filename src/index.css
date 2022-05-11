@@ -20,11 +20,7 @@ a {
   text-decoration: none;
 }
 
-*/ code {
+code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.site-layout-background {
-  background: #fff;
 }

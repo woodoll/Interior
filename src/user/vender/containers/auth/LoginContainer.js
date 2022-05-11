@@ -9,8 +9,6 @@ import VenderLoginComponent from 'user/vender/components/auth/LoginComponent';
 import VenderMainSection from 'user/vender/VenderMainSection';
 import HeaderContainer from 'lib/common/section/HeaderContainer';
 
-import SelectForm from 'lib/common/SelectForm';
-
 import { Layout } from 'antd';
 
 const { Header, Content } = Layout;

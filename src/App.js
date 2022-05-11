@@ -5,8 +5,6 @@ import MasterMainSection from 'user/master/MasterMainSection';
 import ClientMainSection from 'user/client/ClientMainSection';
 import VenderLoginContainer from 'user/vender/containers/auth/LoginContainer';
 
-const user = localStorage.getItem('user');
-
 const App = ({ user }) => {
   return <VenderLoginContainer user={user} />;
 };

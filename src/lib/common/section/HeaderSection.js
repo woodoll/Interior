@@ -57,24 +57,7 @@ const HeaderSection = ({ pagename, pageuser, user, disLogout, FontColor }) => {
               </Button>
             </Space>
           </div>
-<<<<<<< HEAD
-        ) : (
-          <div className="right">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 304ed38 (04/27-1)
-            <Button styles={{ margin: '0 auto' }} type="primary">
-              <Link to={`/${pageuser}/auth/login`}>로그인</Link>
-            </Button>
-=======
-            <Button to={`/${pageuser}/signIn`}>로그인</Button>
->>>>>>> parent of 872dc29 (04/12)
-          </div>
-        )}
-=======
         ) : null}
->>>>>>> 7911096 (05/09)
       </Wrapper>
     </HeaderSectionBlock>
   );

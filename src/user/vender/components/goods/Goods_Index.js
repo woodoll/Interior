@@ -10,6 +10,8 @@ import Goods_display from 'user/vender/components/goods/Goods_display';
 import Goods_detail from 'user/vender/components/goods/Goods_detail';
 import Goods_dispaly_list from 'user/vender/components/goods/Goods_display_list';
 
+import Goods_success from './Goods_success';
+
 const IndexBlock = styled.div``;
 
 const Goods_Index = () => {
@@ -41,6 +43,7 @@ const Goods_Index = () => {
             path="/display_list"
             element={<Goods_dispaly_list setPathUrl={setPathUrl} />}
           />
+          <Route path="/success" element={<Goods_success />} />
         </Routes>
       </div>
     </IndexBlock>
