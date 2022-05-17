@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import LoadingReducer from './LoadingReducer';
-// import MasterLoginReducer, {
-//   MasterLoginReducerSaga,
-// } from 'user/master/reducers/login/LoginReducer';
+import MasterLoginReducer, {
+  MasterLoginReducerSaga,
+} from 'user/master/reducers/auth/MasterLoginReducer';
 import VendersReducer, {
   VendersReducerSaga,
 } from 'user/master/reducers/venders/VendersReducer';
@@ -15,7 +15,7 @@ import ProductReducer, {
 } from 'user/client/reducers/product/ProductReducer';
 import VenderLoginReducer, {
   VenderLoginReducerSaga,
-} from 'user/vender/reducers/auth/LoginReducer';
+} from 'user/vender/reducers/auth/VenderLoginReducer';
 import ClientLoginReducer, {
   ClientLoginReducerSaga,
 } from 'user/client/reducers/login/LoginReducer';
@@ -32,7 +32,7 @@ import VenderRegisterReducer, {
 
 const RootReducer = combineReducers({
   LoadingReducer,
-  // MasterLoginReducer,
+  MasterLoginReducer,
   VenderLoginReducer,
   ClientLoginReducer,
   VendersReducer,
@@ -46,7 +46,7 @@ const RootReducer = combineReducers({
 
 export function* RootSaga() {
   yield all([
-    // MasterLoginReducerSaga(),
+    MasterLoginReducerSaga(),
     VenderLoginReducerSaga(),
     ClientLoginReducerSaga(),
     VendersReducerSaga(),

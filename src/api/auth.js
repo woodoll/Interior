@@ -45,7 +45,6 @@ export const venderRegister = ({ formData }) => {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
-    body: formData,
   });
 };
 

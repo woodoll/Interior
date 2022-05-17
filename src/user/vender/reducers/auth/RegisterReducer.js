@@ -5,29 +5,30 @@ import { actStartLoading } from 'lib/reducer/LoadingReducer';
 import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 
 const initialState = {
-  userId: 'user1',
-  password: '1234',
-  companyNm: '테스트회사',
-  productType: '00',
-  ceoNm: '대표자이름',
-  businessNb: '1234',
-  businessType: '업태',
-  businessItems: '업종',
-  mailOrderNb: '1234',
-  customerServiceNb: '1234',
-  avlbStartTime: '0',
-  avlbEndTime: '24',
-  zipCode: '12345',
-  addr1: '주소',
-  addr2: '상세주소',
-  managerNm: '담당자명',
-  managerMobile: '1234',
-  managerEmail: 'test@test.com',
-  bankNm: '은행명',
-  accountHolder: '예금주',
-  accountNb: '1234',
+  userId: '',
+  password: '',
+  companyNm: '',
+  productType: '',
+  ceoNm: '',
+  businessNb: '',
+  businessType: '',
+  businessItems: '',
+  mailOrderNb: '',
+  customerServiceNb: '',
+  avlbStartTime: '',
+  avlbEndTime: '',
+  zipCode: '',
+  addr1: '',
+  addr2: '',
+  managerNm: '',
+  managerMobile: '',
+  managerEmail: '',
+  bankNm: '',
+  accountHolder: '',
+  accountNb: '',
   registration: '',
   passbook: '',
+  authResult: '',
 };
 
 const CHANGE_FILED = 'VenderRegisterReducer/CAHNGE_FILED';
@@ -62,13 +63,12 @@ function* registerSaga(action) {
     const register = yield call(registerAPI.venderRegister, action);
     yield put({
       type: REGISTER_SUCCESS,
-      register: register.data,
+      authResult: register.data,
     });
   } catch (e) {
     yield put({
       type: REGISTER_FIALURE,
-      error: true,
-      register: e,
+      authResult: e,
     });
   }
   yield put(actFinishLoading(REGISTER));
@@ -93,11 +93,11 @@ function VenderRegisterReducer(state = initialState, action) {
       });
     case REGISTER_SUCCESS:
       return produce(state, (draft) => {
-        draft.auth = action.auth;
+        draft.authResult = action.authResult;
       });
     case REGISTER_FIALURE:
       return produce(state, (draft) => {
-        draft.auth = action.e;
+        draft.authResult = action.authResult;
       });
     default:
       return state;

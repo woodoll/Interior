@@ -13,6 +13,16 @@ const mapStateToProps = (store) => ({
   searchKeyword: store.AddReducer.searchKeyword,
   displayYn: store.AddReducer.displayYn,
   products: store.AddReducer.products,
+  productNm: store.AddReducer.products.productNm,
+  displayOrder: store.AddReducer.products.displayOrder,
+  colorCode: store.AddReducer.products.colorCode,
+  listPrice: store.AddReducer.products.listPrice,
+  discountRate: store.AddReducer.products.discountRate,
+  sellingPrice: store.AddReducer.products.sellingPrice,
+  stockYn: store.AddReducer.products.stockYn,
+  stock: store.AddReducer.products.stock,
+  detailContents: store.AddReducer.products.detailContents,
+  thumbnail: store.AddReducer.products.thumbnail,
   addResult: store.AddReducer.addResult,
 });
 
@@ -29,6 +39,16 @@ const AddContainer = ({
   searchKeyword,
   displayYn,
   products,
+  productNm,
+  displayOrder,
+  colorCode,
+  listPrice,
+  discountRate,
+  sellingPrice,
+  stockYn,
+  stock,
+  detailContents,
+  thumbnail,
   addResult,
   disSubmit,
   disChange,
@@ -54,6 +74,16 @@ const AddContainer = ({
       searchKeyword={searchKeyword}
       displayYn={displayYn}
       products={products}
+      productNm={productNm}
+      displayOrder={displayOrder}
+      colorCode={colorCode}
+      listPrice={listPrice}
+      discountRate={discountRate}
+      sellingPrice={sellingPrice}
+      stockYn={stockYn}
+      stock={stock}
+      detailContents={detailContents}
+      thumbnail={thumbnail}
       disSubmit={disSubmit}
       disChange={disChange}
       setPathUrl={setPathUrl}

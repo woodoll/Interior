@@ -14,7 +14,9 @@ const Goods_success = () => {
         title="상품등록에 성공했습니다!"
         subTitle="광고문구 혹은 카피라이트"
         extra={[
-          <Button key="list">상품 조회하기</Button>,
+          <Button key="list" onClick={() => navigate('/goods/all_list')}>
+            상품 조회하기
+          </Button>,
           <Button
             type="primary"
             key="moreAdd"

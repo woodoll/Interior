@@ -10,7 +10,18 @@ const initialState = {
   productGroupNm: '',
   searchKeyword: '',
   displayYn: '',
-  products: {},
+  products: {
+    productNm: '',
+    displayOrder: '',
+    colorCode: '',
+    listPrice: '',
+    discountRate: '',
+    sellingPrice: '',
+    stockYn: '',
+    stock: '',
+    detailContents: '',
+    thumbnail: '',
+  },
   addResult: '',
 };
 

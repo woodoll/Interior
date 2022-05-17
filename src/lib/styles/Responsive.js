@@ -2,12 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ResponsiveBlock = styled.div`
-  padding-top: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
   width: 100%;
-  min-height: calc(90vh - 16px);
   height: 100%;
+  min-height: calc(90vh - 16px);
   margin: 0 auto;
   background: #fff;
   text-align: left;

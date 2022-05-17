@@ -2,25 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
 
-import { Breadcrumb } from 'antd';
-
 import VenderLoginContainer from 'user/vender/containers/auth/LoginContainer';
 import VenderRegisterComponent from './RegisterComponent';
 
 const IndexBlock = styled.div`
-  margin-top: 1rem;
+  width: 100%;
 `;
 
 const Auth_Index = () => {
   return (
     <IndexBlock>
-      <Breadcrumb />
-      <div className="site-layout-background padding_area">
-        <Routes>
-          <Route path="/login" element={<VenderLoginContainer />} />
-          <Route path="/register" element={<VenderRegisterComponent />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/login" element={<VenderLoginContainer />} />
+        <Route path="/register" element={<VenderRegisterComponent />} />
+      </Routes>
     </IndexBlock>
   );
 };

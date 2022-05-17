@@ -1,25 +1,12 @@
 /* #region  import */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { actChangeField } from 'user/vender/reducers/auth/LoginReducer';
-import { actInitialize } from 'user/vender/reducers/auth/LoginReducer';
-import { actVenderLogin } from 'user/vender/reducers/auth/LoginReducer';
+import { actChangeField } from 'user/vender/reducers/auth/VenderLoginReducer';
+import { actInitialize } from 'user/vender/reducers/auth/VenderLoginReducer';
+import { actVenderLogin } from 'user/vender/reducers/auth/VenderLoginReducer';
 import { check } from 'lib/reducer/user';
 import VenderLoginComponent from 'user/vender/components/auth/LoginComponent';
-import VenderMainSection from 'user/vender/VenderMainSection';
-import HeaderContainer from 'lib/common/section/HeaderContainer';
 
-import { Layout } from 'antd';
-
-const { Header, Content } = Layout;
-
-const FontColorBlack = {
-  color: '#000',
-};
-
-const FontColorWhite = {
-  color: '#fff',
-};
 /* #endregion */
 
 const mapStateToProps = (store) => ({
@@ -41,7 +28,6 @@ const VenderLoginContainer = ({
   userId,
   password,
   auth,
-  user,
   disLogin,
   disChange,
   disInitialize,
@@ -85,31 +71,13 @@ const VenderLoginContainer = ({
   // });
 
   return (
-    <>
-      {user ? (
-        <VenderMainSection FontColor={FontColorBlack} user={user} />
-      ) : (
-        <Layout>
-          <Header style={{ color: '#fff' }}>
-            <HeaderContainer
-              pagename="INTERIOR PLAY VENDER"
-              pageuser="vender"
-              FontColor={FontColorWhite}
-              user={user}
-            />
-          </Header>
-          <Content>
-            <VenderLoginComponent
-              userId={userId}
-              password={password}
-              auth={auth}
-              disChange={disChange}
-              disLogin={disLogin}
-            />
-          </Content>
-        </Layout>
-      )}
-    </>
+    <VenderLoginComponent
+      userId={userId}
+      password={password}
+      auth={auth}
+      disChange={disChange}
+      disLogin={disLogin}
+    />
   );
 };
 export default connect(

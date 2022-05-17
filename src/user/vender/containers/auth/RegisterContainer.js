@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actChangeFiled } from 'user/vender/reducers/auth/RegisterReducer';
 import { actUploadFiled } from 'user/vender/reducers/auth/RegisterReducer';
@@ -30,6 +30,7 @@ const mapStateToProps = (store) => ({
   accountNb: store.VenderRegisterReducer.accountNb,
   registration: store.VenderRegisterReducer.registration,
   passbook: store.VenderRegisterReducer.passbook,
+  authResult: store.VenderRegisterReducer.authResult,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -68,7 +69,11 @@ const VenderRegisterContainer = ({
   disInitialize,
   disUpload,
   next,
+  authResult,
 }) => {
+  useEffect(() => {
+    disInitialize();
+  }, []);
   return (
     <VenderRegisterComponent_2
       userId={userId}
@@ -98,6 +103,7 @@ const VenderRegisterContainer = ({
       disChange={disChange}
       disUpload={disUpload}
       next={next}
+      authResult={authResult}
     />
   );
 };

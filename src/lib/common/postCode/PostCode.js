@@ -1,18 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
-const ModalPostCode = ({ setAddress, setZipcode }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
+const ModalPostCode = ({ setIsModalVisible, disChange }) => {
   const Postcode = () => {
     const handleComplete = (data) => {
       let fullAddress = data.address;
@@ -31,33 +20,21 @@ const ModalPostCode = ({ setAddress, setZipcode }) => {
         setIsModalVisible(false);
       }
 
-      console.log(data);
-      console.log(fullAddress);
-      setAddress(fullAddress);
-      setZipcode(zipcode);
+      disChange(zipcode, 'zipCode');
+      disChange(data.address, 'addr1');
     };
 
-    return <DaumPostcode onComplete={handleComplete} />;
+    return (
+      <div>
+        <DaumPostcode onComplete={handleComplete} />
+      </div>
+    );
   };
 
   return (
-    <>
-      <Button type="primary" onClick={showModal} style={{ width: '90px' }}>
-        우편번호
-      </Button>
-      <Modal
-        title="우편번호 검색"
-        visible={isModalVisible}
-        onCancel={handleCancel}
-        footer={
-          <Button key="back" onClick={handleCancel}>
-            닫기
-          </Button>
-        }
-      >
-        <Postcode />
-      </Modal>
-    </>
+    <div>
+      <Postcode />
+    </div>
   );
 };
 

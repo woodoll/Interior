@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Button, Space } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import palette from 'lib/styles/palette';
 /* #endregion */
@@ -33,6 +34,7 @@ const UserInfo = styled.div`
 /* #endregion */
 
 const HeaderSection = ({ pagename, pageuser, user, disLogout, FontColor }) => {
+  const navigate = useNavigate();
   const userInfo = JSON.parse(user);
   return (
     <HeaderSectionBlock>
@@ -51,6 +53,7 @@ const HeaderSection = ({ pagename, pageuser, user, disLogout, FontColor }) => {
               <Button
                 onClick={() => {
                   disLogout();
+                  navigate('/');
                 }}
               >
                 로그아웃

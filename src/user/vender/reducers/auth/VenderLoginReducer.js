@@ -1,4 +1,4 @@
-/* #region  import  */
+/* #region  import */
 import * as loginAPI from 'api/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
@@ -9,16 +9,16 @@ import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 const initialState = {
   userId: '',
   password: '',
-  auth: '',
-  authError: null,
-  error: null,
+  auth: {
+    message: '',
+  },
 };
 
-const CHANGE_FIELD = 'LoginReducer/CHANGE_FIELD';
-const INITIALIZE = 'LoginReducer/INITIALIZE';
-const LOGIN = 'LoginReducer/LOGIN';
-const LOGIN_SUCCESS = 'LoginReducer/LOGIN_SUCCESS';
-const LOGIN_FAILURE = 'LoginReducer/LOGIN_FAILURE';
+const CHANGE_FIELD = 'VenderLoginReducer/CHANGE_FIELD';
+const INITIALIZE = 'VenderLoginReducer/INITIALIZE';
+const LOGIN = 'LoginRedVenderLoginReducerucer/LOGIN';
+const LOGIN_SUCCESS = 'VenderLoginReducer/LOGIN_SUCCESS';
+const LOGIN_FAILURE = 'VenderLoginReducer/LOGIN_FAILURE';
 
 export const actChangeField = ({ key, value }) => ({
   type: CHANGE_FIELD,
@@ -29,7 +29,7 @@ export const actInitialize = () => ({
   type: INITIALIZE,
   initialState,
 });
-export const actMasterLogin = ({ userId, password }) => ({
+export const actVenderLogin = ({ userId, password }) => ({
   type: LOGIN,
   userId,
   password,
@@ -38,26 +38,26 @@ export const actMasterLogin = ({ userId, password }) => ({
 function* loginSaga(action) {
   yield put(actStartLoading(LOGIN));
   try {
-    const auth = yield call(loginAPI.masterLogin, action);
+    const auth = yield call(loginAPI.venderLogin, action);
     yield put({
       type: LOGIN_SUCCESS,
       auth: auth.data,
     });
   } catch (e) {
+    console.log('에러는 = ' + e.response.data.message);
     yield put({
       type: LOGIN_FAILURE,
-      error: true,
-      authError: e,
+      auth: e.response.data,
     });
   }
   yield put(actFinishLoading(LOGIN));
 }
 
-export function* MasterLoginReducerSaga() {
+export function* VenderLoginReducerSaga() {
   yield takeLatest(LOGIN, loginSaga);
 }
 
-function MasterLoginReducer(state = initialState, action) {
+function VenderLoginReducer(state = initialState, action) {
   switch (action.type) {
     case INITIALIZE:
       return initialState;
@@ -71,12 +71,11 @@ function MasterLoginReducer(state = initialState, action) {
       });
     case LOGIN_FAILURE:
       return produce(state, (draft) => {
-        draft.auth = null;
-        draft.authError = action.error;
+        draft.auth = action.auth;
       });
     default:
       return state;
   }
 }
 
-export default MasterLoginReducer;
+export default VenderLoginReducer;

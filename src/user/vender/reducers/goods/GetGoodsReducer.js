@@ -50,7 +50,7 @@ function GetGoodsReducer(state = initialState, action) {
       return initialState;
     case GET_GOODS_SUCCESS:
       return produce(state, (draft) => {
-        draft.goods = action.goods;
+        draft.goods = action.goods.data.list;
       });
     default:
       return state;

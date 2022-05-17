@@ -141,6 +141,8 @@ const AllListComponent = ({ orders }) => {
   if (orders.result === 'login') {
     navigate('/vender/signIn');
   }
+
+  console.log(dataNum);
   return (
     <AllListComponentBlock>
       <PageHeader className="PageHeader" title="전체주문리스트" />

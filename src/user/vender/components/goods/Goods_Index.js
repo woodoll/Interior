@@ -18,9 +18,6 @@ const Goods_Index = () => {
   const [pathUrl, setPathUrl] = useState('');
   return (
     <IndexBlock>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>상품 관리</Breadcrumb.Item>
-      </Breadcrumb>
       <div className="site-layout-background padding_area">
         <Routes>
           <Route

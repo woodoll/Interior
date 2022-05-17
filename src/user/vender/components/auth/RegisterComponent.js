@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
 
-import { Steps, Button, PageHeader, Space, Divider } from 'antd';
+import { Steps, Button, PageHeader, Space, Divider, Form } from 'antd';
 import RegisterComponent_1 from './RegisterComponent_1';
 import VenderRegisterContainer from 'user/vender/containers/auth/RegisterContainer';
+import RegisterComponent_3 from './RegisterComponent_3';
 
 const RegisterComponentBlock = styled(Responsive)`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +25,7 @@ const VenderRegisterComponent = () => {
   return (
     <RegisterComponentBlock>
       <Space direction="vertical" size={12}>
+        <Divider style={{ border: '#fff' }} />
         <PageHeader
           className="PageHeader"
           title="인테리어 플레이"
@@ -36,20 +39,17 @@ const VenderRegisterComponent = () => {
         <Divider />
         {current < 1 && (
           <>
-            <RegisterComponent_1 />
-            <Button
-              style={{ width: '100%' }}
-              size="large"
-              type="primary"
-              onClick={() => next()}
-            >
-              약관 동의
-            </Button>
+            <RegisterComponent_1 next={next} />
           </>
         )}
         {current === 1 && (
           <>
             <VenderRegisterContainer next={next} />
+          </>
+        )}
+        {current > 1 && (
+          <>
+            <RegisterComponent_3 />
           </>
         )}
       </Space>

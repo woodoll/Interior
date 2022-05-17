@@ -15,6 +15,7 @@ import {
   PageHeader,
   Form,
   Upload,
+  Breadcrumb,
 } from 'antd';
 
 import {
@@ -28,15 +29,6 @@ import {
 /* #region  styles */
 const AddComponentBlock = styled(Responsive)`
   width: 100%;
-`;
-
-const AddSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  p {
-    width: 100px;
-  }
 `;
 
 const itemLayout = {
@@ -63,11 +55,11 @@ const VenderAddComponent = ({
 }) => {
   const navigate = useNavigate();
 
-  const onChange = (e, o) => {
-    disChange(e.target.value, e.target.name);
-    console.log('내용은 = ' + e);
-    console.log(o);
-  };
+  // const onChange = (e, o) => {
+  //   disChange(e.target.value, e.target.name);
+  //   console.log('내용은 = ' + e);
+  //   console.log(o);
+  // };
   const onValueList = (changedValues, allValues) => {
     const value = Object.values(changedValues)[0];
     const key = Object.keys(changedValues)[0];
@@ -82,10 +74,6 @@ const VenderAddComponent = ({
     }
   };
 
-  // const uploadSuccess = (e) => {
-  //   console.log(e.fileList[0].originFileObj);
-  // };
-
   const onSubmit = (e) => {
     // e.preventdefault();
     const formData = new FormData();
@@ -94,7 +82,43 @@ const VenderAddComponent = ({
     formData.append('productGroupNm', productGroupNm);
     formData.append('searchKeyword', searchKeyword);
     formData.append('displayYn', displayYn);
-    formData.append('products', JSON.stringify(products));
+    for (let i = 0; i < products.length; i++) {
+      formData.append('products[' + i + '].productNm', products[i].productNm);
+      formData.append(
+        'products[' + i + '].displayOrder',
+        products[i].displayOrder,
+      );
+      formData.append('products[' + i + '].colorCode', products[i].colorCode);
+      formData.append('products[' + i + '].listPrice', products[i].listPrice);
+      formData.append(
+        'products[' + i + '].discountRate',
+        products[i].discountRate,
+      );
+      formData.append(
+        'products[' + i + '].sellingPrice',
+        products[i].sellingPrice,
+      );
+      formData.append('products[' + i + '].stockYn', products[i].stockYn);
+      formData.append('products[' + i + '].stock', products[i].stock);
+      formData.append(
+        'products[' + i + '].detailContents',
+        products[i].detailContents,
+      );
+      formData.append('products[' + i + '].thumbnail', products[i].thumbnail);
+    }
+    // formData.append(
+    //   'products',
+    //   formData.append('productNm', productNm),
+    //   formData.append('displayOrder', displayOrder),
+    //   formData.append('colorCode', colorCode),
+    //   formData.append('listPrice', listPrice),
+    //   formData.append('discountRate', discountRate),
+    //   formData.append('sellingPrice', sellingPrice),
+    //   formData.append('stockYn', stockYn),
+    //   formData.append('stock', stock),
+    //   formData.append('detailContents', detailContents),
+    //   formData.append('thumbnail', thumbnail),
+    // );
     console.log('상품정보는 = ' + products);
     disSubmit({
       formData,
@@ -113,20 +137,31 @@ const VenderAddComponent = ({
     console.log('Upload event:', e);
     // const UploadLegnth = e.fileList.legnth;
     // e.fileList.length === 1 && setUpload(true);
-    return e.fileList[0].originFileObj;
+    const fileImage = e.file;
+    return fileImage;
   };
 
   const onFinish = (values) => {
     console.log(values);
-    onSubmit(values);
+    onSubmit();
   };
 
   return (
     <AddComponentBlock>
-      <PageHeader className="PageHeader" title="상품 등록" />
+      <PageHeader
+        className="PageHeader"
+        title="상품 등록"
+        extra={[
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>홈</Breadcrumb.Item>
+            <Breadcrumb.Item>상품 관리</Breadcrumb.Item>
+            <Breadcrumb.Item>상품 등록</Breadcrumb.Item>
+          </Breadcrumb>,
+        ]}
+      />
       <Divider />
       <Form
-        name="basic"
+        name="Add"
         encType="multipart/form-data"
         labelAlign="left"
         onValuesChange={onValueList}
@@ -191,166 +226,176 @@ const VenderAddComponent = ({
         </Form.Item>
         <Divider />
         <Form.List name="products" style={{ width: '100%' }}>
-          {(fileds, { add, remove }) => (
-            <>
-              <h3>판매상품 목록</h3>
-              <Form.Item>
-                <Button
-                  type="dashed"
-                  onClick={() => add()}
-                  block
-                  icon={<PlusOutlined />}
-                  style={{ width: '100%' }}
-                >
-                  상세항목 추가하기
-                </Button>
-              </Form.Item>
-              {fileds.map(({ key, name, ...restField }) => (
-                <Space
-                  key={key}
-                  style={{
-                    display: 'flex',
-                    marginBottom: 8,
-                    alignItems: 'baseline',
-                    padding: '0',
-                  }}
-                  align="baseline"
-                >
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'productNm']}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
+          {(fileds, { add, remove }) => {
+            return (
+              <>
+                <h3>판매상품 목록</h3>
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                    style={{ width: '100%' }}
                   >
-                    <Input
-                      name="productNm"
-                      placeholder="상품명"
-                      style={{ width: 100 }}
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'displayOrder']}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
+                    상세항목 추가하기
+                  </Button>
+                </Form.Item>
+                {fileds.map(({ key, name, ...restField }) => (
+                  <Space
+                    key={key}
+                    style={{
+                      display: 'flex',
+                      marginBottom: 8,
+                      alignItems: 'baseline',
+                      padding: '0',
+                    }}
+                    align="baseline"
                   >
-                    <Input
-                      name="displayOrder"
-                      type="number"
-                      placeholder="진열순서"
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'skyCode']}
-                    style={{ margin: '0' }}
-                  >
-                    <Input name="skyCode" placeholder="자체상품코드" />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'colorCode']}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
-                  >
-                    <Select placeholder="색상코드">
-                      <Select.Option value={'00'}>색상</Select.Option>
-                    </Select>
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'listPrice']}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
-                  >
-                    <Input name="listPrice" type="number" placeholder="정가" />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'discountRate']}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
-                  >
-                    <Input
-                      name="discountRate"
-                      type="number"
-                      placeholder="할인률"
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'sellingPrice']}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
-                  >
-                    <Input
-                      name="sellingPrice"
-                      type="number"
-                      placeholder="판매가격"
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'stockYn']}
-                    style={{ margin: '0' }}
-                    rules={[
-                      {
-                        required: true,
-                        message: '',
-                      },
-                    ]}
-                  >
-                    <Input name="stockYn" placeholder="재고관리여부" />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'stock']}
-                    style={{ margin: '0' }}
-                  >
-                    <Input name="stock" type="number" placeholder="재고수량" />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'detailContents']}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
-                  >
-                    <Input name="detailContents" placeholder="상세설명" />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'thumbnail']}
-                    valuePropName="originFileObj"
-                    getValueFromEvent={normFile}
-                    style={{ margin: '0' }}
-                    rules={[{ required: true, message: '' }]}
-                  >
-                    <Upload
-                      name="thumbnail"
-                      // onChange={uploadSuccess}
-                      style={{ marginTop: '0' }}
-                      beforeUpload={() => {
-                        return false;
-                      }}
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'productNm']}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
                     >
-                      {/* {UploadLegnth < 1 ? ( */}
-                      <Button style={{ margin: '0' }} icon={<UploadOutlined />}>
-                        파일 올리기
-                      </Button>
-                      {/* ) : null} */}
-                    </Upload>
-                  </Form.Item>
-                  <MinusCircleOutlined
-                    onClick={() => remove(name)}
-                    style={{ marginRight: '1rem', color: 'red' }}
-                  />
-                </Space>
-              ))}
-            </>
-          )}
+                      <Input
+                        name="productNm"
+                        placeholder="상품명"
+                        style={{ width: 100 }}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'displayOrder']}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
+                    >
+                      <Input
+                        name="displayOrder"
+                        type="number"
+                        placeholder="진열순서"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'skyCode']}
+                      style={{ margin: '0' }}
+                    >
+                      <Input name="skyCode" placeholder="자체상품코드" />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'colorCode']}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
+                    >
+                      <Select placeholder="색상코드">
+                        <Select.Option value={'00'}>색상</Select.Option>
+                      </Select>
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'listPrice']}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
+                    >
+                      <Input
+                        name="listPrice"
+                        type="number"
+                        placeholder="정가"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'discountRate']}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
+                    >
+                      <Input
+                        name="discountRate"
+                        type="number"
+                        placeholder="할인률"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'sellingPrice']}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
+                    >
+                      <Input
+                        name="sellingPrice"
+                        type="number"
+                        placeholder="판매가격"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'stockYn']}
+                      style={{ margin: '0' }}
+                      rules={[
+                        {
+                          required: true,
+                          message: '',
+                        },
+                      ]}
+                    >
+                      <Input name="stockYn" placeholder="재고관리여부" />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'stock']}
+                      style={{ margin: '0' }}
+                    >
+                      <Input
+                        name="stock"
+                        type="number"
+                        placeholder="재고수량"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'detailContents']}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
+                    >
+                      <Input name="detailContents" placeholder="상세설명" />
+                    </Form.Item>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'thumbnail']}
+                      valuePropName="fileImage"
+                      getValueFromEvent={normFile}
+                      style={{ margin: '0' }}
+                      rules={[{ required: true, message: '' }]}
+                    >
+                      <Upload
+                        name="thumbnail"
+                        style={{ marginTop: '0' }}
+                        beforeUpload={() => {
+                          return false;
+                        }}
+                      >
+                        <Button
+                          style={{ margin: '0' }}
+                          icon={<UploadOutlined />}
+                        >
+                          파일 올리기
+                        </Button>
+                      </Upload>
+                    </Form.Item>
+                    <MinusCircleOutlined
+                      onClick={() => remove(name)}
+                      style={{ marginRight: '1rem', color: 'red' }}
+                    />
+                  </Space>
+                ))}
+              </>
+            );
+          }}
         </Form.List>
         <Divider />
-        <Form.Item label="상품 세부정보" name="" {...itemLayout}>
+        {/* <Form.Item label="상품 세부정보" name="" {...itemLayout}>
           <Switch
             checkedChildren="ON"
             unCheckedChildren="OFF"
@@ -381,7 +426,7 @@ const VenderAddComponent = ({
             style={{ width: '200px' }}
             disabled={disable}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Divider />
         <Button type={'primary'} htmlType="submit">
           등록

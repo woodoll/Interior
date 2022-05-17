@@ -1,82 +1,133 @@
-/* #region  import */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import palette from 'lib/styles/palette';
-import Responsive from 'lib/styles/Responsive';
-import HeaderSection from 'lib/common/section/HeaderSection';
-import SidebarSection from 'lib/common/section/SidebarSection';
-import MainSection from 'lib/common/section/MainSection';
-import { MasterMenuList } from 'lib/master/masterMenuList';
+import SiderMenu from 'lib/common/section/SidebarSection';
+import HeaderContainer from 'lib/common/section/HeaderContainer';
 
-import MasterLoginContainer from 'user/master/containers/login/LoginContainer';
-import AllListContainer from 'user/master/containers/venders/AllListContainer';
-/* #endregion */
+import MasterLoginContainer from 'user/master/containers/auth/LoginContainer';
 
-/* #region  styles */
-const MasterMainSectionBlock = styled.div`
-  max-width: 100vw;
-  max-height: 100vh;
-  overflow-y: scroll;
-  margin: 0 auto;
+import { Layout, BackTop } from 'antd';
 
-  @media (max-width: 1024px) {
-    width: 768px;
+const mapStateToProps = (store) => ({
+  user: store.userReducer.user,
+});
+
+const LayoutForm = styled(Layout)`
+  width: 100vw;
+  .logo {
+    height: 32px;
+    margin: 16px;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    vertical-align: center;
+    position: sticky;
   }
-
-  @media (max-width: 768px) {
-    width: 100%;
+  .site-layout-background {
+    background: #fff;
   }
-
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+  .padding_area {
+    padding: 0 24px;
+    text-align: center;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-`;
-
-const Sections = styled.div`
-  display: flex;
-  flex-direction: row;
-  max-width: 100vw;
-
-  overflow-y: scroll;
-
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
+  .PageHeader {
+    margin: 0;
+    padding: 0;
   }
 `;
 
-const SectionForm = styled(Responsive)`
-  padding: 1rem;
-  background: ${palette.gray[2]};
-`;
-/* #endregion */
+const { Header, Content, Footer, Sider } = Layout;
 
-const MasterMainSection = () => {
+const VenderMainSection = ({ user }) => {
+  const [open, setOpen] = useState(false);
+
+  const onCollapse = () => {
+    setOpen(!open);
+  };
+
+  const FontColorBlack = {
+    color: '#000',
+  };
+
+  const FontColorWhite = {
+    color: '#fff',
+  };
+
   return (
-    <MasterMainSectionBlock>
-      <HeaderSection pagename="INTERIOR PLAY MSTER" pageuser="master" />
-      <Sections>
-        <SidebarSection MenuList={MasterMenuList} pageuser="master" />
-        <SectionForm>
-          <Routes>
-            <Route path="/" element={<MainSection />}>
-              <Route path="/signIn" element={<MasterLoginContainer />} />
-              <Route path="/venders/all_list" element={<AllListContainer />} />
-            </Route>
-          </Routes>
-        </SectionForm>
-      </Sections>
-    </MasterMainSectionBlock>
+    <>
+      {user ? (
+        <LayoutForm>
+          <BackTop />
+          <Header className="site-layout-background" style={{ padding: 0 }}>
+            <HeaderContainer
+              pagename="INTERIOR PLAY MASTER"
+              pageuser="vender"
+              FontColor={FontColorBlack}
+              user={user}
+            />
+          </Header>
+          <Layout
+            hasSider
+            className="site-layout"
+            style={{ overflow: 'scroll-y' }}
+          >
+            <Sider
+              style={{
+                position: 'sticky',
+                top: '0',
+                maxHeight: '100vh',
+              }}
+              collapsible
+              collapsed={open}
+              onCollapse={onCollapse}
+            >
+              <SiderMenu />
+            </Sider>
+            <Layout style={{ overflow: 'scroll-y', paddingTop: '16px' }}>
+              <Content
+                style={{
+                  margin: '0 16px',
+                  overflow: 'initial',
+                  minHeight: '90vh',
+                }}
+              >
+                <Routes></Routes>
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>
+                Copyright© 2020.InteriorPlay.All rights reserved
+              </Footer>
+            </Layout>
+          </Layout>
+        </LayoutForm>
+      ) : (
+        <Layout>
+          <Header>
+            <HeaderContainer
+              pagename="INTERIOR PLAY MASTER"
+              pageuser="master"
+              FontColor={FontColorWhite}
+              user={user}
+            />
+          </Header>
+          <Content>
+            <Routes>
+              <Route path="/login" element={<MasterLoginContainer />} />
+            </Routes>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            Copyright© 2020.InteriorPlay.All rights reserved
+          </Footer>
+        </Layout>
+      )}
+    </>
   );
 };
 
-export default MasterMainSection;
+export default connect(mapStateToProps)(VenderMainSection);

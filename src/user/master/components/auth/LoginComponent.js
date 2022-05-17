@@ -28,7 +28,7 @@ const ErrorMessage = styled.div`
 
 /* #endregion */
 
-const VenderLoginComponent = ({
+const MasterLoginComponent = ({
   userId,
   password,
   disLogin,
@@ -63,7 +63,7 @@ const VenderLoginComponent = ({
         <PageHeader
           className="PageHeader"
           title="인테리어 플레이"
-          subTitle="판매사 관리자"
+          subTitle="마스터 관리자"
           style={{ marginBottom: 12 }}
         />
         <Form.Item
@@ -103,7 +103,6 @@ const VenderLoginComponent = ({
             >
               아이디 저장
             </Checkbox>
-            <Link to="/">아이디/비밀번호 찾기</Link>
           </Split>
           <Button
             style={{ width: '100%' }}
@@ -113,18 +112,10 @@ const VenderLoginComponent = ({
           >
             로그인
           </Button>
-          <h4>판매자가 아니신가요?</h4>
-          <Button
-            style={{ width: '100%' }}
-            size="large"
-            onClick={() => navigate('/auth/register')}
-          >
-            회원가입
-          </Button>
         </Space>
       </Form>
     </LoginComponentBlock>
   );
 };
 
-export default VenderLoginComponent;
+export default MasterLoginComponent;
