@@ -14,8 +14,10 @@ const RegisterComponent_3 = () => {
         title="회원가입 요청이 완료되었습니다! 승인이 완료될 때까지 잠시만 기다려주세요."
         subTitle="회원가입 승인은 평균 하루 이내에 완료됩니다."
         extra={[
-          <Button onClick={() => navigate('/')}>메인으로 이동하기</Button>,
-          <Button onClick={() => navigate('auth/login')} type="primary">
+          <Button onClick={() => navigate('/inspection')}>
+            메인으로 이동하기
+          </Button>,
+          <Button onClick={() => navigate('/vender/auth/login')} type="primary">
             로그인 하러가기
           </Button>,
         ]}

@@ -11,8 +11,7 @@ import CheckTable from 'lib/common/table/Table_check';
 const Orders_return_detailBlock = styled(Responsive)``;
 /* #endregion */
 
-const Orders_return_detail = ({ setPathUrl }) => {
-  setPathUrl('취소/반품/교환 내역');
+const Orders_return_detail = () => {
   return (
     <Orders_return_detailBlock>
       <PageHeader className="PageHeader" title="취소/반품/교환 내역" />

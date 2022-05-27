@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 
 import SiderMenu from 'lib/common/section/SidebarSection';
 import HeaderContainer from 'lib/common/section/HeaderContainer';
+import { VenderMenuList } from 'lib/options/menuList';
 
-import Auth_Index from './components/auth/Auth_index';
+import AuthIndex from './components/auth/AuthIndex';
 import VenderLoginContairner from 'user/vender/containers/auth/LoginContainer';
 import Orders_Index from './components/orders/Orders_Index';
 import Goods_Index from './components/goods/Goods_Index';
-import Board_Index from 'user/vender/components/board/Board_Index';
+import BoardIndex from 'user/vender/components/board/BoardIndex';
 
 import { Layout, BackTop } from 'antd';
 
@@ -50,6 +51,8 @@ const LayoutForm = styled(Layout)`
 const { Header, Content, Footer, Sider } = Layout;
 
 const VenderMainSection = ({ user }) => {
+  const menulist = VenderMenuList;
+
   const [open, setOpen] = useState(false);
 
   const onCollapse = () => {
@@ -71,7 +74,7 @@ const VenderMainSection = ({ user }) => {
           <BackTop />
           <Header className="site-layout-background" style={{ padding: 0 }}>
             <HeaderContainer
-              pagename="INTERIOR PLAY VENDER"
+              pagename="INTERIOR PALETTE VENDER"
               pageuser="vender"
               FontColor={FontColorBlack}
               user={user}
@@ -92,7 +95,7 @@ const VenderMainSection = ({ user }) => {
               collapsed={open}
               onCollapse={onCollapse}
             >
-              <SiderMenu />
+              <SiderMenu menulist={menulist} />
             </Sider>
             <Layout style={{ overflow: 'scroll-y', paddingTop: '16px' }}>
               <Content
@@ -105,7 +108,7 @@ const VenderMainSection = ({ user }) => {
                 <Routes>
                   <Route path="/goods/*" element={<Goods_Index />} />
                   <Route path="/orders/*" element={<Orders_Index />} />
-                  <Route path="/board/*" element={<Board_Index />} />
+                  <Route path="/board/*" element={<BoardIndex />} />
                 </Routes>
               </Content>
               <Footer style={{ textAlign: 'center' }}>
@@ -126,7 +129,7 @@ const VenderMainSection = ({ user }) => {
           </Header>
           <Content>
             <Routes>
-              <Route path="/auth/*" element={<Auth_Index />} />
+              <Route path="/auth/*" element={<AuthIndex />} />
               <Route path="/" element={<VenderLoginContairner />} />
             </Routes>
           </Content>

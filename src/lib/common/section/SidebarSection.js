@@ -1,26 +1,26 @@
 /* #region  import */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MenuList } from 'lib/vender/venderMenuList';
-// import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-// import palette from 'lib/styles/palette';
 // /* #endregion */
 
 import { Menu } from 'antd';
-import {
-  PieChartOutlined,
-  CreditCardOutlined,
-  FormatPainterOutlined,
-  ProfileOutlined,
-} from '@ant-design/icons';
 
 const { SubMenu } = Menu;
+
+const Sidebarblock = styled.div`
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+`;
 
 // submenu keys of first level
 const rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4'];
 
-const SiderMenu = () => {
+const SiderMenu = ({ menulist }) => {
   const [openKeys, setOpenKeys] = React.useState([]);
 
   const onOpenChange = (keys) => {
@@ -32,72 +32,32 @@ const SiderMenu = () => {
     }
   };
 
+  const menu = menulist.map((main) => {
+    return (
+      <SubMenu key={main.key} title={main.title} icon={main.icon}>
+        {main.sub.map((sublist) => {
+          return (
+            <Menu.Item key={sublist.key}>
+              <Link to={main.url + '/' + sublist.url}>{sublist.title}</Link>
+            </Menu.Item>
+          );
+        })}
+      </SubMenu>
+    );
+  });
+
   return (
-    <Menu
-      theme="dark"
-      mode="inline"
-      openKeys={openKeys}
-      onOpenChange={onOpenChange}
-      style={{ minHeight: '100vh' }}
-    >
-      <SubMenu
-        key={MenuList[0].key}
-        icon={<PieChartOutlined />}
-        title={MenuList[0].title}
+    <Sidebarblock>
+      <Menu
+        theme="dark"
+        mode="inline"
+        openKeys={openKeys}
+        onOpenChange={onOpenChange}
+        style={{ minHeight: '100vh' }}
       >
-        <Menu.Item key={MenuList[0].sub[0].key}>
-          <Link to={`/`}>{MenuList[0].sub[0].title}</Link>
-        </Menu.Item>
-        <Menu.Item key={MenuList[0].sub[1].key}>
-          <Link to={`/`}>{MenuList[0].sub[1].title}</Link>
-        </Menu.Item>
-      </SubMenu>
-      <SubMenu
-        key={MenuList[1].key}
-        icon={<CreditCardOutlined />}
-        title={MenuList[1].title}
-      >
-        <Menu.Item key={MenuList[1].sub[0].key}>
-          <Link to={`/orders/all_list`}>{MenuList[1].sub[0].title}</Link>
-        </Menu.Item>
-        <Menu.Item key={MenuList[1].sub[1].key}>
-          <Link to={`/orders/delivery`}>{MenuList[1].sub[1].title}</Link>
-        </Menu.Item>
-        <Menu.Item key={MenuList[1].sub[2].key}>
-          <Link to={`/orders/return`}>{MenuList[1].sub[2].title}</Link>
-        </Menu.Item>
-      </SubMenu>
-      <SubMenu
-        key={MenuList[2].key}
-        icon={<FormatPainterOutlined />}
-        title={MenuList[2].title}
-      >
-        <Menu.Item key={MenuList[2].sub[0].key}>
-          <Link to={`/goods/all_list`}>{MenuList[2].sub[0].title}</Link>
-        </Menu.Item>
-        <Menu.Item key={MenuList[2].sub[1].key}>
-          <Link to={`/goods/add`}>{MenuList[2].sub[1].title}</Link>
-        </Menu.Item>
-        <Menu.Item key={MenuList[2].sub[2].key}>
-          <Link to={`/goods/display`}>{MenuList[2].sub[2].title}</Link>
-        </Menu.Item>
-        <Menu.Item key={MenuList[2].sub[3].key}>
-          <Link to={`/goods/display_list`}>{MenuList[2].sub[3].title}</Link>
-        </Menu.Item>
-      </SubMenu>
-      <SubMenu
-        key={MenuList[3].key}
-        icon={<ProfileOutlined />}
-        title={MenuList[3].title}
-      >
-        <Menu.Item key={MenuList[3].sub[0].key}>
-          <Link to={`/board/goodsqna`}>{MenuList[3].sub[0].title}</Link>
-        </Menu.Item>
-        <Menu.Item key={MenuList[3].sub[1].key}>
-          <Link to={`/board/goodsreview`}>{MenuList[3].sub[1].title}</Link>
-        </Menu.Item>
-      </SubMenu>
-    </Menu>
+        {menu}
+      </Menu>
+    </Sidebarblock>
   );
 };
 

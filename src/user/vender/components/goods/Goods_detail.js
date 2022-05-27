@@ -10,11 +10,9 @@ import {
   Space,
   PageHeader,
   Divider,
+  Breadcrumb,
 } from 'antd';
 import Responsive from 'lib/styles/Responsive';
-
-import { productOptProductType } from 'lib/vender/options';
-import { productOptMnfctType } from 'lib/vender/options';
 
 import UploadFile from 'lib/common/upload/Upload';
 import Wysiwyg from 'lib/common/Wysiwyg';
@@ -101,7 +99,17 @@ const VenderAddComponent = ({
   });
   return (
     <AddComponentBlock>
-      <PageHeader className="PageHeader" title="상품 등록" />
+      <PageHeader
+        className="PageHeader"
+        title="상품 정보"
+        extra={[
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>홈</Breadcrumb.Item>
+            <Breadcrumb.Item>상품 관리</Breadcrumb.Item>
+            <Breadcrumb.Item>상품 정보</Breadcrumb.Item>
+          </Breadcrumb>,
+        ]}
+      />
       <Divider />
       <Form
         name="AddProduct"
@@ -111,7 +119,7 @@ const VenderAddComponent = ({
       >
         <Space direction="vertical" size={12}>
           <h3>카테고리 선택</h3>
-          <AddSection>
+          {/* <AddSection>
             <Select
               style={{ width: '100px' }}
               name="productType"
@@ -123,7 +131,7 @@ const VenderAddComponent = ({
               options={productOptMnfctType}
               defaultValue={productOptMnfctType[0]}
             />
-          </AddSection>
+          </AddSection> */}
           <h3>기본정보</h3>
           <AddSection>
             <p>상품코드</p>

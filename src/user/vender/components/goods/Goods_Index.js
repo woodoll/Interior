@@ -15,31 +15,15 @@ import Goods_success from './Goods_success';
 const IndexBlock = styled.div``;
 
 const Goods_Index = () => {
-  const [pathUrl, setPathUrl] = useState('');
   return (
     <IndexBlock>
       <div className="site-layout-background padding_area">
         <Routes>
-          <Route
-            path="/all_list"
-            element={<GetGoodsContainer setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/add"
-            element={<AddContainer setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/display"
-            element={<Goods_display setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/detail"
-            element={<Goods_detail setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/display_list"
-            element={<Goods_dispaly_list setPathUrl={setPathUrl} />}
-          />
+          <Route path="/all_list" element={<GetGoodsContainer />} />
+          <Route path="/add" element={<AddContainer />} />
+          <Route path="/display" element={<Goods_display />} />
+          <Route path="/detail" element={<Goods_detail />} />
+          <Route path="/display_list" element={<Goods_dispaly_list />} />
           <Route path="/success" element={<Goods_success />} />
         </Routes>
       </div>

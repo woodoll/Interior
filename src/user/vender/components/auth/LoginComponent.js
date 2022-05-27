@@ -13,19 +13,15 @@ const LoginComponentBlock = styled(Responsive)`
   justify-content: center;
   align-items: center;
 `;
-
 const Split = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
 const ErrorMessage = styled.div`
   color: red;
   text-align: center;
   font-size: 0.875rem;
-  margin-top: 1rem;
 `;
-
 /* #endregion */
 
 const VenderLoginComponent = ({
@@ -91,9 +87,6 @@ const VenderLoginComponent = ({
             value={password}
           />
         </Form.Item>
-        {auth.status === 401 ? (
-          <ErrorMessage>{auth.message}입니다.</ErrorMessage>
-        ) : null}
         <Space direction="vertical" size={12} style={{ width: '100%' }}>
           <Split>
             <Checkbox
@@ -105,6 +98,15 @@ const VenderLoginComponent = ({
             </Checkbox>
             <Link to="/">아이디/비밀번호 찾기</Link>
           </Split>
+          {auth.status === 401 ? (
+            <ErrorMessage>{auth.message}입니다.</ErrorMessage>
+          ) : null}
+          {auth.status === 400 && auth.error[0].field === 'password' ? (
+            <ErrorMessage>비밀번호가 틀렸습니다.</ErrorMessage>
+          ) : null}
+          {auth.status === 400 && auth.error[0].field === 'userId' ? (
+            <ErrorMessage>아이디가 틀렸습니다.</ErrorMessage>
+          ) : null}
           <Button
             style={{ width: '100%' }}
             size="large"
@@ -117,7 +119,7 @@ const VenderLoginComponent = ({
           <Button
             style={{ width: '100%' }}
             size="large"
-            onClick={() => navigate('/auth/register')}
+            onClick={() => navigate('/vender/auth/register')}
           >
             회원가입
           </Button>

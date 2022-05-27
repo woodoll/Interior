@@ -55,8 +55,7 @@ const columns = [
   },
 ];
 
-const Orders_detail = ({ setPathUrl }) => {
-  setPathUrl('주문 상세');
+const Orders_detail = () => {
   return (
     <Orders_detailBlock>
       <PageHeader className="PageHeader" title="주문상세내역" />

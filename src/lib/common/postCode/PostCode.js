@@ -1,7 +1,12 @@
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
-const ModalPostCode = ({ setIsModalVisible, disChange }) => {
+const ModalPostCode = ({
+  setIsModalVisible,
+  disChange,
+  setZipCodeError,
+  setAddrError,
+}) => {
   const Postcode = () => {
     const handleComplete = (data) => {
       let fullAddress = data.address;
@@ -22,6 +27,8 @@ const ModalPostCode = ({ setIsModalVisible, disChange }) => {
 
       disChange(zipcode, 'zipCode');
       disChange(data.address, 'addr1');
+      setZipCodeError('');
+      setAddrError('');
     };
 
     return (

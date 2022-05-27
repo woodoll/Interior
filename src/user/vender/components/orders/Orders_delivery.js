@@ -90,8 +90,7 @@ const data = [
   },
 ];
 
-const Orders_delivery = ({ setPathUrl }) => {
-  setPathUrl('배송관리');
+const Orders_delivery = () => {
   return (
     <Orders_deliveryBlock>
       <PageHeader className="PageHeader" title="배송관리" />

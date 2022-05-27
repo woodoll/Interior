@@ -6,10 +6,10 @@ import VenderLoginContainer from 'user/vender/containers/auth/LoginContainer';
 import VenderRegisterComponent from './RegisterComponent';
 
 const IndexBlock = styled.div`
-  width: 100%;
+  width: 100vw;
 `;
 
-const Auth_Index = () => {
+const AuthIndex = () => {
   return (
     <IndexBlock>
       <Routes>
@@ -20,4 +20,4 @@ const Auth_Index = () => {
   );
 };
 
-export default Auth_Index;
+export default AuthIndex;

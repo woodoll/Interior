@@ -13,35 +13,15 @@ import Orders_return_detail from 'user/vender/components/orders/Orders_return_de
 const indexBlock = styled.div``;
 
 const Orders_Index = () => {
-  const [pathUrl, setPathUrl] = useState('');
   return (
     <indexBlock>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>주문 관리</Breadcrumb.Item>
-        <Breadcrumb.Item>{pathUrl}</Breadcrumb.Item>
-      </Breadcrumb>
       <div className="site-layout-background padding_area">
         <Routes>
-          <Route
-            path="/all_list"
-            element={<AllListContainer setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/detail"
-            element={<Orders_detail setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/delivery"
-            element={<Orders_delivery setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/return"
-            element={<Orders_return setPathUrl={setPathUrl} />}
-          />
-          <Route
-            path="/return_detail"
-            element={<Orders_return_detail setPathUrl={setPathUrl} />}
-          />
+          <Route path="/all_list" element={<AllListContainer />} />
+          <Route path="/detail" element={<Orders_detail />} />
+          <Route path="/delivery" element={<Orders_delivery />} />
+          <Route path="/return" element={<Orders_return />} />
+          <Route path="/return_detail" element={<Orders_return_detail />} />
         </Routes>
       </div>
     </indexBlock>

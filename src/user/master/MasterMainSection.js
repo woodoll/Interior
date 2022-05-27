@@ -4,9 +4,12 @@ import { Route, Routes } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import SiderMenu from 'lib/common/section/SidebarSection';
+import { MasterMenuList } from 'lib/options/menuList';
 import HeaderContainer from 'lib/common/section/HeaderContainer';
 
 import MasterLoginContainer from 'user/master/containers/auth/LoginContainer';
+import VendersIndex from 'user/master/components/venders/VendersIndex';
+import CodesIndex from 'user/master/components/codes/CodesIndex';
 
 import { Layout, BackTop } from 'antd';
 
@@ -46,16 +49,14 @@ const LayoutForm = styled(Layout)`
 const { Header, Content, Footer, Sider } = Layout;
 
 const VenderMainSection = ({ user }) => {
+  const menulist = MasterMenuList;
   const [open, setOpen] = useState(false);
-
   const onCollapse = () => {
     setOpen(!open);
   };
-
   const FontColorBlack = {
     color: '#000',
   };
-
   const FontColorWhite = {
     color: '#fff',
   };
@@ -67,8 +68,8 @@ const VenderMainSection = ({ user }) => {
           <BackTop />
           <Header className="site-layout-background" style={{ padding: 0 }}>
             <HeaderContainer
-              pagename="INTERIOR PLAY MASTER"
-              pageuser="vender"
+              pagename="INTERIOR PALETTE MASTER"
+              pageuser="master"
               FontColor={FontColorBlack}
               user={user}
             />
@@ -88,7 +89,7 @@ const VenderMainSection = ({ user }) => {
               collapsed={open}
               onCollapse={onCollapse}
             >
-              <SiderMenu />
+              <SiderMenu menulist={menulist} />
             </Sider>
             <Layout style={{ overflow: 'scroll-y', paddingTop: '16px' }}>
               <Content
@@ -98,7 +99,10 @@ const VenderMainSection = ({ user }) => {
                   minHeight: '90vh',
                 }}
               >
-                <Routes></Routes>
+                <Routes>
+                  <Route path="/venders/*" element={<VendersIndex />} />
+                  <Route path="/codes/*" element={<CodesIndex />} />
+                </Routes>
               </Content>
               <Footer style={{ textAlign: 'center' }}>
                 Copyright© 2020.InteriorPlay.All rights reserved

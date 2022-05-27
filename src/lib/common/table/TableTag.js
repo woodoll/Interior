@@ -61,8 +61,8 @@ const data = [
   },
 ];
 
-const Table_tag = () => {
+const TableTag = () => {
   return <Table columns={columns} dataSource={data}></Table>;
 };
 
-export default Table_tag;
+export default TableTag;

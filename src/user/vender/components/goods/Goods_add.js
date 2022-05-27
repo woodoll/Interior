@@ -106,19 +106,6 @@ const VenderAddComponent = ({
       );
       formData.append('products[' + i + '].thumbnail', products[i].thumbnail);
     }
-    // formData.append(
-    //   'products',
-    //   formData.append('productNm', productNm),
-    //   formData.append('displayOrder', displayOrder),
-    //   formData.append('colorCode', colorCode),
-    //   formData.append('listPrice', listPrice),
-    //   formData.append('discountRate', discountRate),
-    //   formData.append('sellingPrice', sellingPrice),
-    //   formData.append('stockYn', stockYn),
-    //   formData.append('stock', stock),
-    //   formData.append('detailContents', detailContents),
-    //   formData.append('thumbnail', thumbnail),
-    // );
     console.log('상품정보는 = ' + products);
     disSubmit({
       formData,

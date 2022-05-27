@@ -15,9 +15,6 @@ import {
   Breadcrumb,
   Table,
 } from 'antd';
-
-import { productOptProductType } from 'lib/vender/options';
-import { productOptMnfctType } from 'lib/vender/options';
 import CheckTable from 'lib/common/table/Table_check';
 /* #endregion */
 
@@ -95,7 +92,7 @@ const Goods_list = ({ goods }) => {
     <Goods_listBlock>
       <PageHeader
         className="PageHeader"
-        title="상품목록"
+        title="상품 리스트"
         extra={[
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>홈</Breadcrumb.Item>
@@ -106,7 +103,7 @@ const Goods_list = ({ goods }) => {
       />
       <Divider />
       <Form name="all_list" encType="multipart/form-data" labelAlign="left">
-        <Form.Item label="상품 분류별" {...itemLayout} name="productValue">
+        {/* <Form.Item label="상품 분류별" {...itemLayout} name="productValue">
           <Select
             style={{ width: '100px', marginRight: '1rem' }}
             name="productType"
@@ -114,7 +111,7 @@ const Goods_list = ({ goods }) => {
             defaultValue={productOptProductType[0]}
             placeholder="분류"
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="색상계열" {...itemLayout} name="colorOption">
           <Radio.Group defaultValue="red">
             <Radio.Button value="red" style={{ background: 'red' }} />

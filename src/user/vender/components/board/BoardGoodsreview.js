@@ -80,8 +80,7 @@ const columns = [
   },
 ];
 
-const Board_goodsreview = ({ setPathUrl }) => {
-  setPathUrl('상품 리뷰');
+const Board_goodsreview = () => {
   return (
     <Board_goodsreviewBlock>
       <PageHeader className="PageHeader" title="상품 리뷰" />

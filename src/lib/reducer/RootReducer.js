@@ -1,12 +1,17 @@
+/* #region  import */
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import LoadingReducer from './LoadingReducer';
+// Master
 import MasterLoginReducer, {
   MasterLoginReducerSaga,
 } from 'user/master/reducers/auth/MasterLoginReducer';
-import VendersReducer, {
-  VendersReducerSaga,
-} from 'user/master/reducers/venders/VendersReducer';
+import MasterVendersReducer, {
+  MasterVendersReducerSaga,
+} from 'user/master/reducers/venders/MasterVendersReducer';
+import MasterCodeReducer, {
+  MasterCodeReducerSaga,
+} from 'user/master/reducers/codes/MasterCodeReducer';
 import AddReducer, {
   AddReducerSaga,
 } from 'user/vender/reducers/goods/AddReducer';
@@ -29,27 +34,30 @@ import GetGoodsReducer, {
 import VenderRegisterReducer, {
   VenderRegisterSaga,
 } from 'user/vender/reducers/auth/RegisterReducer';
+/* #endregion */
 
 const RootReducer = combineReducers({
   LoadingReducer,
   MasterLoginReducer,
+  MasterCodeReducer,
+  MasterVendersReducer,
   VenderLoginReducer,
+  VenderRegisterReducer,
   ClientLoginReducer,
-  VendersReducer,
   AddReducer,
   ProductReducer,
   userReducer,
   OrderReducer,
   GetGoodsReducer,
-  VenderRegisterReducer,
 });
 
 export function* RootSaga() {
   yield all([
     MasterLoginReducerSaga(),
+    MasterCodeReducerSaga(),
+    MasterVendersReducerSaga(),
     VenderLoginReducerSaga(),
     ClientLoginReducerSaga(),
-    VendersReducerSaga(),
     AddReducerSaga(),
     ProductReducerSaga(),
     userSaga(),

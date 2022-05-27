@@ -13,17 +13,11 @@ const mapDispatchToProps = (dispatch) => ({
   disGetGoods: () => dispatch(getGoods()),
 });
 
-const GetGoodsContainer = ({
-  setPathUrl,
-  goods,
-  disInitialize,
-  disGetGoods,
-}) => {
+const GetGoodsContainer = ({ goods, disInitialize, disGetGoods }) => {
   useEffect(() => {
     disInitialize();
     disGetGoods();
   }, []);
-  setPathUrl('상품 목록');
   return <Goods_list goods={goods} />;
 };
 

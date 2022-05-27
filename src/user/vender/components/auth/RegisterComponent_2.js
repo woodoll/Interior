@@ -1,7 +1,6 @@
 /* #region  import */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Responsive from 'lib/styles/Responsive';
 import {
   Input,
   Divider,
@@ -11,6 +10,7 @@ import {
   Select,
   TimePicker,
   Modal,
+  message,
 } from 'antd';
 
 import ModalPostCode from 'lib/common/postCode/PostCode';
@@ -19,34 +19,24 @@ import { UploadOutlined } from '@ant-design/icons';
 /* #endregion */
 
 /* #region  styles */
-const RegisterComponentBlock = styled(Responsive)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const RegisterComponentBlock = styled.div`
+  width: 30vw;
 `;
-
-const AddSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  p {
-    width: 100px;
-    align-self: flex-start;
-  }
-
-  Input {
-    width: 200px;
-  }
-`;
-
 const itemLayout = {
   labelCol: {
-    span: 8,
+    span: 6,
   },
   wrapperCol: {
-    span: 0,
+    span: 16,
   },
+  autocomplete: 'off',
 };
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+`;
 /* #endregion */
 
 const RegisterComponent_2 = ({
@@ -75,9 +65,10 @@ const RegisterComponent_2 = ({
   passbook,
   disSubmit,
   disChange,
-  disUpload,
   next,
   authResult,
+  productTypeList,
+  disGetProductType,
 }) => {
   useEffect(() => {
     if (authResult.status === 201) {
@@ -86,23 +77,29 @@ const RegisterComponent_2 = ({
   });
   const { Search } = Input;
 
-  const [registrationImage, setRegistrationImage] = useState('');
+  const format = 'HH:mm';
 
-  const onUpload = (e) => {
+  const characterChack = (e) => {
     console.log(e);
-    disUpload(e.target.files[0], e.target.name);
-  };
-
-  const saveRegistrationImage = (e) => {
-    setRegistrationImage(URL.createObjectURL(e.file));
-    console.log(registrationImage);
+    const regExp = /[ \{\}\[\]\/?.,;:|\)~`\-_┼<>'\"\\\(\=]/gi;
+    if (regExp.test(e.target.value)) {
+      message.error('특수문자는 !,@,#,$,%,^,&,*이외에 사용하실 수 없습니다.');
+    }
   };
 
   const onValueList = (changedValues, allValues) => {
     const value = Object.values(changedValues)[0];
     const key = Object.keys(changedValues);
-    disChange(value, key);
+    if (value._isAMomentObject) {
+      const date = new Date(value._d);
+      const time = date.toTimeString().substring(0, 8).replace(/\:/g, '');
+      disChange(time, key);
+      console.log(time);
+    } else {
+      disChange(value, key);
+    }
   };
+
   const onSearch = (value) => {
     disChange('', 'addr1');
     disChange('', 'zipCode');
@@ -126,7 +123,6 @@ const RegisterComponent_2 = ({
   };
 
   const onSubmit = (e) => {
-    const reader = new FileReader();
     const formData = new FormData();
     formData.append('userId', userId);
     formData.append('password', password);
@@ -167,6 +163,22 @@ const RegisterComponent_2 = ({
     onSubmit();
   };
 
+  const idTip =
+    '아이디는 소문자, 숫자 혼합 (각 최소 1개씩), 최소 6자에서 최대 16자입니다.';
+  const passTip =
+    '비밀번호는 대소문자, 숫자, 특수문자 !,@,#,$,%,^,&,* 혼합 (각 최소 1개씩), 최소 8자에서 최대 16자입니다.';
+  const [zipCodeError, setZipCodeError] = useState('');
+  const [zipAddrError, setAddrError] = useState('');
+
+  const errorMessage = () => {
+    if (zipCode === '') {
+      setZipCodeError('error');
+    }
+    if (addr1 === '') {
+      setAddrError('error');
+    }
+  };
+
   return (
     <RegisterComponentBlock>
       <Form
@@ -175,27 +187,36 @@ const RegisterComponent_2 = ({
         labelAlign="left"
         onValuesChange={onValueList}
         onFinish={onFinish}
+        requiredMark={false}
       >
         <Form.Item
           name="userId"
           label="아이디"
-          rules={[{ required: true, message: '아이디를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
+          help={idTip}
         >
-          <Input name="userId" value={userId} />
+          <Input name="userId" value={userId} minlength="6" maxlength="16" />
         </Form.Item>
         <Form.Item
           name="password"
           label="비밀번호"
-          rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
+          help={passTip}
         >
-          <Input name="password" value={password} />
+          <Input
+            name="password"
+            value={password}
+            minlength="8"
+            maxlength="16"
+            onChange={characterChack}
+          />
         </Form.Item>
         <Form.Item
           name="companyNm"
           label="회사명"
-          rules={[{ required: true, message: '회사명을 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="companyNm" value={companyNm} />
@@ -203,18 +224,25 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="productType"
           label="품목종류"
-          rules={[{ required: true, message: '품목종류를 선택해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Select placeholder="품목종류">
-            <Select.Option value="00">페인트</Select.Option>
-            <Select.Option value="01">벽지</Select.Option>
+            {productTypeList ? (
+              <>
+                {productTypeList.map((options) => (
+                  <Select.Option value={options.code}>
+                    {options.name}
+                  </Select.Option>
+                ))}
+              </>
+            ) : null}
           </Select>
         </Form.Item>
         <Form.Item
           name="ceoNm"
           label="대표자성함"
-          rules={[{ required: true, message: '대표자성함을 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="ceoNm" value={ceoNm} />
@@ -222,7 +250,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="businessNb"
           label="사업자번호"
-          rules={[{ required: true, message: '사업자번호를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="businessNb" value={businessNb} />
@@ -230,7 +258,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="businessType"
           label="업태"
-          rules={[{ required: true, message: '업태를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="businessType" value={businessType} />
@@ -238,7 +266,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="businessItems"
           label="업종"
-          rules={[{ required: true, message: '업종을 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="businessItems" value={businessItems} />
@@ -246,7 +274,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="mailOrderNb"
           label="회사번호"
-          rules={[{ required: true, message: '회사번호를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="mailOrderNb" value={mailOrderNb} />
@@ -254,7 +282,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="customerServiceNb"
           label="고객문의번호"
-          rules={[{ required: true, message: '고객문의번호를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="customerServiceNb" value={customerServiceNb} />
@@ -262,26 +290,32 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="avlbStartTime"
           label="상담시작시간"
-          rules={[{ required: true, message: '상담시작시간를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
-          <Input name="avlbStartTime" value={avlbStartTime} />
+          <TimePicker format={format} />
         </Form.Item>
         <Form.Item
           name="avlbEndTime"
           label="상담종료시간"
-          rules={[{ required: true, message: '상담종료시간를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
-          <Input name="avlbEndTime" value={avlbEndTime} />
+          <TimePicker format={format} />
         </Form.Item>
-        <Form.Item name="zipCode" label="우편번호" {...itemLayout}>
+        <Form.Item
+          name="zipCode"
+          label="우편번호"
+          {...itemLayout}
+          rules={[{ message: '' }]}
+        >
           <Search
             name="zipCode"
             enterButton="우편번호"
             onSearch={onSearch}
             readOnly
             value={zipCode}
+            status={zipCodeError}
           />
           <Modal
             title="우편번호 검색"
@@ -296,17 +330,19 @@ const RegisterComponent_2 = ({
             <ModalPostCode
               setIsModalVisible={setIsModalVisible}
               disChange={disChange}
+              setZipCodeError={setZipCodeError}
+              setAddrError={setAddrError}
             />
           </Modal>
         </Form.Item>
-        <Form.Item name="addr1" label="우편번호" {...itemLayout}>
-          <Input name="addr1" readOnly value={addr1} />
-          <></>
+        <Form.Item name="addr1" label="주소" {...itemLayout}>
+          <Input name="addr1" readOnly value={addr1} status={zipAddrError} />
+          <></> {/* <- 이게 있어야지 입력이 가능함 */}
         </Form.Item>
         <Form.Item
           name="addr2"
           label="상세주소"
-          rules={[{ required: true, message: '상세주소를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="addr2" value={addr2} />
@@ -314,7 +350,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="managerNm"
           label="담당자명"
-          rules={[{ required: true, message: '담당자성함을 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="managerNm" value={managerNm} />
@@ -322,7 +358,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="managerMobile"
           label="담당자번호"
-          rules={[{ required: true, message: '담당자번호를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="managerMobile" value={managerMobile} />
@@ -330,7 +366,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="managerEmail"
           label="담당자이메일"
-          rules={[{ required: true, message: '담당자이메일을 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="managerEmail" value={managerEmail} />
@@ -338,7 +374,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="bankNm"
           label="은행명"
-          rules={[{ required: true, message: '거래은행을 선택해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Select placeholder="은행명을 선택해주세요">
@@ -365,7 +401,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="accountHolder"
           label="예금주"
-          rules={[{ required: true, message: '예금주를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="accountHolder" value={accountHolder} />
@@ -373,7 +409,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="accountNb"
           label="계좌번호"
-          rules={[{ required: true, message: '계좌번호를 입력해주세요' }]}
+          rules={[{ required: true, message: '' }]}
           {...itemLayout}
         >
           <Input name="accountNb" value={accountNb} />
@@ -381,7 +417,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="registration"
           label="사업자등록증"
-          // rules={[{ required: true, message: '사업자등록증을 등록해주세요' }]}
+          rules={[{ required: true, message: '사업자등록증을 등록해주세요.' }]}
           {...itemLayout}
           valuePropName="fileImage"
           getValueFromEvent={normFile}
@@ -391,7 +427,7 @@ const RegisterComponent_2 = ({
             beforeUpload={() => {
               return false;
             }}
-            onChange={saveRegistrationImage}
+            accept=".jpg, .jpeg, .png, .pdf"
           >
             <Button icon={<UploadOutlined />}>사업자 등록증 등록</Button>
           </Upload>
@@ -399,7 +435,7 @@ const RegisterComponent_2 = ({
         <Form.Item
           name="passbook"
           label="통장사본"
-          // rules={[{ required: true, message: '통장사본을 등록해주세요' }]}
+          rules={[{ required: true, message: '통장사본을 등록해주세요' }]}
           {...itemLayout}
           valuePropName="fileImage"
           getValueFromEvent={normFile}
@@ -409,17 +445,21 @@ const RegisterComponent_2 = ({
             beforeUpload={() => {
               return false;
             }}
+            accept=".jpg, .jpeg, .png, .pdf"
           >
             <Button icon={<UploadOutlined />}>통장사본 등록</Button>
           </Upload>
         </Form.Item>
-        {/* <input type="file" name="registration" onChange={onUpload} />
-        <input type="file" name="passbook" onChange={onUpload} /> */}
+        {authResult.status === 400 ? (
+          <ErrorMessage>필수 항목을 입력해주세요!</ErrorMessage>
+        ) : // {authResult.error[0].message}
+        null}
         <Button
           style={{ width: '100%' }}
           type={'primary'}
           size="large"
           htmlType="submit"
+          onClick={errorMessage}
         >
           저장
         </Button>

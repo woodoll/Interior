@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
 
-import { Steps, Button, PageHeader, Space, Divider, Form } from 'antd';
+import { Steps, PageHeader, Space, Divider } from 'antd';
 import RegisterComponent_1 from './RegisterComponent_1';
 import VenderRegisterContainer from 'user/vender/containers/auth/RegisterContainer';
 import RegisterComponent_3 from './RegisterComponent_3';
 
 const RegisterComponentBlock = styled(Responsive)`
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
 `;
 
 const { Step } = Steps;

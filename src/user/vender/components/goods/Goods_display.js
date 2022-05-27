@@ -2,10 +2,17 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Input, Radio, Cascader, Divider, Space, PageHeader } from 'antd';
+import {
+  Input,
+  Radio,
+  Cascader,
+  Divider,
+  Space,
+  PageHeader,
+  Breadcrumb,
+} from 'antd';
 import Responsive from 'lib/styles/Responsive';
 
-import { productOptProductType } from 'lib/vender/options';
 import SortableTable from 'lib/common/table/Table_drag';
 
 /* #endregion */
@@ -52,7 +59,6 @@ const VenderAddComponent = ({
   disChange,
   disUpload,
   msgCode,
-  setPathUrl,
 }) => {
   const navigate = useNavigate();
   const onChange = (e) => disChange(e.target.value, e.target.name);
@@ -91,11 +97,19 @@ const VenderAddComponent = ({
     }
   });
 
-  setPathUrl('상품 진열');
-
   return (
     <AddComponentBlock>
-      <PageHeader className="PageHeader" title="상품진열" />
+      <PageHeader
+        className="PageHeader"
+        title="상품 진열"
+        extra={[
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>홈</Breadcrumb.Item>
+            <Breadcrumb.Item>상품 관리</Breadcrumb.Item>
+            <Breadcrumb.Item>상품 진열</Breadcrumb.Item>
+          </Breadcrumb>,
+        ]}
+      />
       <Divider />
       <Form
         name="AddProduct"
@@ -105,14 +119,14 @@ const VenderAddComponent = ({
       >
         <Space direction="vertical" size={12}>
           <h3>카테고리 선택</h3>
-          <AddSection>
+          {/* <AddSection>
             <Cascader
               style={{ width: '200px' }}
               name="productType"
               options={productOptProductType}
               placeholder="분류"
             />
-          </AddSection>
+          </AddSection> */}
           <h3>기본정보</h3>
           <AddSection>
             <p>진열코드</p>

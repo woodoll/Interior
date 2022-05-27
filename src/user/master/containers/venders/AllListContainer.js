@@ -1,23 +1,33 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { actGetVenders } from 'user/master/reducers/venders/VendersReducer';
-import { actPutApprove } from 'user/master/reducers/venders/VendersReducer';
-import MasterVenderAllListComponent from 'user/master/components/venders/All_list';
+import { actGetVenders } from 'user/master/reducers/venders/MasterVendersReducer';
+import { actPutApprove } from 'user/master/reducers/venders/MasterVendersReducer';
+import { actInitailize } from 'user/master/reducers/venders/MasterVendersReducer';
+import MasterVenderAllListComponent from 'user/master/components/venders/VendersAllList';
 
 const mapStateToProps = (store) => ({
-  venders: store.VendersReducer.venders,
+  venders: store.MasterVendersReducer.venders,
+  approvalType: store.MasterVendersReducer.approvalType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  disGetVender: (page) => dispatch(actGetVenders(page)),
-  disPutApprove: (userId) => dispatch(actPutApprove(userId)),
+  disInitailize: () => dispatch(actInitailize()),
+  disGetVender: () => dispatch(actGetVenders()),
+  disPutApprove: (uuid, approvalType) =>
+    dispatch(actPutApprove(uuid, approvalType)),
 });
 
 const MasterVenderAllListContainer = ({
   venders,
   disGetVender,
   disPutApprove,
+  setModalData,
+  approvalType,
+  disInitailize,
 }) => {
+  useEffect(() => {
+    disInitailize();
+  }, []);
   useEffect(() => {
     disGetVender(1);
   }, [disGetVender]);
@@ -25,6 +35,8 @@ const MasterVenderAllListContainer = ({
     <MasterVenderAllListComponent
       venders={venders}
       disPutApprove={disPutApprove}
+      setModalData={setModalData}
+      approvalType={approvalType}
     />
   );
 };

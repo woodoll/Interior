@@ -4,6 +4,7 @@ import { actChangeFiled } from 'user/vender/reducers/auth/RegisterReducer';
 import { actUploadFiled } from 'user/vender/reducers/auth/RegisterReducer';
 import { actInitialize } from 'user/vender/reducers/auth/RegisterReducer';
 import { actSubmit } from 'user/vender/reducers/auth/RegisterReducer';
+import { actGetProductCode } from 'user/vender/reducers/auth/RegisterReducer';
 import VenderRegisterComponent_2 from 'user/vender/components/auth/RegisterComponent_2';
 
 const mapStateToProps = (store) => ({
@@ -31,12 +32,14 @@ const mapStateToProps = (store) => ({
   registration: store.VenderRegisterReducer.registration,
   passbook: store.VenderRegisterReducer.passbook,
   authResult: store.VenderRegisterReducer.authResult,
+  productTypeList: store.VenderRegisterReducer.productTypeList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   disSubmit: (formData) => dispatch(actSubmit(formData)),
   disChange: (value, name) => dispatch(actChangeFiled({ key: name, value })),
   disUpload: (files, name) => dispatch(actUploadFiled({ key: name, files })),
+  disGetProductType: () => dispatch(actGetProductCode()),
   disInitialize: () => dispatch(actInitialize()),
 });
 
@@ -70,9 +73,12 @@ const VenderRegisterContainer = ({
   disUpload,
   next,
   authResult,
+  productTypeList,
+  disGetProductType,
 }) => {
   useEffect(() => {
     disInitialize();
+    disGetProductType();
   }, []);
   return (
     <VenderRegisterComponent_2
@@ -104,6 +110,8 @@ const VenderRegisterContainer = ({
       disUpload={disUpload}
       next={next}
       authResult={authResult}
+      productTypeList={productTypeList}
+      disGetProductType={disGetProductType}
     />
   );
 };

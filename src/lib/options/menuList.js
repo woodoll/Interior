@@ -1,4 +1,56 @@
-export const MenuList = [
+import {
+  PieChartOutlined,
+  CreditCardOutlined,
+  FormatPainterOutlined,
+  ProfileOutlined,
+} from '@ant-design/icons';
+
+const master = '/master';
+const vender = '/vender';
+
+export const MasterMenuList = [
+  {
+    key: 'sub1',
+    title: '판매사 관리',
+    icon: <PieChartOutlined />,
+    sub: [
+      {
+        key: '1',
+        title: '판매사 전체',
+        url: `all_list`,
+      },
+    ],
+    url: 'venders',
+  },
+  {
+    key: 'sub2',
+    title: '시공자 관리',
+    icon: <CreditCardOutlined />,
+    sub: [
+      {
+        key: '2',
+        title: '전체 시공자',
+        url: `all_list`,
+      },
+    ],
+    url: 'dealers',
+  },
+  {
+    key: 'sub3',
+    title: '카테고리 관리',
+    icon: <FormatPainterOutlined />,
+    sub: [
+      {
+        key: '3',
+        title: '카테고리 전체',
+        url: `all_list`,
+      },
+    ],
+    url: 'codes',
+  },
+];
+
+export const VenderMenuList = [
   {
     key: 'sub1',
     title: '매출분석',
@@ -59,7 +111,7 @@ export const MenuList = [
       },
       {
         key: '9',
-        title: '진열상품 리스트',
+        title: '진열 상품 리스트',
         url: 'display_list',
       },
     ],
@@ -81,5 +133,18 @@ export const MenuList = [
       },
     ],
     url: 'board',
+  },
+];
+
+export const ClientMenuList = [
+  {
+    name: 'goods',
+    title: '상품 목록',
+    lists: [
+      {
+        title: '전체 상품목록',
+        url: 'all_list',
+      },
+    ],
   },
 ];

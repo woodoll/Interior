@@ -13,11 +13,11 @@ import {
   PageHeader,
 } from 'antd';
 import Checkbox_all from 'lib/common/Checkbox_all';
-import Table_tag from 'lib/common/table/Table_tag';
+import TableTag from 'lib/common/table/TableTag';
 /* #endregion */
 
 /* #region  styles */
-const Board_goodsqnaBlock = styled(Responsive)``;
+const BoardGoodsqnaBlock = styled(Responsive)``;
 
 const Form = styled.form`
   display: flex;
@@ -57,10 +57,9 @@ const { RangePicker } = DatePicker;
 const plainOptions = ['답변대기', '답변완료'];
 const defaultCheckedList = ['답변대기', '답변완료'];
 
-const Board_goodsqna = ({ setPathUrl }) => {
-  setPathUrl('상품 문의');
+const BoardGoodsqna = () => {
   return (
-    <Board_goodsqnaBlock>
+    <BoardGoodsqnaBlock>
       <PageHeader className="PageHeader" title="상품 문의" />
       <Divider />
       <Form>
@@ -88,9 +87,9 @@ const Board_goodsqna = ({ setPathUrl }) => {
         </Space>
       </Form>
       <Divider />
-      <Table_tag />
-    </Board_goodsqnaBlock>
+      <TableTag />
+    </BoardGoodsqnaBlock>
   );
 };
 
-export default Board_goodsqna;
+export default BoardGoodsqna;

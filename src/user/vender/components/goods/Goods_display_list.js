@@ -11,10 +11,8 @@ import {
   Divider,
   Space,
   PageHeader,
+  Breadcrumb,
 } from 'antd';
-
-import { productOptProductType } from 'lib/vender/options';
-import { productOptMnfctType } from 'lib/vender/options';
 import CheckTable from 'lib/common/table/Table_check';
 /* #endregion */
 
@@ -61,12 +59,21 @@ const columns = [
   },
 ];
 
-const Goods_display_list = ({ setPathUrl }) => {
+const Goods_display_list = () => {
   const { RangePicker } = DatePicker;
-  setPathUrl('진열상품 목록');
   return (
     <Goods_listBlock>
-      <PageHeader className="PageHeader" title="진열상품 목록" />
+      <PageHeader
+        className="PageHeader"
+        title="진열 상품 리스트"
+        extra={[
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>홈</Breadcrumb.Item>
+            <Breadcrumb.Item>상품 관리</Breadcrumb.Item>
+            <Breadcrumb.Item>진열 상품 리스트</Breadcrumb.Item>
+          </Breadcrumb>,
+        ]}
+      />
       <Divider />
       <Form>
         <Space direction="vertical" size={12}>
@@ -78,7 +85,7 @@ const Goods_display_list = ({ setPathUrl }) => {
           >
             <AddSection style={{ width: '40vw' }}>
               <p>상품 분류별</p>
-              <Select
+              {/* <Select
                 style={{ width: '100px', marginRight: '1rem' }}
                 name="productType"
                 options={productOptProductType}
@@ -90,7 +97,7 @@ const Goods_display_list = ({ setPathUrl }) => {
                 name="mnfctType"
                 options={productOptMnfctType}
                 defaultValue={productOptMnfctType[0]}
-              />
+              /> */}
             </AddSection>
             <AddSection>
               <p>색상계열</p>

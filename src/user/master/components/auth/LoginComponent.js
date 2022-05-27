@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Responsive from 'lib/styles/Responsive';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Input, Button, Checkbox, Space, PageHeader, Form } from 'antd';
 /* #endregion */
@@ -23,7 +23,6 @@ const ErrorMessage = styled.div`
   color: red;
   text-align: center;
   font-size: 0.875rem;
-  margin-top: 1rem;
 `;
 
 /* #endregion */
@@ -71,29 +70,26 @@ const MasterLoginComponent = ({
           rules={[{ required: true, message: '아이디를 입력해주세요' }]}
         >
           <Input
-            autoComplete="userId"
             name="userId"
             placeholder="아이디"
             onChange={onChange}
             value={userId}
+            autocomplete="off"
           />
         </Form.Item>
         <Form.Item
           name="password"
           rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
         >
-          <Input.Password
-            autoComplete="new-password"
+          <Input
             name="password"
             placeholder="비밀번호"
             type="password"
             onChange={onChange}
             value={password}
+            autocomplete="off"
           />
         </Form.Item>
-        {auth.status === 401 ? (
-          <ErrorMessage>{auth.message}입니다.</ErrorMessage>
-        ) : null}
         <Space direction="vertical" size={12} style={{ width: '100%' }}>
           <Split>
             <Checkbox
@@ -104,6 +100,12 @@ const MasterLoginComponent = ({
               아이디 저장
             </Checkbox>
           </Split>
+          {auth.status === 401 ? (
+            <ErrorMessage>{auth.message}입니다.</ErrorMessage>
+          ) : null}
+          {auth.status === 400 ? (
+            <ErrorMessage>아이디, 비밀번호를 확인해주세요.</ErrorMessage>
+          ) : null}
           <Button
             style={{ width: '100%' }}
             size="large"

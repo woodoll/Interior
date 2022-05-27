@@ -24,7 +24,7 @@ const MainSectionBlock = styled.div`
   }
 `;
 
-const SectionForm = styled(Responsive)`
+const SectionForm = styled.div`
   padding: 1rem;
   background: ${palette.gray[2]};
 `;

@@ -8,7 +8,7 @@ import Responsive from 'lib/styles/Responsive';
 import HeaderContainer from 'lib/common/section/HeaderContainer';
 import SidebarSection from 'lib/common/section/SidebarSection';
 import MainSection from 'lib/common/section/MainSection';
-import { ClientMenuList } from 'lib/client/clientMenuList';
+import { ClientMenuList } from 'lib/options/menuList';
 
 import ClientLoginContainer from 'user/client/containers/login/LoginContainer';
 import ClientBuyProductContainer from 'user/client/containers/product/BuyProductContainer';

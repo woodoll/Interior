@@ -52,7 +52,7 @@ const MasterLoginContainer = ({
     }
     if (auth.message === '로그인 성공') {
       console.log('로그인 성공');
-      const authUser = auth.data;
+      const authUser = auth;
       sessionStorage.setItem('user', JSON.stringify(authUser));
       disCheck();
     }

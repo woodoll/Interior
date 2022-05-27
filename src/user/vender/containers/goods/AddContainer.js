@@ -53,7 +53,6 @@ const AddContainer = ({
   disSubmit,
   disChange,
   disInitialize,
-  setPathUrl,
 }) => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -86,7 +85,6 @@ const AddContainer = ({
       thumbnail={thumbnail}
       disSubmit={disSubmit}
       disChange={disChange}
-      setPathUrl={setPathUrl}
     />
   );
 };

@@ -10,6 +10,7 @@ export const check = () => user.post('/home/getInfo');
 export const logout = () => {
   return user.post('/home/logOut').then((res) => {
     user.defaults.headers.common['Authorization'] = null;
+    sessionStorage.removeItem('accessToken');
     return res;
   });
 };
@@ -18,9 +19,11 @@ export const logout = () => {
 
 //  로그인
 export const masterLogin = ({ userId, password }) => {
-  return user.post('/master/login', { userId, password }).then((res) => {
-    const accessToken = res.headers.authorization;
-    user.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+  return user.post('/masters/login', { userId, password }).then((res) => {
+    sessionStorage.setItem('accessToken', res.headers.authorization);
+    user.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${sessionStorage.getItem('accessToken')}`;
     return res;
   });
 };
@@ -30,9 +33,10 @@ export const masterLogin = ({ userId, password }) => {
 //  로그인
 export const venderLogin = ({ userId, password }) => {
   return user.post('/venders/login', { userId, password }).then((res) => {
-    const accessToken = res.headers.authorization;
-    sessionStorage.setItem('accessToken', accessToken);
-    user.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    sessionStorage.setItem('accessToken', res.headers.authorization);
+    user.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${sessionStorage.getItem('accessToken')}`;
     return res;
   });
 };

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from 'lib/styles/palette';
 import Responsive from 'lib/styles/Responsive';
-import SidebarSection from 'lib/common/section/SidebarSection';
+import SidebarSection from 'lib/common/section/VenderSidebarSection';
 import MainSection from 'lib/common/section/MainSection';
 import { VenderMenuList } from 'lib/vender/venderMenuList';
 

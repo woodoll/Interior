@@ -9,9 +9,9 @@ import { actFinishLoading } from 'lib/reducer/LoadingReducer';
 const initialState = {
   userId: '',
   password: '',
-  auth: '',
-  authError: null,
-  error: null,
+  auth: {
+    message: '',
+  },
 };
 
 const CHANGE_FIELD = 'MasterLoginReducer/CHANGE_FIELD';
@@ -46,8 +46,7 @@ function* loginSaga(action) {
   } catch (e) {
     yield put({
       type: LOGIN_FAILURE,
-      error: true,
-      authError: e,
+      auth: e.response.data,
     });
   }
   yield put(actFinishLoading(LOGIN));
@@ -71,8 +70,7 @@ function MasterLoginReducer(state = initialState, action) {
       });
     case LOGIN_FAILURE:
       return produce(state, (draft) => {
-        draft.auth = null;
-        draft.authError = action.error;
+        draft.auth = action.auth;
       });
     default:
       return state;

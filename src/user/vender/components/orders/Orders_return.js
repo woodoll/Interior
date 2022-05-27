@@ -96,8 +96,7 @@ const columns = [
 
 const { RangePicker } = DatePicker;
 
-const Orders_return = ({ setPathUrl }) => {
-  setPathUrl('취소/교환/반품');
+const Orders_return = () => {
   return (
     <Orders_returnBlock>
       <PageHeader className="PageHeader" title="취소/교환/반품" />
